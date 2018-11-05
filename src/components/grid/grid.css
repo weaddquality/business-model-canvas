@@ -1,0 +1,74 @@
+.container {
+  display: grid;
+  grid-gap: 10px;
+  border: solid;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: left;
+  height: 800px;
+  width: 95%;
+  grid-template-rows: 50px 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header header header"
+    "key-partners key-activities value-propositions customer-relationships customer-segments"
+    "key-partners key-resources value-propositions channels customer-segments"
+    "cost-structures cost-structures cost-structures revenue-streams revenue-streams"
+}
+
+p {
+  margin-left: 8px;
+}
+
+.header {
+  grid-area: header;
+  height: 1px;
+  text-align: left;
+  background-color: white;
+}
+
+.key-partners {
+  grid-area: key-partners;
+  background-color: coral;
+}
+
+.key-activities { 
+  grid-area: key-activities;
+  background-color: green;
+}
+
+.key-resources {
+  grid-area: key-resources;
+  background-color: blue;
+}
+
+.value-propositions {
+  grid-area: value-propositions;
+  background-color: red;
+}
+
+.customer-relationships {
+  grid-area: customer-relationships;
+  background-color: purple;
+}
+
+.channels {
+  grid-area: channels;
+  background-color: violet;
+}
+
+.customer-segments {
+  grid-area: customer-segments;
+  background-color: orange;
+}
+
+.cost-structures {
+  grid-area: cost-structures;
+  background-color: yellow;
+}
+
+.revenue-streams {
+  grid-area: revenue-streams;
+  background-color: greenyellow;
+}
