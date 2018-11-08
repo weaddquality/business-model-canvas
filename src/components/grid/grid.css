@@ -17,15 +17,22 @@
     "cost-structures cost-structures cost-structures revenue-streams revenue-streams"
 }
 
-p {
+h3, h4, p {
   margin-left: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 }
+  
 
 .header {
   grid-area: header;
   height: 1px;
   text-align: left;
   background-color: white;
+}
+
+.area:hover {
+  background-color: gray;
+  cursor: pointer;
 }
 
 .key-partners {
