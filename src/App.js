@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Grid from './components/grid/grid';
 import Nav from './components/navigation-bar/nav';
+import Grid from './components/grid/grid';
 import Detail from './components/detail/detail';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 

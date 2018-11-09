@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 const Detail = () => {
   return (
-    <div>Detail page:
+    <div>
+      <h2>A page of our areas</h2>
       <div>
         <Link to="/">
-          Go to grid
+          Go back to grid
       </Link>
       </div>
     </div>
