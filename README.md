@@ -11,7 +11,7 @@ Read more on wikipedia: https://en.wikipedia.org/wiki/Business_Model_Canvas
 
 ## Installation
 - `cd <your_repositories_catalog>`
-- `git clone git@github.com:sjansson/business-model-canvas.git`
+- `git clone git@github.com:stefanfranzen/business-model-canvas.git`
 - `npm install`
 
 ## Start application
