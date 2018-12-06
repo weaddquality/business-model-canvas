@@ -5,6 +5,8 @@ A business model canvas is a tool to map and visualize a business model. The BMC
 
 Read more on wikipedia: https://en.wikipedia.org/wiki/Business_Model_Canvas
 
+See it live here: http://team-continuous-businessmodelcanvas.s3-website.eu-west-2.amazonaws.com/
+
 ## Prerequisites
 - node installed
 - git installed
