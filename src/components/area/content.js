@@ -4,14 +4,15 @@ const areaObjects = [
     header: 'Key Partners',
     description: 'Who are our key partners',
     items: [ 
-      'Dessa är våra partners...'
+      'Dessa är våra partners...',
+      'Här är en till partner'
     ]
   },
   {
     className: 'key-activities',
     header: 'Key Activities',
     description: 'What key activities do our value propositions require',
-    items: [ 
+    items: [
       'Vi ska göra detta för att...'
     ]
   },

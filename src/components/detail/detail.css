@@ -1,0 +1,16 @@
+.itemContainer {
+  width: 1000px;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.leftArrow {
+}
+  
+.rightArrow {
+
+}
+
+.items {
+  
+}

@@ -13,7 +13,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Grid} />
-            <Route path="/detail" component={Detail} />
+            <Route path="/detail/:blockType" component={Detail} />
           </Switch>
         </BrowserRouter>
       </div>
