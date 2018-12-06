@@ -21,7 +21,6 @@ h3, h4, p {
   margin-left: 8px;
   font-family: Arial, Helvetica, sans-serif;
 }
-  
 
 .header {
   grid-area: header;
@@ -30,7 +29,7 @@ h3, h4, p {
   background-color: white;
 }
 
-.area:hover {
+.block:hover {
   background-color: gray;
   cursor: pointer;
 }

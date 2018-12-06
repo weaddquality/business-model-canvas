@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import Nav from './components/navigation-bar/nav';
-import Grid from './components/grid/grid';
-import Detail from './components/detail/detail';
+import NavigationBar from './components/navigation-bar/navigation-bar';
+import Canvas from './components/canvas/canvas';
+import Editor from './components/editor/editor';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav />
+        <NavigationBar />
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Grid} />
-            <Route path="/detail/:blockType" component={Detail} />
+            <Route exact path="/" component={Canvas} />
+            <Route path="/editor/:blockType" component={Editor} />
           </Switch>
         </BrowserRouter>
       </div>

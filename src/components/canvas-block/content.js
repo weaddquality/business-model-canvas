@@ -1,4 +1,4 @@
-const areaObjects = [
+const blocks = [
   {
     className: 'key-partners',
     header: 'Key Partners',
@@ -74,4 +74,4 @@ const areaObjects = [
   },
 ]
 
-export default areaObjects;
+export default blocks;

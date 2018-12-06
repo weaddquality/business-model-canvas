@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './area.css'
+import './canvas-block.css'
 
-const area = function (props) {
-
+const CanvasBlock = function (props) {
   const items = props.content.items.map((item, index) => {
     return <p key={index}>{item}</p>
   })
-
-
+  
   return (
-    <Link to={`/detail/${props.content.className}`} className={`${props.content.className} area`}>
+    <Link to={`/editor/${props.content.className}`} className={`${props.content.className} block`}>
       <div>
         <h3>{props.content.header}</h3>
         <h4>{props.content.description}</h4>
@@ -20,4 +18,4 @@ const area = function (props) {
   );
 }
 
-export default area;
+export default CanvasBlock;

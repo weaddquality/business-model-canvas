@@ -1,9 +1,9 @@
 import React from 'react';
-import './detail.css'
+import './editor.css'
 import { Link } from 'react-router-dom'
-import blocks from '../area/content';
+import blocks from '../canvas-block/content';
 
-const Detail = (props) => {
+const Editor = (props) => {
   const selectedBlock = blocks.find(function (block, index) {
     if (block.className === props.match.params.blockType) {
       block.index = index
@@ -11,16 +11,30 @@ const Detail = (props) => {
     }
     return false
   })
-  const nextBlock = function () {
+
+  const nextBlock = () => {
     if (selectedBlock.index < blocks.length - 1) {
       return blocks[selectedBlock.index + 1].className;
     }
   }
 
-  const previousBlock = function () {
+  const previousBlock = () => {
     if (selectedBlock.index > 0) {
       return blocks[selectedBlock.index - 1].className;
     }
+  }
+
+  const previousBlockButton = () => {
+    if (selectedBlock.index > 0) {
+      return <Link to={`/editor/${previousBlock()}`} className="leftArrow"> &lt;--- </Link>
+    }
+    return <div className="leftArrow"> &lt;--- </div>
+  }
+  const nextBlockButton = () => {
+    if (selectedBlock.index < blocks.length - 1) {
+      return <Link to={`/editor/${nextBlock()}`} className="rightArrow"> ---&gt; </Link>
+    }
+    return <div className="rightArrow"> ---&gt; </div>
   }
 
   const items = selectedBlock.items.map((item, index) => {
@@ -32,18 +46,17 @@ const Detail = (props) => {
       <h1>{selectedBlock.header}</h1>
       <h2>{selectedBlock.description}</h2>
       <div className="itemContainer">
-        {selectedBlock.index > 0 ? <Link to={`/detail/${previousBlock()}`} className="leftArrow">"VÄNSTERPILEN"</Link> : <div>"VÄNSTERPILEN"</div>}
+        {previousBlockButton()}
         <div className="items">{items}</div>
-        {selectedBlock.index < blocks.length - 1 ? <Link to={`/detail/${nextBlock()}`} className="rightArrow">"HÖGERPILEN"</Link> : <div>"HÖGERPILEN"</div>}
+        {nextBlockButton()}
       </div>
       <div>
         <Link to="/">
-          Go back to grid
+          Go back to Canvas
         </Link>
       </div>
     </div>
-
   )
 }
 
-export default Detail;
+export default Editor;

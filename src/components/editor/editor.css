@@ -5,12 +5,9 @@
 }
 
 .leftArrow {
+  margin-left: 20px;
 }
   
 .rightArrow {
-
-}
-
-.items {
-  
+  margin-right: 20px;
 }
