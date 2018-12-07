@@ -17,11 +17,6 @@
     "cost-structures cost-structures cost-structures revenue-streams revenue-streams"
 }
 
-h3, h4, p {
-  margin-left: 8px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .header {
   grid-area: header;
   height: 1px;
