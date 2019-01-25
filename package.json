@@ -18,6 +18,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "aws-amplify": "^1.1.19",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
