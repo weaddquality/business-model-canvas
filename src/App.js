@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './App.css';
-import NavigationBar from './components/navigation-bar/navigation-bar';
-import Canvas from './components/canvas/canvas';
-import Editor from './components/editor/editor';
+import React, { Component } from 'react'
+import './App.css'
+import NavigationBar from './components/navigation-bar/navigation-bar'
+import Canvas from './components/canvas/canvas'
+import Editor from './components/editor/editor'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
@@ -17,8 +17,8 @@ class App extends Component {
           </Switch>
         </BrowserRouter>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,5 +1,5 @@
-import React from 'react';
-import './navigation-bar.css';
+import React from 'react'
+import './navigation-bar.css'
 
 const NavigationBar = () => {
   return (
@@ -9,4 +9,4 @@ const NavigationBar = () => {
   )
 }
 
-export default NavigationBar;
+export default NavigationBar

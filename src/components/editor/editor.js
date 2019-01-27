@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import './editor.css'
 import { Link } from 'react-router-dom'
-import blocks from '../canvas-block/content';
+import blocks from '../canvas-block/content'
 
-const Editor = (props) => {
-  const selectedBlock = blocks.find(function (block, index) {
+const Editor = props => {
+  const selectedBlock = blocks.find(function(block, index) {
     if (block.className === props.match.params.blockType) {
       block.index = index
       return true
@@ -14,25 +14,35 @@ const Editor = (props) => {
 
   const nextBlock = () => {
     if (selectedBlock.index < blocks.length - 1) {
-      return blocks[selectedBlock.index + 1].className;
+      return blocks[selectedBlock.index + 1].className
     }
   }
 
   const previousBlock = () => {
     if (selectedBlock.index > 0) {
-      return blocks[selectedBlock.index - 1].className;
+      return blocks[selectedBlock.index - 1].className
     }
   }
 
   const previousBlockButton = () => {
     if (selectedBlock.index > 0) {
-      return <Link to={`/editor/${previousBlock()}`} className="leftArrow"> &lt;--- </Link>
+      return (
+        <Link to={`/editor/${previousBlock()}`} className="leftArrow">
+          {' '}
+          &lt;---{' '}
+        </Link>
+      )
     }
     return <div className="leftArrow"> &lt;--- </div>
   }
   const nextBlockButton = () => {
     if (selectedBlock.index < blocks.length - 1) {
-      return <Link to={`/editor/${nextBlock()}`} className="rightArrow"> ---&gt; </Link>
+      return (
+        <Link to={`/editor/${nextBlock()}`} className="rightArrow">
+          {' '}
+          ---&gt;{' '}
+        </Link>
+      )
     }
     return <div className="rightArrow"> ---&gt; </div>
   }
@@ -51,12 +61,10 @@ const Editor = (props) => {
         {nextBlockButton()}
       </div>
       <div>
-        <Link to="/">
-          Go back to Canvas
-        </Link>
+        <Link to="/">Go back to Canvas</Link>
       </div>
     </div>
   )
 }
 
-export default Editor;
+export default Editor
