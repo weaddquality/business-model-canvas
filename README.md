@@ -1,4 +1,4 @@
-# Business-Model-Canvas
+# Business Model Canvas
 
 ## Description
 A business model canvas is a tool to map and visualize a business model. The BMC is a great tool for collaboration on building and understanding business models, and making it a continuously ever evolving piece of work in an agile way.
