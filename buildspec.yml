@@ -14,4 +14,3 @@ phases:
  post_build:
    commands:
      - echo "post_build step"
-     - aws s3 sync --delete . "s3://thebusinessmodelcanvas"
