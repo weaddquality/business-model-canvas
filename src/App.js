@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import NavigationBar from './components/navigation-bar/navigation-bar'
 import Canvas from './components/canvas/canvas'
 import Editor from './components/editor/editor'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import NotFound from './components/not-found/not-found'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Canvas} />
             <Route path="/editor/:blockType" component={Editor} />
+            <Route component={NotFound} />
           </Switch>
         </BrowserRouter>
       </div>
