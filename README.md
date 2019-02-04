@@ -7,7 +7,7 @@ The backend for this repository is here: https://github.com/weaddquality/bmc-aws
 
 Read more about the concept of Business Model Canvas is on wikipedia: https://en.wikipedia.org/wiki/Business_Model_Canvas
 
-See it live here: http://team-continuous-businessmodelcanvas.s3-website.eu-west-2.amazonaws.com/
+See it live here: http://thebusinessmodelcanvas.s3-website.eu-north-1.amazonaws.com/
 
 ## Prerequisites
 - node installed
