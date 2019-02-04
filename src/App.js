@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import NavigationBar from './components/navigation-bar/navigation-bar'
 import Canvas from './components/canvas/canvas'
 import Editor from './components/editor/editor'

@@ -31,7 +31,6 @@ Amplify.configure({
   },
 })
 
-// ReactDOM.render(<App />, document.getElementById('business-model-canvas'))
 ReactDOM.render(
   <Router>
     <App />
