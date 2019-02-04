@@ -11,13 +11,11 @@ class App extends Component {
     return (
       <div className="App">
         <NavigationBar />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Canvas} />
-            <Route path="/editor/:blockType" component={Editor} />
-            <Route component={NotFound} />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Canvas} />
+          <Route path="/editor/:blockType" component={Editor} />
+          <Route component={NotFound} />
+        </Switch>
       </div>
     )
   }
