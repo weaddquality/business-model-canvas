@@ -3,12 +3,12 @@ import './canvas.css'
 import CanvasBlock from '../canvas-block/canvas-block'
 import blocks from '../canvas-block/content'
 
-const Canvas = () => {
+const Horizontal = () => {
   const canvasBlocks = blocks.map(block => {
     return <CanvasBlock key={block.className} content={block} />
   })
 
-  return <div className="canvas">{canvasBlocks}</div>
+  return <div className="horizontal">{canvasBlocks}</div>
 }
 
-export default Canvas
+export default Horizontal

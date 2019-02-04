@@ -1,16 +1,35 @@
-.container {
+.canvas {
   display: grid;
   grid-gap: 10px;
   padding-left: 0;
   padding-right: 0;
   height: 800px;
   width: 100%;
-  grid-template-rows: 2fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
   grid-template-areas:
     'key-partners key-activities value-propositions customer-relationships customer-segments'
     'key-partners key-resources value-propositions channels customer-segments'
     'cost-structures cost-structures cost-structures revenue-streams revenue-streams';
+}
+
+.horizontal {
+  display: grid;
+  grid-gap: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+  grid-template-areas:
+    'key-partners'
+    'key-activities'
+    'customer-relationships'
+    'value-propositions'
+    'channels'
+    'key-resources'
+    'customer-segments'
+    'cost-structures'
+    'revenue-streams';
 }
 
 .block {
