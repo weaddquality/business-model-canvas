@@ -8,14 +8,7 @@ const Canvas = () => {
     return <CanvasBlock key={block.className} content={block} />
   })
 
-  return (
-    <div className="container">
-      <div className="header">
-        <h2>Business Model Canvas - Team Continuous</h2>
-      </div>
-      {canvasBlocks}
-    </div>
-  )
+  return <div className="container">{canvasBlocks}</div>
 }
 
 export default Canvas

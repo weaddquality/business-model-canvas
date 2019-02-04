@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 1600px;
 }
 
 .App-header {
@@ -15,4 +18,18 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
+}
+
+select.form-control,
+textarea.form-control,
+input.form-control {
+  font-size: 16px;
+}
+
+input[type='file'] {
+  width: 100%;
 }

@@ -1,27 +1,22 @@
 .container {
   display: grid;
   grid-gap: 10px;
-  border: solid;
-  padding: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-  text-align: left;
+  padding-left: 0;
+  padding-right: 0;
   height: 800px;
-  width: 95%;
-  grid-template-rows: 50px 2fr 1fr 1fr;
+  width: 100%;
+  grid-template-rows: 2fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    "header header header header header"
-    "key-partners key-activities value-propositions customer-relationships customer-segments"
-    "key-partners key-resources value-propositions channels customer-segments"
-    "cost-structures cost-structures cost-structures revenue-streams revenue-streams"
+    'key-partners key-activities value-propositions customer-relationships customer-segments'
+    'key-partners key-resources value-propositions channels customer-segments'
+    'cost-structures cost-structures cost-structures revenue-streams revenue-streams';
 }
 
-.header {
-  grid-area: header;
-  height: 1px;
+.block {
+  border: solid;
+  color: black;
   text-align: left;
-  background-color: white;
 }
 
 .block:hover {
@@ -31,45 +26,45 @@
 
 .key-partners {
   grid-area: key-partners;
-  background-color: coral;
+  background-color: #80ba27;
 }
 
-.key-activities { 
+.key-activities {
   grid-area: key-activities;
-  background-color: green;
+  background-color: #d1abff;
 }
 
 .key-resources {
   grid-area: key-resources;
-  background-color: blue;
+  background-color: #ffa230;
 }
 
 .value-propositions {
   grid-area: value-propositions;
-  background-color: red;
+  background-color: #80ba27;
 }
 
 .customer-relationships {
   grid-area: customer-relationships;
-  background-color: purple;
+  background-color: #ffa230;
 }
 
 .channels {
   grid-area: channels;
-  background-color: violet;
+  background-color: #d1abff;
 }
 
 .customer-segments {
   grid-area: customer-segments;
-  background-color: orange;
+  background-color: #80ba27;
 }
 
 .cost-structures {
   grid-area: cost-structures;
-  background-color: yellow;
+  background-color: #d1abff;
 }
 
 .revenue-streams {
   grid-area: revenue-streams;
-  background-color: greenyellow;
+  background-color: #ffa230;
 }
