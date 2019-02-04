@@ -15,16 +15,6 @@ const NavigationBar = () => {
       <Navbar.Collapse>
         <Nav pullRight>
           <NavItem>
-            <ButtonGroup>
-              <Link to="/">
-                <Button>Grid</Button>
-              </Link>
-              <Link to="/horizontal">
-                <Button>Horizontal</Button>
-              </Link>
-            </ButtonGroup>
-          </NavItem>
-          <NavItem>
             <Link to="/signup">Signup</Link>
           </NavItem>
           <NavItem>
