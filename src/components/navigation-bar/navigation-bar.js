@@ -14,8 +14,12 @@ const NavigationBar = () => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem href="/signup">Signup</NavItem>
-          <NavItem href="/login">Login</NavItem>
+          <NavItem>
+            <Link to="/signup">Signup</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/signup">Login</Link>
+          </NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
