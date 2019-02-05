@@ -1,15 +1,13 @@
 .view {
-  position: absolute;
-  top: 75px;
-  right: 0px;
-  margin-right: 66px;
+  position: relative;
+  float: right;
 }
 
 .App {
   text-align: center;
   margin-top: 15px;
   margin-left: 15px;
-  width: 1600px;
+  width: 100%;
 }
 
 .App-header {
