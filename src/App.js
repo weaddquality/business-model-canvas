@@ -2,9 +2,10 @@ import Routes from './Routes'
 import React, { Component } from 'react'
 import './App.css'
 import './components/navigation-bar/navigation-bar.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import NavigationBar from './components/navigation-bar/navigation-bar'
+import { Auth } from 'aws-amplify'
 
 class App extends Component {
   constructor(props) {
@@ -19,8 +20,10 @@ class App extends Component {
     this.setState({ isAuthenticated: authenticated })
   }
 
-  handleLogout = () => {
+  handleLogout = async () => {
+    await Auth.signOut()
     this.userHasAuthenticated(false)
+    this.props.history.push('/')
   }
 
   render() {
@@ -34,7 +37,7 @@ class App extends Component {
         <NavigationBar props={childProps} />
         <div className="view">
           <ButtonGroup>
-            <Link to="/">
+            <Link to="/canvas">
               <Button>Grid</Button>
             </Link>
             <Link to="/horizontal">
@@ -48,4 +51,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

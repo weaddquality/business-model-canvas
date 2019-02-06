@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 import { Auth } from 'aws-amplify'
 import './Login.css'
+import { Route53 } from 'aws-sdk/clients/all'
 
 export default class Login extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class Login extends Component {
     try {
       await Auth.signIn(this.state.email, this.state.password)
       this.props.userHasAuthenticated(true)
+      this.props.history.push('/canvas')
     } catch (e) {
       alert(e.message)
     }

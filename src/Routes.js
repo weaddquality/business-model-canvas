@@ -9,8 +9,8 @@ import Login from './containers/Login'
 
 export default ({ props }) => (
   <Switch>
-    <AppliedRoute path="/login" exact component={Login} props={props} />
-    <AppliedRoute exact path="/" component={Canvas} props={props} />
+    <AppliedRoute path="/" exact component={Login} props={props} />
+    <AppliedRoute exact path="/canvas" component={Canvas} props={props} />
     <AppliedRoute
       exact
       path="/horizontal"

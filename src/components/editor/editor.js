@@ -61,7 +61,7 @@ const Editor = props => {
         {nextBlockButton()}
       </div>
       <div>
-        <Link to="/">Go back to Canvas</Link>
+        <Link to="/canvas">Go back to Canvas</Link>
       </div>
     </div>
   )
