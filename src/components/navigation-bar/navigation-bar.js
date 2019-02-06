@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './navigation-bar.css'
 import { Link } from 'react-router-dom'
-import { Nav, Navbar, NavItem, ButtonGroup, Button } from 'react-bootstrap'
+import { Nav, Navbar, NavItem } from 'react-bootstrap'
 
-const NavigationBar = () => {
+const NavigationBar = ({ props }) => {
   return (
     <Navbar fluid collapseOnSelect>
       <Navbar.Header>
@@ -14,12 +14,18 @@ const NavigationBar = () => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem>
-            <Link to="/signup">Signup</Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/login">Login</Link>
-          </NavItem>
+          {props.isAuthenticated ? (
+            <NavItem onClick={props.handleLogout}>Logout</NavItem>
+          ) : (
+            <Fragment>
+              <NavItem>
+                <Link to="/signup">Signup</Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/login">Login</Link>
+              </NavItem>
+            </Fragment>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
