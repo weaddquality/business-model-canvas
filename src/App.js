@@ -52,6 +52,9 @@ class App extends Component {
           <NavigationBar props={childProps} />
           <div className="view">
             <ButtonGroup>
+              <Link to="/items/create">
+                <Button>Create item</Button>
+              </Link>
               <Link to="/canvas">
                 <Button>Canvas</Button>
               </Link>
