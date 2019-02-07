@@ -6,7 +6,7 @@ import Horizontal from './components/canvas/horizontal'
 import Home from './components/home/home'
 import Editor from './components/editor/editor'
 import NotFound from './components/not-found/not-found'
-import Login from './containers/Login'
+import Login from './components/login/login'
 
 export default ({ props }) => (
   <Switch>

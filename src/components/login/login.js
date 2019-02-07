@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Home from '../components/home/home'
+import Home from '../home/home'
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 import { Auth } from 'aws-amplify'
-import './Login.css'
+import './login.css'
 import { Route53 } from 'aws-sdk/clients/all'
 
 export default class Login extends Component {
