@@ -7,11 +7,13 @@ import Home from './components/home/home'
 import Editor from './components/editor/editor'
 import NotFound from './components/not-found/not-found'
 import Login from './components/login/login'
+import Signup from './components/signup/signup'
 
 export default ({ props }) => (
   <Switch>
     <AppliedRoute exact path="/" exact component={Home} />
     <AppliedRoute exact path="/login" component={Login} props={props} />
+    <AppliedRoute exact path="/signup" component={Signup} props={props} />
     <AppliedRoute exact path="/canvas" component={Canvas} props={props} />
     <AppliedRoute
       exact
