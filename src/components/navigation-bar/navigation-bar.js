@@ -8,7 +8,7 @@ const NavigationBar = ({ props }) => {
     <Navbar fluid collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/canvas">Business Model Canvas</Link>
+          <Link to="/">Business Model Canvas</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>

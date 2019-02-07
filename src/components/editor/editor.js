@@ -52,7 +52,7 @@ const Editor = props => {
   })
 
   return (
-    <div>
+    <div className="editor-container">
       <h1>{selectedBlock.header}</h1>
       <h2>{selectedBlock.description}</h2>
       <div className="itemContainer">

@@ -13,7 +13,21 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
+      isAuthenticating: true,
     }
+  }
+
+  async componentDidMount() {
+    try {
+      await Auth.currentSession()
+      this.userHasAuthenticated(true)
+    } catch (e) {
+      if (e !== 'No current user') {
+        alert(e)
+      }
+    }
+
+    this.setState({ isAuthenticating: false })
   }
 
   userHasAuthenticated = authenticated => {
@@ -23,7 +37,7 @@ class App extends Component {
   handleLogout = async () => {
     await Auth.signOut()
     this.userHasAuthenticated(false)
-    this.props.history.push('/')
+    this.props.history.push('/login')
   }
 
   render() {
@@ -33,20 +47,22 @@ class App extends Component {
       handleLogout: this.handleLogout,
     }
     return (
-      <div className="App">
-        <NavigationBar props={childProps} />
-        <div className="view">
-          <ButtonGroup>
-            <Link to="/canvas">
-              <Button>Grid</Button>
-            </Link>
-            <Link to="/horizontal">
-              <Button>Horizontal</Button>
-            </Link>
-          </ButtonGroup>
+      !this.state.isAuthenticating && (
+        <div className="App">
+          <NavigationBar props={childProps} />
+          <div className="view">
+            <ButtonGroup>
+              <Link to="/canvas">
+                <Button>Canvas</Button>
+              </Link>
+              <Link to="/horizontal">
+                <Button>Horizontal</Button>
+              </Link>
+            </ButtonGroup>
+          </div>
+          <Routes props={childProps} />
         </div>
-        <Routes props={childProps} />
-      </div>
+      )
     )
   }
 }
