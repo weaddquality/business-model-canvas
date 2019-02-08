@@ -7,6 +7,7 @@ import {
   ControlLabel,
 } from 'react-bootstrap'
 import LoaderButton from '../loader-button/loader-button'
+import Home from '../home/home'
 import { Auth } from 'aws-amplify'
 
 export default class Signup extends Component {
@@ -148,10 +149,13 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="Signup">
-        {this.state.newUser === null
-          ? this.renderForm()
-          : this.renderConfirmationForm()}
+      <div>
+        <Home />
+        <div className="Signup">
+          {this.state.newUser === null
+            ? this.renderForm()
+            : this.renderConfirmationForm()}
+        </div>
       </div>
     )
   }
