@@ -1,6 +1,7 @@
 import React from 'react'
 import './loader-button.css'
-import { Button, Glyphicon } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+// import { Button, Glyphicon } from 'react-bootstrap' // no support in react-bootstrap 1.0.0-beta5
 
 export default ({
   isLoading,
@@ -15,7 +16,7 @@ export default ({
     disabled={disabled || isLoading}
     {...props}
   >
-    {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
+    {/* {isLoading && <Glyphicon glyph="refresh" className="spinning" />} // no support in react-bootstrap 1.0.0-beta5 */}
     {!isLoading ? text : loadingText}
   </Button>
 )
