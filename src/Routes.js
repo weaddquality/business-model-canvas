@@ -12,11 +12,11 @@ import Create from './components/create/create'
 
 export default ({ props }) => (
   <Switch>
-    <AppliedRoute exact path="/" component={Home} />
+    <Route exact path="/" component={Home} />
     <AppliedRoute exact path="/login" component={Login} props={props} />
     <AppliedRoute exact path="/signup" component={Signup} props={props} />
     <AppliedRoute exact path="/canvas" component={Canvas} props={props} />
-    <AppliedRoute exact path="/items/create" component={Create} props={props} />
+    <AppliedRoute exact path="/item/create" component={Create} props={props} />
     <AppliedRoute
       exact
       path="/horizontal"

@@ -1,17 +1,17 @@
 .editor-container {
-  padding-top: 15px;
+  padding-top: 40px;
 }
 
-.itemContainer {
+.editor-itemContainer {
   width: 1000px;
   display: inline-flex;
   justify-content: space-between;
 }
 
-.leftArrow {
+.editor-leftArrow {
   margin-left: 20px;
 }
 
-.rightArrow {
+.editor-rightArrow {
   margin-right: 20px;
 }
