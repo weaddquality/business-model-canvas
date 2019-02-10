@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import './navigation-bar.css'
+import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
 
@@ -12,7 +13,15 @@ const NavigationBar = ({ props }) => {
       className="navbar-custom rounded"
     >
       <Navbar.Brand>
+        <img
+          alt=""
+          src={QLogo}
+          width="26"
+          height="30"
+          className="d-inline-block align-top"
+        />
         <Link to="/" className="navbar-header">
+          {' '}
           Business Model Canvas
         </Link>
       </Navbar.Brand>

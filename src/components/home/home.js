@@ -1,6 +1,6 @@
 import React from 'react'
 import './home.css'
-import logo from '../../images/logo.png'
+import logo from '../../images/addq-logo.png'
 
 const Home = () => {
   return (
