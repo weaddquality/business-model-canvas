@@ -1,20 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ButtonGroup, Button, Dropdown } from 'react-bootstrap'
+import { ButtonGroup, Button } from 'react-bootstrap'
 
 const OptionBar = () => {
   return (
     <div>
-      <div className="CanvasId">
-        <Dropdown>
-          <Dropdown.Toggle variant="outline-secondary" size="sm">
-            Team Continuous
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">None</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
       <div className="View">
         <ButtonGroup>
           <Link to="/item/create">

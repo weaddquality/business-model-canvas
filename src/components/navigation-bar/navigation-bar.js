@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import './navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Nav, Navbar, Dropdown, NavDropdown } from 'react-bootstrap'
 
 const NavigationBar = ({ props }) => {
   return (
@@ -26,6 +26,13 @@ const NavigationBar = ({ props }) => {
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />
+      <Navbar.Collapse>
+        <NavDropdown title="Team Continuous" id="collasible-nav-dropdown">
+          <NavDropdown.Item>
+            <Link to="">Only one canvas</Link>
+          </NavDropdown.Item>
+        </NavDropdown>
+      </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           {props.isAuthenticated ? (

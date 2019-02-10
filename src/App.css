@@ -44,3 +44,12 @@ input.form-control {
 input[type='file'] {
   width: 100%;
 }
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+a:hover {
+  color: white;
+}

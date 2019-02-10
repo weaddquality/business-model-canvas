@@ -6,19 +6,9 @@
 .navbar-header {
   font-size: 14pt;
   text-decoration: none !important;
-  color: gray !important;
-}
-
-.navbar-header:hover {
-  color: white !important;
 }
 
 .navbar-link {
   font-size: 12pt;
   text-decoration: none !important;
-  color: gray !important;
-}
-
-.navbar-link:hover {
-  color: white !important;
 }
