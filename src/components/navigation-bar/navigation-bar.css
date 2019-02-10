@@ -9,6 +9,10 @@
   color: gray !important;
 }
 
+.header:hover {
+  color: white !important;
+}
+
 .link {
   font-size: 12pt;
   text-decoration: none !important;
