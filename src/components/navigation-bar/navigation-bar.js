@@ -16,9 +16,9 @@ const NavigationBar = ({ props }) => {
         <img
           alt=""
           src={QLogo}
-          width="26"
-          height="30"
-          className="d-inline-block align-top"
+          width="18"
+          height="20"
+          className="d-inline-block align-center"
         />
         <Link to="/" className="navbar-header">
           {' '}
