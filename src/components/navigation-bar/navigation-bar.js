@@ -1,47 +1,42 @@
 import React, { Fragment } from 'react'
 import './navigation-bar.css'
 import { Link } from 'react-router-dom'
-import {
-  Nav,
-  Navbar,
-  NavItem,
-  ButtonToolbar,
-  DropdownButton,
-  Dropdown,
-  Button,
-} from 'react-bootstrap'
-// import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-// import Dropdown from 'react-bootstrap/lib/Dropdown';
-// import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-// import DropdownItem from 'react-bootstrap/lib/DropdownItem';
+import { Nav, Navbar } from 'react-bootstrap'
 
 const NavigationBar = ({ props }) => {
   return (
-    <Navbar fluid collapseOnSelect className="navbar navbar-inverse">
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">Business Model Canvas</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav pullRight>
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
+      className="rounded navbar-custom"
+    >
+      <Navbar.Brand>
+        <Link to="/" className="header">
+          Business Model Canvas
+        </Link>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse className="justify-content-end">
+        <Nav>
           {props.isAuthenticated ? (
-            <NavItem onClick={props.handleLogout}>
-              <span className="glyphicon glyphicon-log-out" /> Logout
-            </NavItem>
+            <Nav.Link onClick={props.handleLogout}>
+              <Link to="/signup" className="link">
+                <span className="glyphicon glyphicon-log-out" /> Logout
+              </Link>
+            </Nav.Link>
           ) : (
             <Fragment>
-              <NavItem>
-                <Link to="/signup">
+              <Nav.Link>
+                <Link to="/signup" className="link">
                   <span className="glyphicon glyphicon-user" /> Signup
                 </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/login">
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/login" className="link">
                   <span className="glyphicon glyphicon-log-in" /> Login
                 </Link>
-              </NavItem>
+              </Nav.Link>
             </Fragment>
           )}
         </Nav>

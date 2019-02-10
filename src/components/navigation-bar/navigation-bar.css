@@ -1,4 +1,20 @@
-.navigation-bar {
-  text-align: right;
-  margin-right: 70px;
+.navbar-custom {
+  background-color: black !important;
+  height: 50px;
+}
+
+.header {
+  font-size: 14pt;
+  text-decoration: none !important;
+  color: gray !important;
+}
+
+.link {
+  font-size: 12pt;
+  text-decoration: none !important;
+  color: gray !important;
+}
+
+.link:hover {
+  color: white !important;
 }
