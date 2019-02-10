@@ -53,13 +53,19 @@ class App extends Component {
           <div className="view">
             <ButtonGroup>
               <Link to="/items/create">
-                <Button>Create item</Button>
+                <Button variant="outline-secondary" size="sm">
+                  Create item
+                </Button>
               </Link>
               <Link to="/canvas">
-                <Button>Canvas</Button>
+                <Button variant="outline-secondary" size="sm">
+                  Canvas
+                </Button>
               </Link>
               <Link to="/horizontal">
-                <Button>Horizontal</Button>
+                <Button variant="outline-secondary" size="sm">
+                  Horizontal
+                </Button>
               </Link>
             </ButtonGroup>
           </div>
