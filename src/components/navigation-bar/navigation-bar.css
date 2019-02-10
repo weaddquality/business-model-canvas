@@ -3,22 +3,22 @@
   height: 50px;
 }
 
-.header {
+.navbar-header {
   font-size: 14pt;
   text-decoration: none !important;
   color: gray !important;
 }
 
-.header:hover {
+.navbar-header:hover {
   color: white !important;
 }
 
-.link {
+.navbar-link {
   font-size: 12pt;
   text-decoration: none !important;
   color: gray !important;
 }
 
-.link:hover {
+.navbar-link:hover {
   color: white !important;
 }

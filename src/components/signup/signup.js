@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import './signup.css'
-import {
-  // HelpBlock,
-  Form,
-  FormGroup,
-  FormControl,
-  FormLabel,
-} from 'react-bootstrap'
+import { Form, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 import LoaderButton from '../loader-button/loader-button'
 import Home from '../home/home'
 import { Auth } from 'aws-amplify'
@@ -84,7 +78,7 @@ export default class Signup extends Component {
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
+        <FormGroup controlId="confirmationCode">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -98,7 +92,6 @@ export default class Signup extends Component {
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
           disabled={!this.validateConfirmationForm()}
           type="submit"
           isLoading={this.state.isLoading}
@@ -112,7 +105,7 @@ export default class Signup extends Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
+        <FormGroup controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -121,7 +114,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
+        <FormGroup controlId="password">
           <FormLabel>Password</FormLabel>
           <FormControl
             value={this.state.password}
@@ -129,7 +122,7 @@ export default class Signup extends Component {
             type="password"
           />
         </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
+        <FormGroup controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             value={this.state.confirmPassword}
@@ -139,7 +132,6 @@ export default class Signup extends Component {
         </FormGroup>
         <LoaderButton
           block
-          bsSize="large"
           disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}
@@ -154,7 +146,7 @@ export default class Signup extends Component {
     return (
       <div>
         <Home />
-        <div className="Signup">
+        <div className="signup">
           {this.state.newUser === null
             ? this.renderForm()
             : this.renderConfirmationForm()}

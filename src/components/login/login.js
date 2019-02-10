@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import './login.css'
 import Home from '../home/home'
 import LoaderButton from '../loader-button/loader-button'
-import { FormGroup, FormControl, FormLabel } from 'react-bootstrap'
+import { Form, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 import { Auth } from 'aws-amplify'
-import { Route53 } from 'aws-sdk/clients/all'
 
 export default class Login extends Component {
   constructor(props) {
@@ -46,9 +45,9 @@ export default class Login extends Component {
     return (
       <div>
         <Home />
-        <div className="Login">
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" bsSize="large">
+        <div className="login">
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="email">
               <FormLabel>Email</FormLabel>
               <FormControl
                 autoFocus
@@ -57,7 +56,7 @@ export default class Login extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
+            <FormGroup controlId="password">
               <FormLabel>Password</FormLabel>
               <FormControl
                 value={this.state.password}
@@ -67,14 +66,13 @@ export default class Login extends Component {
             </FormGroup>
             <LoaderButton
               block
-              bsSize="large"
               disabled={!this.validateForm()}
               type="submit"
               isLoading={this.state.isLoading}
               text="Login"
               loadingText="Logging in…"
             />
-          </form>
+          </Form>
         </div>
       </div>
     )

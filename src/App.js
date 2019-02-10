@@ -50,9 +50,9 @@ class App extends Component {
       !this.state.isAuthenticating && (
         <div className="App">
           <NavigationBar props={childProps} />
-          <div className="view">
+          <div className="View">
             <ButtonGroup>
-              <Link to="/items/create">
+              <Link to="/item/create">
                 <Button variant="outline-secondary" size="sm">
                   Create item
                 </Button>

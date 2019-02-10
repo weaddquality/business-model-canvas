@@ -13,7 +13,7 @@ export default ({
 }) => (
   <Button
     variant="secondary"
-    className={`LoaderButton ${className}`}
+    className={`loaderButton ${className}`}
     disabled={disabled || isLoading}
     {...props}
   >

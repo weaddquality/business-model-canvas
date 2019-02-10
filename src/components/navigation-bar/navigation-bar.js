@@ -9,31 +9,31 @@ const NavigationBar = ({ props }) => {
       bg="dark"
       variant="dark"
       expand="lg"
-      className="rounded navbar-custom"
+      className="navbar-custom rounded"
     >
       <Navbar.Brand>
-        <Link to="/" className="header">
+        <Link to="/" className="navbar-header">
           Business Model Canvas
         </Link>
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           {props.isAuthenticated ? (
             <Nav.Link onClick={props.handleLogout}>
-              <Link to="/signup" className="link">
+              <Link to="/signup" className="navbar-link">
                 <span className="fa fa-sign-out" /> Logout
               </Link>
             </Nav.Link>
           ) : (
             <Fragment>
               <Nav.Link>
-                <Link to="/signup" className="link">
+                <Link to="/signup" className="navbar-link">
                   <span className="fa fa-user" /> Signup
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/login" className="link">
+                <Link to="/login" className="navbar-link">
                   <span className="fa fa-sign-in" /> Login
                 </Link>
               </Nav.Link>

@@ -1,7 +1,9 @@
-.logo {
-  padding-top: 50px;
+.home-logo {
+  padding-top: 40px;
 }
 
-.header {
-  font-size: 20pt;
+.home-header {
+  font-size: 21pt;
+  text-decoration: none !important;
+  color: gray !important;
 }

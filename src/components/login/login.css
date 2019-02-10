@@ -1,14 +1,9 @@
 @media all and (min-width: 480px) {
-  .header .login {
-    padding-top: 60px;
-    font-size: 20pt;
-  }
-
-  .Login {
+  .login {
     padding: 20px 0;
   }
 
-  .Login form {
+  .login form {
     margin: 0 auto;
     max-width: 320px;
   }

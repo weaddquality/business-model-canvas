@@ -27,7 +27,7 @@ const Editor = props => {
   const previousBlockButton = () => {
     if (selectedBlock.index > 0) {
       return (
-        <Link to={`/editor/${previousBlock()}`} className="leftArrow">
+        <Link to={`/editor/${previousBlock()}`} className="editor-leftArrow">
           {' '}
           &lt;---{' '}
         </Link>
@@ -38,7 +38,7 @@ const Editor = props => {
   const nextBlockButton = () => {
     if (selectedBlock.index < blocks.length - 1) {
       return (
-        <Link to={`/editor/${nextBlock()}`} className="rightArrow">
+        <Link to={`/editor/${nextBlock()}`} className="editor-rightArrow">
           {' '}
           ---&gt;{' '}
         </Link>
@@ -55,9 +55,9 @@ const Editor = props => {
     <div className="editor-container">
       <h1>{selectedBlock.header}</h1>
       <h2>{selectedBlock.description}</h2>
-      <div className="itemContainer">
+      <div className="editor-itemContainer">
         {previousBlockButton()}
-        <div className="items">{items}</div>
+        <div>{items}</div>
         {nextBlockButton()}
       </div>
       <div>
