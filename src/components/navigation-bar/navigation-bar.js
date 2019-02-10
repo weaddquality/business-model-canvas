@@ -22,19 +22,19 @@ const NavigationBar = ({ props }) => {
           {props.isAuthenticated ? (
             <Nav.Link onClick={props.handleLogout}>
               <Link to="/signup" className="link">
-                <span className="glyphicon glyphicon-log-out" /> Logout
+                <span className="fa fa-sign-out" /> Logout
               </Link>
             </Nav.Link>
           ) : (
             <Fragment>
               <Nav.Link>
                 <Link to="/signup" className="link">
-                  <span className="glyphicon glyphicon-user" /> Signup
+                  <span className="fa fa-user" /> Signup
                 </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link to="/login" className="link">
-                  <span className="glyphicon glyphicon-log-in" /> Login
+                  <span className="fa fa-sign-in" /> Login
                 </Link>
               </Nav.Link>
             </Fragment>
