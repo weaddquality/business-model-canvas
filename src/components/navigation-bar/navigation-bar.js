@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import './navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
-import { Nav, Navbar, Dropdown, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const NavigationBar = ({ props }) => {
   return (

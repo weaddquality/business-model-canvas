@@ -4,7 +4,6 @@ import './App.css'
 import './components/navigation-bar/navigation-bar.css'
 import { withRouter } from 'react-router-dom'
 import NavigationBar from './components/navigation-bar/navigation-bar'
-import OptionBar from './components/option-bar/option-bar'
 import { Auth } from 'aws-amplify'
 
 class App extends Component {
