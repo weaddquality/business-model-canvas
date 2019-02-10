@@ -4,6 +4,12 @@
   float: right;
 }
 
+.CanvasId {
+  padding-top: 5px;
+  position: relative;
+  float: left;
+}
+
 .App {
   text-align: center;
   padding: 15px 15px 0px 15px;

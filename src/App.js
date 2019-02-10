@@ -2,9 +2,9 @@ import Routes from './Routes'
 import React, { Component } from 'react'
 import './App.css'
 import './components/navigation-bar/navigation-bar.css'
-import { Link, withRouter } from 'react-router-dom'
-import { ButtonGroup, Button } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 import NavigationBar from './components/navigation-bar/navigation-bar'
+import OptionBar from './components/option-bar/option-bar'
 import { Auth } from 'aws-amplify'
 
 class App extends Component {
@@ -50,25 +50,7 @@ class App extends Component {
       !this.state.isAuthenticating && (
         <div className="App">
           <NavigationBar props={childProps} />
-          <div className="View">
-            <ButtonGroup>
-              <Link to="/item/create">
-                <Button variant="outline-secondary" size="sm">
-                  Create item
-                </Button>
-              </Link>
-              <Link to="/canvas">
-                <Button variant="outline-secondary" size="sm">
-                  Canvas
-                </Button>
-              </Link>
-              <Link to="/horizontal">
-                <Button variant="outline-secondary" size="sm">
-                  Horizontal
-                </Button>
-              </Link>
-            </ButtonGroup>
-          </div>
+          <OptionBar />
           <Routes props={childProps} />
         </div>
       )
