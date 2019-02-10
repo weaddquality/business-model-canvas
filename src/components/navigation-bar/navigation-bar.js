@@ -27,20 +27,38 @@ const NavigationBar = ({ props }) => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <NavDropdown title="Team Continuous" id="collasible-nav-dropdown">
+        <NavDropdown title="Team Continuous">
           <NavDropdown.Item>
-            <Link to="">Only one canvas</Link>
+            <Link to="">Only one canvas available</Link>
           </NavDropdown.Item>
         </NavDropdown>
       </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           {props.isAuthenticated ? (
-            <Nav.Link onClick={props.handleLogout}>
-              <Link to="/signup" className="navbar-link">
-                <span className="fa fa-sign-out" /> Logout
-              </Link>
-            </Nav.Link>
+            <Fragment>
+              <Nav.Link>
+                <Link to="/item/create">
+                  <span className="fa fa-plus" /> Create item
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/canvas">
+                  <span className="fa fa-th" />
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/horizontal">
+                  <span className="fa fa-align-justify" />
+                </Link>
+              </Nav.Link>
+              <Nav.Link>|</Nav.Link>
+              <Nav.Link onClick={props.handleLogout}>
+                <Link to="/signup" className="navbar-link">
+                  <span className="fa fa-sign-out" /> Logout
+                </Link>
+              </Nav.Link>
+            </Fragment>
           ) : (
             <Fragment>
               <Nav.Link>

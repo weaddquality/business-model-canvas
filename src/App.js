@@ -50,7 +50,6 @@ class App extends Component {
       !this.state.isAuthenticating && (
         <div className="App">
           <NavigationBar props={childProps} />
-          <OptionBar />
           <Routes props={childProps} />
         </div>
       )
