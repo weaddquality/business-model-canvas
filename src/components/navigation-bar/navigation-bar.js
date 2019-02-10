@@ -4,6 +4,18 @@ import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
+const renderCanvasDropdownIfAuthenticated = props => {
+  if (props.isAuthenticated) {
+    return (
+      <NavDropdown title="Team Continuous">
+        <NavDropdown.Item>
+          <Link to="">Only one canvas available</Link>
+        </NavDropdown.Item>
+      </NavDropdown>
+    )
+  }
+}
+
 const NavigationBar = ({ props }) => {
   return (
     <Navbar
@@ -27,11 +39,7 @@ const NavigationBar = ({ props }) => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <NavDropdown title="Team Continuous">
-          <NavDropdown.Item>
-            <Link to="">Only one canvas available</Link>
-          </NavDropdown.Item>
-        </NavDropdown>
+        {renderCanvasDropdownIfAuthenticated(props)}
       </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
         <Nav>
