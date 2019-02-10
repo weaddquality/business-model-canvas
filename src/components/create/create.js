@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './create.css'
-import { FormGroup, FormControl } from 'react-bootstrap'
+import { FormGroup, FormControl, Form } from 'react-bootstrap'
 import LoaderButton from '../loader-button/loader-button'
 import { API } from 'aws-amplify'
 import uuid from 'uuid'
@@ -62,27 +62,27 @@ export default class Create extends Component {
 
   render() {
     return (
-      <div className="create">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="content">
-            <FormControl
-              onChange={this.handleChange}
-              value={this.state.content}
-              componentClass="textarea"
-            />
-          </FormGroup>
-          <LoaderButton
-            block
-            bsStyle="primary"
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            isLoading={this.state.isLoading}
-            text="Create"
-            loadingText="Creating…"
+      <Form onSubmit={this.handleSubmit} className="create">
+        <Form.Group controlId="content">
+          <Form.Label>
+            <b>Create a Value proposition</b>
+          </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows="6"
+            placeholder="Enter text here"
+            onChange={this.handleChange}
+            value={this.state.content}
           />
-        </form>
-      </div>
+        </Form.Group>
+        <LoaderButton
+          disabled={!this.validateForm()}
+          type="submit"
+          isLoading={this.state.isLoading}
+          text="Create"
+          loadingText="Creating…"
+        />
+      </Form>
     )
   }
 }
