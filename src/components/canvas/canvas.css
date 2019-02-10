@@ -34,7 +34,7 @@
 }
 
 .block {
-  border: solid;
+  border: solid 1px;
   color: black;
   text-align: left;
 }
