@@ -8,7 +8,7 @@ const Horizontal = () => {
     return <CanvasBlock key={block.className} content={block} />
   })
 
-  return <div className="horizontal">{canvasBlocks}</div>
+  return <div className="horizontal-view">{canvasBlocks}</div>
 }
 
 export default Horizontal

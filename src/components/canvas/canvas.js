@@ -8,7 +8,9 @@ const Canvas = () => {
     return <CanvasBlock key={block.className} content={block} />
   })
 
-  return <div className="canvas">{canvasBlocks}</div>
+  return (
+    <div className="canvas-view canvas-horizontal-view">{canvasBlocks}</div>
+  )
 }
 
 export default Canvas

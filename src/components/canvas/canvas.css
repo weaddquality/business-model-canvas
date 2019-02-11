@@ -1,41 +1,3 @@
-.canvas {
-  display: grid;
-  grid-gap: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  height: 750px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr;
-  grid-template-areas:
-    'key-partners key-activities value-propositions customer-relationships customer-segments'
-    'key-partners key-resources value-propositions channels customer-segments'
-    'cost-structures cost-structures cost-structures revenue-streams revenue-streams';
-}
-
-.horizontal {
-  display: grid;
-  grid-gap: 10px;
-  padding-top: 10px;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  height: 1400px;
-  grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
-  grid-template-areas:
-    'key-partners'
-    'key-activities'
-    'customer-relationships'
-    'value-propositions'
-    'channels'
-    'key-resources'
-    'customer-segments'
-    'cost-structures'
-    'revenue-streams';
-}
-
 .block {
   border: solid 1px;
   color: black;
@@ -90,4 +52,75 @@
 .revenue-streams {
   grid-area: revenue-streams;
   background-color: #8c6584;
+}
+
+.horizontal-view {
+  display: grid;
+  grid-gap: 10px;
+  padding-top: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  height: 1400px;
+  grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+  grid-template-areas:
+    'key-partners'
+    'key-activities'
+    'customer-relationships'
+    'value-propositions'
+    'channels'
+    'key-resources'
+    'customer-segments'
+    'cost-structures'
+    'revenue-streams';
+}
+
+@media (max-width: 1023px) {
+  .canvas {
+    display: none;
+  }
+
+  .canvas-horizontal-view {
+    display: grid;
+    grid-gap: 10px;
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    height: 1400px;
+    grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-areas:
+      'key-partners'
+      'key-activities'
+      'customer-relationships'
+      'value-propositions'
+      'channels'
+      'key-resources'
+      'customer-segments'
+      'cost-structures'
+      'revenue-streams';
+  }
+}
+
+@media (min-width: 1024px) {
+  .horizontal {
+    display: none;
+  }
+
+  .canvas-view {
+    display: grid;
+    grid-gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    height: 750px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-areas:
+      'key-partners key-activities value-propositions customer-relationships customer-segments'
+      'key-partners key-resources value-propositions channels customer-segments'
+      'cost-structures cost-structures cost-structures revenue-streams revenue-streams';
+  }
 }

@@ -9,7 +9,7 @@ const renderCanvasDropdownIfAuthenticated = props => {
     return (
       <NavDropdown title="Team Continuous">
         <NavDropdown.Item>
-          <Link to="">Only one canvas available</Link>
+          <Link to="/canvas">Team Continuous</Link>
         </NavDropdown.Item>
       </NavDropdown>
     )
