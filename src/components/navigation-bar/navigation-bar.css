@@ -12,3 +12,9 @@
   font-size: 12pt;
   text-decoration: none !important;
 }
+
+@media (max-width: 1023px) {
+  .canvas-view-button {
+    display: none;
+  }
+}

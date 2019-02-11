@@ -52,12 +52,12 @@ const NavigationBar = ({ props }) => {
               </Nav.Link>
               <Nav.Link>
                 <Link to="/canvas">
-                  <span className="fa fa-th" />
+                  <span className="fa fa-th canvas-view-button" />
                 </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link to="/horizontal">
-                  <span className="fa fa-align-justify" />
+                  <span className="fa fa-align-justify canvas-view-button" />
                 </Link>
               </Nav.Link>
               <Nav.Link>|</Nav.Link>
