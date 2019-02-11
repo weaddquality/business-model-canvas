@@ -11,7 +11,12 @@ const blocks = [
     description: 'What key activities do our value propositions require',
     items: [
       { header: 'Rubrik 1', text: 'Text1 Text1 Text1 Text1 Text1' },
-      { header: 'Rubrik 2', text: 'Text2 Text2 Text2 Text2 Text2 Text2 Text2' },
+      {
+        header:
+          'LONG HEADER A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö',
+        text:
+          'LONG TEXT A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö A B C D E F G H I J K L M N O P Q R S T U W X Y Z Å Ä Ö',
+      },
     ],
   },
   {
