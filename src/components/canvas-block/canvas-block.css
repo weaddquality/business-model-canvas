@@ -38,3 +38,8 @@ a > div {
 .canvas-item-header {
   font-weight: bold;
 }
+
+.canvas-item-card {
+  width: '98%';
+  max-width: 300px;
+}

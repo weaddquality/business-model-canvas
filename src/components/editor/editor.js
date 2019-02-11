@@ -48,7 +48,12 @@ const Editor = props => {
   }
 
   const items = selectedBlock.items.map((item, index) => {
-    return <p key={index}>{item}</p>
+    return (
+      <div>
+        <div className="editor-item-header">{item.header}</div>
+        <p key={index}>{item.text}</p>
+      </div>
+    )
   })
 
   return (

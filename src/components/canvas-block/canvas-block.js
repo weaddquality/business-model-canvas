@@ -6,7 +6,7 @@ import './canvas-block.css'
 const CanvasBlock = function(props) {
   const items = props.content.items.map(item => {
     return (
-      <Card border="dark" style={{ width: '98%' }}>
+      <Card border="dark" className="canvas-item-card">
         <Card.Header className="canvas-item-header">{item.header}</Card.Header>
         <Card.Body>
           <Card.Text>{item.text}</Card.Text>
