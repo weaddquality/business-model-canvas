@@ -23,6 +23,7 @@ const NavigationBar = ({ props }) => {
       variant="dark"
       expand="lg"
       className="navbar-custom rounded"
+      collapseOnSelect
     >
       <Navbar.Brand>
         <img
@@ -60,7 +61,7 @@ const NavigationBar = ({ props }) => {
                   <span className="fa fa-align-justify canvas-view-button" />
                 </Link>
               </Nav.Link>
-              <Nav.Link>|</Nav.Link>
+              <Nav.Link className="canvas-view-button">|</Nav.Link>
               <Nav.Link onClick={props.handleLogout}>
                 <Link to="/signup" className="navbar-link">
                   <span className="fa fa-sign-out" /> Logout
