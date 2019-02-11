@@ -13,9 +13,13 @@ const CanvasBlock = function(props) {
       className={`${props.content.className} block`}
     >
       <div>
-        <h3>{props.content.header}</h3>
-        <h4>{props.content.description}</h4>
-        {items}
+        <div className="canvas-blocks canvas-block-header ">
+          {props.content.header}
+        </div>
+        <div className="canvas-blocks canvas-block-description">
+          {props.content.description}
+        </div>
+        <div className="canvas-blocks canvas-block-item">{items}</div>
       </div>
     </Link>
   )
