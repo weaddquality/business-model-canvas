@@ -41,5 +41,9 @@ a > div {
 
 .canvas-item-card {
   width: '98%';
-  max-width: 300px;
+  max-width: 1024px;
+}
+
+.canvas-card-container {
+  padding-right: 8px;
 }
