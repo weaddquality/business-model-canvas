@@ -9,8 +9,18 @@ a > div {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.canvas-block-container {
+  padding-top: 10px;
+}
+
+.canvas-blocks-container {
+  border-bottom: 1px solid;
+  min-height: 70px;
+}
+
 .canvas-block-header {
   font-size: 12pt;
+  font-weight: bold;
 }
 
 .canvas-block-description {
@@ -21,4 +31,10 @@ a > div {
 
 .canvas-block-item {
   font-size: 10pt;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.canvas-item-header {
+  font-weight: bold;
 }
