@@ -7,3 +7,15 @@
   text-decoration: none !important;
   color: gray !important;
 }
+
+@media (max-width: 1023px) {
+  img {
+    max-height: 110px;
+  }
+}
+
+@media (min-width: 1024px) {
+  img {
+    max-height: 200px;
+  }
+}
