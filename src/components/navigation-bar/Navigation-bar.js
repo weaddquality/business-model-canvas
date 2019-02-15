@@ -2,7 +2,9 @@ import React, { Fragment } from 'react'
 import './Navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const renderCanvasDropdownIfAuthenticated = props => {
   if (props.isAuthenticated) {

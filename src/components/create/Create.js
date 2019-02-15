@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Create.css'
-import { Form } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
 import LoaderButton from '../loader-button/Loader-button'
 import { API } from 'aws-amplify'
 import uuid from 'uuid'

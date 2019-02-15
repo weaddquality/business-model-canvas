@@ -1,6 +1,6 @@
 import React from 'react'
 import './Loader-button.css'
-import { Button } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 // import { Button, Glyphicon } from 'react-bootstrap' // no support in react-bootstrap 1.0.0-beta5
 
 export default ({ isLoading, text, loadingText, className = '', disabled = false, ...props }) => (
