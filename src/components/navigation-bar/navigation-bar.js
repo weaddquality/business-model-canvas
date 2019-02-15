@@ -18,36 +18,22 @@ const renderCanvasDropdownIfAuthenticated = props => {
 
 const NavigationBar = ({ props }) => {
   return (
-    <Navbar
-      bg="dark"
-      variant="dark"
-      expand="lg"
-      className="navbar-custom rounded"
-      collapseOnSelect
-    >
+    <Navbar bg="dark" variant="dark" expand="lg" className="navbar-custom rounded" collapseOnSelect>
       <Navbar.Brand>
-        <img
-          alt=""
-          src={QLogo}
-          width="18"
-          height="20"
-          className="d-inline-block align-center"
-        />
+        <img alt="" src={QLogo} width="18" height="20" className="d-inline-block align-center" />
         <Link to="/" className="navbar-header">
           {' '}
           Business Model Canvas
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>
-        {renderCanvasDropdownIfAuthenticated(props)}
-      </Navbar.Collapse>
+      <Navbar.Collapse>{renderCanvasDropdownIfAuthenticated(props)}</Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           {props.isAuthenticated ? (
             <Fragment>
               <Nav.Link>
-                <Link to="/item/create">
+                <Link to="/item/create" className="navbar-link">
                   <span className="fa fa-plus" /> Create item
                 </Link>
               </Nav.Link>
