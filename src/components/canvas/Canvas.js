@@ -1,6 +1,6 @@
 import React from 'react'
-import './canvas.css'
-import CanvasBlock from '../canvas-block/canvas-block'
+import './Canvas.css'
+import CanvasBlock from '../canvas-block/Canvas-block'
 import blocks from '../canvas-block/content'
 
 const Canvas = () => {
@@ -8,9 +8,7 @@ const Canvas = () => {
     return <CanvasBlock key={block.className} content={block} />
   })
 
-  return (
-    <div className="canvas-view canvas-horizontal-view">{canvasBlocks}</div>
-  )
+  return <div className="canvas-view canvas-horizontal-view">{canvasBlocks}</div>
 }
 
 export default Canvas

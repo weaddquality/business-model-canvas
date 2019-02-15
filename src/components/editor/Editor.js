@@ -1,5 +1,5 @@
 import React from 'react'
-import './editor.css'
+import './Editor.css'
 import { Link } from 'react-router-dom'
 import blocks from '../canvas-block/content'
 

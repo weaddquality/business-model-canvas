@@ -1,9 +1,9 @@
 import Routes from './Routes'
 import React, { Component } from 'react'
 import './App.css'
-import './components/navigation-bar/navigation-bar.css'
+import './components/navigation-bar/Navigation-bar.css'
 import { withRouter } from 'react-router-dom'
-import NavigationBar from './components/navigation-bar/navigation-bar'
+import NavigationBar from './components/navigation-bar/Navigation-bar'
 import { Auth } from 'aws-amplify'
 
 class App extends Component {

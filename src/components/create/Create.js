@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './create.css'
+import './Create.css'
 import { Form } from 'react-bootstrap'
-import LoaderButton from '../loader-button/loader-button'
+import LoaderButton from '../loader-button/Loader-button'
 import { API } from 'aws-amplify'
 import uuid from 'uuid'
 

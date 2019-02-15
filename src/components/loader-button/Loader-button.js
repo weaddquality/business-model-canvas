@@ -1,16 +1,9 @@
 import React from 'react'
-import './loader-button.css'
+import './Loader-button.css'
 import { Button } from 'react-bootstrap'
 // import { Button, Glyphicon } from 'react-bootstrap' // no support in react-bootstrap 1.0.0-beta5
 
-export default ({
-  isLoading,
-  text,
-  loadingText,
-  className = '',
-  disabled = false,
-  ...props
-}) => (
+export default ({ isLoading, text, loadingText, className = '', disabled = false, ...props }) => (
   <Button
     variant="secondary"
     className={`loaderButton ${className}`}

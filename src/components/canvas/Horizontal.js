@@ -1,6 +1,6 @@
 import React from 'react'
-import './canvas.css'
-import CanvasBlock from '../canvas-block/canvas-block'
+import './Canvas.css'
+import CanvasBlock from '../canvas-block/Canvas-block'
 import blocks from '../canvas-block/content'
 
 const Horizontal = () => {

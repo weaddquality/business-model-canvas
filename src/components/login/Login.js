@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './login.css'
-import Home from '../home/home'
-import LoaderButton from '../loader-button/loader-button'
+import './Login.css'
+import Home from '../home/Home'
+import LoaderButton from '../loader-button/Loader-button'
 import { Form, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 import { Auth } from 'aws-amplify'
 

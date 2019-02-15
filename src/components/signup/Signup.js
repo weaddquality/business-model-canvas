@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './signup.css'
+import './Signup.css'
 import { Form, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
-import LoaderButton from '../loader-button/loader-button'
-import Home from '../home/home'
+import LoaderButton from '../loader-button/Loader-button'
+import Home from '../home/Home'
 import { Auth } from 'aws-amplify'
 
 export default class Signup extends Component {
@@ -86,9 +86,7 @@ export default class Signup extends Component {
             value={this.state.confirmationCode}
             onChange={this.handleChange}
           />
-          <Form.Text className="text-muted">
-            Please check your email for the code.
-          </Form.Text>
+          <Form.Text className="text-muted">Please check your email for the code.</Form.Text>
         </FormGroup>
         <LoaderButton
           block
@@ -116,11 +114,7 @@ export default class Signup extends Component {
         </FormGroup>
         <FormGroup controlId="password">
           <FormLabel>Password</FormLabel>
-          <FormControl
-            value={this.state.password}
-            onChange={this.handleChange}
-            type="password"
-          />
+          <FormControl value={this.state.password} onChange={this.handleChange} type="password" />
         </FormGroup>
         <FormGroup controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
@@ -147,9 +141,7 @@ export default class Signup extends Component {
       <div>
         <Home />
         <div className="signup">
-          {this.state.newUser === null
-            ? this.renderForm()
-            : this.renderConfirmationForm()}
+          {this.state.newUser === null ? this.renderForm() : this.renderConfirmationForm()}
         </div>
       </div>
     )

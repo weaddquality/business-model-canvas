@@ -1,5 +1,5 @@
 import React from 'react'
-import './home.css'
+import './Home.css'
 import logo from '../../images/addq-logo.png'
 
 const Home = () => {
