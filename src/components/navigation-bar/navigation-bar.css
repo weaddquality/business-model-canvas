@@ -17,3 +17,15 @@
     display: none;
   }
 }
+
+@media (max-width: 367px) {
+  .navbar-header {
+    font-size: 12pt;
+  }
+}
+
+@media (max-width: 337px) {
+  .navbar-header {
+    font-size: 10pt;
+  }
+}
