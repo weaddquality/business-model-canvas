@@ -17,7 +17,7 @@ const LoadingButton = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      {isLoading && <span className="fa fa-refresh spinning" />}
+      {isLoading && <i className="fa fa-refresh spinning" />}
       {!isLoading ? text : loadingText}
     </Button>
   )
