@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Create.css'
 import Form from 'react-bootstrap/Form'
-import LoaderButton from '../loader-button/Loader-button'
+import LoadingButton from '../loading-button/Loading-button'
 import { API } from 'aws-amplify'
 import uuid from 'uuid'
 
@@ -69,7 +69,7 @@ class Create extends Component {
             value={this.state.content}
           />
         </Form.Group>
-        <LoaderButton
+        <LoadingButton
           disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}

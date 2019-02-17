@@ -1,9 +1,8 @@
 import React from 'react'
-import './Loader-button.css'
+import './Loading-button.css'
 import Button from 'react-bootstrap/Button'
-// import { Button, Glyphicon } from 'react-bootstrap' // no support in react-bootstrap 1.0.0-beta5
 
-const LoaderButton = ({
+const LoadingButton = ({
   isLoading,
   text,
   loadingText,
@@ -18,10 +17,10 @@ const LoaderButton = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      {/* {isLoading && <Glyphicon glyph="refresh" className="spinning" />} // no support in react-bootstrap 1.0.0-beta5 */}
+      {isLoading && <span className="fa fa-refresh spinning" />}
       {!isLoading ? text : loadingText}
     </Button>
   )
 }
 
-export default LoaderButton
+export default LoadingButton

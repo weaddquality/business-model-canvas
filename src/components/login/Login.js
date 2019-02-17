@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Login.css'
 import Home from '../home/Home'
-import LoaderButton from '../loader-button/Loader-button'
+import LoadingButton from '../loading-button/Loading-button'
 import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
@@ -63,7 +63,7 @@ class Login extends Component {
                 type="password"
               />
             </FormGroup>
-            <LoaderButton
+            <LoadingButton
               block
               disabled={!this.validateForm()}
               type="submit"

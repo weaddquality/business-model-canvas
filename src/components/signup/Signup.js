@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import FormLabel from 'react-bootstrap/FormLabel'
-import LoaderButton from '../loader-button/Loader-button'
+import LoadingButton from '../loading-button/Loading-button'
 import Home from '../home/Home'
 import { Auth } from 'aws-amplify'
 
@@ -87,7 +87,7 @@ class Signup extends Component {
           />
           <Form.Text className="text-muted">Please check your email for the code.</Form.Text>
         </FormGroup>
-        <LoaderButton
+        <LoadingButton
           block
           disabled={!this.validateConfirmationForm()}
           type="submit"
@@ -123,7 +123,7 @@ class Signup extends Component {
             type="password"
           />
         </FormGroup>
-        <LoaderButton
+        <LoadingButton
           block
           disabled={!this.validateForm()}
           type="submit"
