@@ -8,15 +8,11 @@ import FormControl from 'react-bootstrap/FormControl'
 import FormLabel from 'react-bootstrap/FormLabel'
 import { Auth } from 'aws-amplify'
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isLoading: false,
-      email: '',
-      password: '',
-    }
+class Login extends Component {
+  state = {
+    isLoading: false,
+    email: '',
+    password: '',
   }
 
   validateForm() {
@@ -81,3 +77,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default Login

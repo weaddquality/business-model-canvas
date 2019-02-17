@@ -8,18 +8,14 @@ import LoaderButton from '../loader-button/Loader-button'
 import Home from '../home/Home'
 import { Auth } from 'aws-amplify'
 
-export default class Signup extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isLoading: false,
-      email: '',
-      password: '',
-      confirmPassword: '',
-      confirmationCode: '',
-      newUser: null,
-    }
+class Signup extends Component {
+  state = {
+    isLoading: false,
+    email: '',
+    password: '',
+    confirmPassword: '',
+    confirmationCode: '',
+    newUser: null,
   }
 
   validateForm() {
@@ -150,3 +146,5 @@ export default class Signup extends Component {
     )
   }
 }
+
+export default Signup

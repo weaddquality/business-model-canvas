@@ -7,13 +7,9 @@ import NavigationBar from './components/navigation-bar/Navigation-bar'
 import { Auth } from 'aws-amplify'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isAuthenticated: false,
-      isAuthenticating: true,
-    }
+  state = {
+    isAuthenticated: false,
+    isAuthenticating: true,
   }
 
   async componentDidMount() {

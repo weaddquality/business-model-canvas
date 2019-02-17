@@ -19,7 +19,7 @@ const textSubString = item => {
   return item
 }
 
-const CanvasBlock = function(props) {
+const CanvasBlock = props => {
   const items = props.content.items.map(item => {
     return (
       <div className="canvas-card-container">
