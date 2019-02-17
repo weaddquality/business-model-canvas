@@ -5,16 +5,10 @@ import LoaderButton from '../loader-button/Loader-button'
 import { API } from 'aws-amplify'
 import uuid from 'uuid'
 
-export default class Create extends Component {
-  constructor(props) {
-    super(props)
-
-    this.file = null
-
-    this.state = {
-      isLoading: null,
-      content: '',
-    }
+class Create extends Component {
+  state = {
+    isLoading: null,
+    content: '',
   }
 
   validateForm() {
@@ -68,7 +62,7 @@ export default class Create extends Component {
             <b>Create a Value proposition</b>
           </Form.Label>
           <Form.Control
-            as="textarea"
+            as="input"
             rows="6"
             placeholder="Enter text here"
             onChange={this.handleChange}
@@ -86,3 +80,5 @@ export default class Create extends Component {
     )
   }
 }
+
+export default Create
