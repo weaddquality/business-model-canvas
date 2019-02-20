@@ -4,16 +4,24 @@ import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import Dropdown from 'react-bootstrap/Dropdown'
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const renderCanvasDropdownIfAuthenticated = props => {
   if (props.isAuthenticated) {
     return (
-      <NavDropdown title="Team Continuous">
-        <NavDropdown.Item>
+      <Dropdown as={ButtonGroup}>
+        <Button variant="success">
           <Link to="/canvas">Team Continuous</Link>
-        </NavDropdown.Item>
-      </NavDropdown>
+        </Button>
+        <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+        <Dropdown.Menu>
+          <Dropdown.Item href="/canvas">Team Continuous</Dropdown.Item>
+          <Dropdown.Item href="#/canvas2">Team UX & Mobilt</Dropdown.Item>
+          <Dropdown.Item href="#/canvas3">Team XXX</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     )
   }
 }
