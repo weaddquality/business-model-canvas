@@ -5,7 +5,7 @@ A business model canvas is a tool to map and visualize a business model. The BMC
 
 Read more about the concept of Business Model Canvas on wikipedia: https://en.wikipedia.org/wiki/Business_Model_Canvas
 
-See the application with backend live here: http://thebusinessmodelcanvas.s3-website.eu-north-1.amazonaws.com/
+See the application with backend live here: https://dec11evc3bzjf.cloudfront.net/
 
 The backend for this repository: https://github.com/weaddquality/bmc-aws-lambda-serverless
 
