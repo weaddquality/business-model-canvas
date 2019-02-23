@@ -1,5 +1,5 @@
 .block {
-  border: solid 1px;
+  border: solid 3px;
   color: black;
   text-align: left;
 }
@@ -11,47 +11,57 @@
 
 .key-partners {
   grid-area: key-partners;
-  background-color: #95b82f;
+  /* background-color: #95b82f; */
+  border-color: #95b82f;
+  opacity: 10%;
 }
 
 .key-activities {
   grid-area: key-activities;
-  background-color: #dcd9d2;
+  /* background-color: #dcd9d2; */
+  border-color: #dcd9d2;
 }
 
 .key-resources {
   grid-area: key-resources;
-  background-color: #8c6584;
+  /* background-color: #8c6584; */
+  border-color: #8c6584;
 }
 
 .value-propositions {
   grid-area: value-propositions;
-  background-color: #95b82f;
+  /* background-color: #95b82f; */
+  border-color: #95b82f;
 }
 
 .customer-relationships {
   grid-area: customer-relationships;
-  background-color: #8c6584;
+  /* background-color: #8c6584; */
+  border-color: #8c6584;
 }
 
 .channels {
   grid-area: channels;
-  background-color: #dcd9d2;
+  /* background-color: #dcd9d2; */
+  border-color: #dcd9d2;
 }
 
 .customer-segments {
   grid-area: customer-segments;
-  background-color: #95b82f;
+  /* background-color: #95b82f; */
+  border-color: #95b82f;
 }
 
 .cost-structures {
   grid-area: cost-structures;
-  background-color: #dcd9d2;
+  /* background-color: #dcd9d2; */
+  border-color: #dcd9d2;
 }
 
 .revenue-streams {
   grid-area: revenue-streams;
-  background-color: #8c6584;
+  /* background-color: #8c6584; */
+  border-color: #8c6584;
 }
 
 .horizontal-view {
