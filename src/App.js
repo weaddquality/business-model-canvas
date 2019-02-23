@@ -44,8 +44,11 @@ class App extends Component {
     return (
       !this.state.isAuthenticating && (
         <div className="App">
-          <NavigationBar props={childProps} />
-          <Routes props={childProps} />
+          <div className="background-container">
+            <div className="background-image" />
+            <NavigationBar props={childProps} />
+            <Routes props={childProps} />
+          </div>
         </div>
       )
     )

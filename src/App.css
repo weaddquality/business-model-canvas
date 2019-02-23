@@ -53,3 +53,35 @@ a {
 a:hover {
   color: white;
 }
+
+.background-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .background-image {
+    position: fixed;
+    height: 90%;
+    width: 80%;
+    background-image: url('images/q-logo.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 2100px 2100px;
+    opacity: 0.15;
+  }
+}
+
+@media (max-width: 1023px) {
+  .background-image {
+    position: fixed;
+    height: 90%;
+    width: 80%;
+    background-image: url('images/q-logo.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 1000px 1000px;
+    opacity: 0.15;
+  }
+}
