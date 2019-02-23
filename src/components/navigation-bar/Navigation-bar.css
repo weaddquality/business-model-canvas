@@ -7,6 +7,20 @@
   text-decoration: none !important;
 }
 
+.navbar-dropdown {
+  color: gray;
+  text-decoration: none !important;
+}
+
+.navbar-dropdown-arrow {
+  color: white;
+}
+
+.navbar-dropdown-submenu:hover {
+  color: black;
+  text-decoration: none !important;
+}
+
 .navbar-link {
   font-size: 12pt;
   text-decoration: none !important;
