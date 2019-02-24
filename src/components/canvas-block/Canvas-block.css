@@ -16,6 +16,7 @@ a > div {
 .canvas-blocks-container {
   border-bottom: 1px solid;
   min-height: 70px;
+  background-color: #c6c6c6;
 }
 
 .canvas-block-header {
