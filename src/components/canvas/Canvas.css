@@ -1,5 +1,5 @@
 .block {
-  border: solid 3px;
+  border: solid 2px;
   background-color: #e4e4e4;
   color: black;
   text-align: left;
@@ -13,12 +13,11 @@
 .key-partners {
   grid-area: key-partners;
   border-color: #95b82f;
-  opacity: 10%;
 }
 
 .key-activities {
   grid-area: key-activities;
-  border-color: #dcd9d2;
+  border-color: #9b9b9b;
 }
 
 .key-resources {
@@ -38,7 +37,7 @@
 
 .channels {
   grid-area: channels;
-  border-color: #dcd9d2;
+  border-color: #9b9b9b;
 }
 
 .customer-segments {
@@ -48,7 +47,7 @@
 
 .cost-structures {
   grid-area: cost-structures;
-  border-color: #dcd9d2;
+  border-color: #9b9b9b;
 }
 
 .revenue-streams {
