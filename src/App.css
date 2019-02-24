@@ -70,6 +70,7 @@ a:hover {
     background-position: right bottom;
     background-size: 2100px 2100px;
     opacity: 0.15;
+    z-index: -1;
   }
 }
 
@@ -83,5 +84,6 @@ a:hover {
     background-position: right bottom;
     background-size: 1000px 1000px;
     opacity: 0.15;
+    z-index: -1;
   }
 }
