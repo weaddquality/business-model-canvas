@@ -61,16 +61,18 @@ const NavigationBar = ({ props }) => {
                   <i className="fa fa-plus" /> Create item
                 </Link>
               </Nav.Link>
-              <Nav.Link>
-                <Link to="/canvas">
-                  <i className="fa fa-th canvas-view-button" />
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/horizontal">
-                  <i className="fa fa-align-justify canvas-view-button" />
-                </Link>
-              </Nav.Link>
+              {props.isHorizontalViewToggled ? (
+                <Nav.Link>
+                  <i className="fa fa-th canvas-view-button" onClick={props.toggleHorizontalView} />
+                </Nav.Link>
+              ) : (
+                <Nav.Link>
+                  <i
+                    className="fa fa-align-justify canvas-view-button"
+                    onClick={props.toggleHorizontalView}
+                  />
+                </Nav.Link>
+              )}
               <Nav.Link className="canvas-view-button">|</Nav.Link>
               <Nav.Link onClick={props.handleLogout}>
                 <Link to="/signup" className="navbar-link">

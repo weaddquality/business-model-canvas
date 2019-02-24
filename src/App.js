@@ -10,6 +10,7 @@ class App extends Component {
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
+    isHorizontalViewToggled: false,
   }
 
   async componentDidMount() {
@@ -23,6 +24,10 @@ class App extends Component {
     }
 
     this.setState({ isAuthenticating: false })
+  }
+
+  toggleHorizontalView = () => {
+    this.setState({ isHorizontalViewToggled: !this.state.isHorizontalViewToggled })
   }
 
   userHasAuthenticated = authenticated => {
@@ -40,6 +45,8 @@ class App extends Component {
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenticated: this.userHasAuthenticated,
       handleLogout: this.handleLogout,
+      isHorizontalViewToggled: this.state.isHorizontalViewToggled,
+      toggleHorizontalView: this.toggleHorizontalView,
     }
     return (
       !this.state.isAuthenticating && (
