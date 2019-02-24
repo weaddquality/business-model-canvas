@@ -1,6 +1,6 @@
 .block {
   border: solid 2px;
-  background-color: #e4e4e4;
+  background-color: rgba(180, 180, 180, 0.2);
   color: black;
   text-align: left;
 }
