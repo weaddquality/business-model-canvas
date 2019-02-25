@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ViewToggle from '../view-toggle/View-toggle'
 
 const renderCanvasDropdownIfAuthenticated = props => {
   if (props.isAuthenticated) {
@@ -61,18 +62,9 @@ const NavigationBar = ({ props }) => {
                   <i className="fa fa-plus" /> Create item
                 </Link>
               </Nav.Link>
-              {props.isHorizontalViewToggled ? (
-                <Nav.Link>
-                  <i className="fa fa-th canvas-view-button" onClick={props.toggleHorizontalView} />
-                </Nav.Link>
-              ) : (
-                <Nav.Link>
-                  <i
-                    className="fa fa-align-justify canvas-view-button"
-                    onClick={props.toggleHorizontalView}
-                  />
-                </Nav.Link>
-              )}
+              <Nav.Link className="canvas-view-button">
+                <ViewToggle />
+              </Nav.Link>
               <Nav.Link className="canvas-view-button">|</Nav.Link>
               <Nav.Link onClick={props.handleLogout}>
                 <Link to="/logout" className="navbar-link">
