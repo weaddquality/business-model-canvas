@@ -71,6 +71,7 @@ class Login extends Component {
               isLoading={this.state.isLoading}
               text="Login"
               loadingText="Logging in…"
+              data-testid="loginSubmitButton"
             />
           </Form>
         </div>

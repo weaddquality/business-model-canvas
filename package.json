@@ -10,6 +10,8 @@
     "deploy": "aws s3 sync build/ s3://thebusinessmodelcanvas --delete",
     "postdeploy": "aws cloudfront create-invalidation --distribution-id E2ID8E7S1GJNTU --paths '/*'",
     "test": "react-scripts test",
+    "cypress": "cypress open",
+    "cypress:ci": "cypress run",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.+(js|json|md|css|css|sass|jsx)\""
   },
@@ -31,6 +33,8 @@
     "react-scripts": "^2.1.3"
   },
   "devDependencies": {
+    "cypress": "^3.1.5",
+    "cypress-testing-library": "^2.3.6",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.0",
     "prettier": "^1.16.1"
