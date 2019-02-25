@@ -1,14 +1,14 @@
-.home-logo {
+.logout-container {
   padding-top: 40px;
 }
 
-.home-header {
+.logout-header {
   font-size: 21pt;
   text-decoration: none !important;
   color: gray !important;
 }
 
-.home-text {
+.logout-text {
   font-size: 18pt;
   padding-top: 40px;
   text-decoration: none !important;

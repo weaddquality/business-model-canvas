@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Login.css'
-import Home from '../home/Home'
+import logo from '../../images/addq-logo.png'
 import LoadingButton from '../loading-button/Loading-button'
 import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
@@ -33,7 +33,7 @@ class Login extends Component {
     try {
       await Auth.signIn(this.state.email, this.state.password)
       this.props.userHasAuthenticated(true)
-      this.props.history.push('/canvas')
+      this.props.history.push('/')
     } catch (e) {
       alert(e.message)
       this.setState({ isLoading: false })
@@ -42,8 +42,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <Home />
+      <div className="login-container">
+        <img src={logo} alt="" />
+        <div className="login-header">Business Model Canvas</div>
         <div className="login">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email">

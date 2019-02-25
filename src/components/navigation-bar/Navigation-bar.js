@@ -75,7 +75,7 @@ const NavigationBar = ({ props }) => {
               )}
               <Nav.Link className="canvas-view-button">|</Nav.Link>
               <Nav.Link onClick={props.handleLogout}>
-                <Link to="/signup" className="navbar-link">
+                <Link to="/logout" className="navbar-link">
                   <i className="fa fa-sign-out" /> Logout
                 </Link>
               </Nav.Link>

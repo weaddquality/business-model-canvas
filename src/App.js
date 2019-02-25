@@ -37,6 +37,10 @@ class App extends Component {
   handleLogout = async () => {
     await Auth.signOut()
     this.userHasAuthenticated(false)
+    this.props.history.push('/logout')
+  }
+
+  redirectToLogin = () => {
     this.props.history.push('/login')
   }
 
@@ -47,6 +51,7 @@ class App extends Component {
       handleLogout: this.handleLogout,
       isHorizontalViewToggled: this.state.isHorizontalViewToggled,
       toggleHorizontalView: this.toggleHorizontalView,
+      redirectToLogin: this.redirectToLogin,
     }
     return (
       !this.state.isAuthenticating && (

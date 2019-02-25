@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './Signup.css'
+import logo from '../../images/addq-logo.png'
 import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import FormLabel from 'react-bootstrap/FormLabel'
 import LoadingButton from '../loading-button/Loading-button'
-import Home from '../home/Home'
 import { Auth } from 'aws-amplify'
 
 class Signup extends Component {
@@ -137,8 +137,9 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
-        <Home />
+      <div className="signup-container">
+        <img src={logo} alt="" />
+        <div className="signup-header">Business Model Canvas</div>
         <div className="signup">
           {this.state.newUser === null ? this.renderForm() : this.renderConfirmationForm()}
         </div>
