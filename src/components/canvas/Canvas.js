@@ -7,7 +7,11 @@ const Canvas = () => {
   const canvasBlocks = blocks.map(block => {
     return <CanvasBlock key={block.className} content={block} />
   })
-  return <div className="canvas-view canvas-horizontal-view">{canvasBlocks}</div>
+  return (
+    <div className="canvas-view canvas-horizontal-view" data-testid="canvasView">
+      {canvasBlocks}
+    </div>
+  )
 }
 
 export default Canvas

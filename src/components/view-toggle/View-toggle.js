@@ -9,7 +9,7 @@ const ViewToggle = () => {
   }
 
   return (
-    <div>
+    <div data-testid="viewToggleButton">
       {toggle ? (
         <Link to="/canvas">
           <i className="fa fa-th" onClick={handleToggle} />

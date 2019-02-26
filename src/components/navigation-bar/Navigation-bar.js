@@ -13,13 +13,18 @@ const renderCanvasDropdownIfAuthenticated = props => {
   if (props.isAuthenticated) {
     return (
       <Dropdown as={ButtonGroup}>
-        <Button variant="black" className="navbar-dropdown">
+        <Button variant="black" className="navbar-dropdown" data-testid="navbarDropdownSplitButton">
           <Link to="/canvas" className="navbar-dropdown">
             Team Continuous
           </Link>
         </Button>
-        <Dropdown.Toggle split variant="black" className="navbar-dropdown-arrow" />
-        <Dropdown.Menu>
+        <Dropdown.Toggle
+          split
+          variant="black"
+          className="navbar-dropdown-arrow"
+          data-testid="navbarDropdownSubmenuToggle"
+        />
+        <Dropdown.Menu data-testid="navbarDropdownSubmenu">
           <Dropdown.Item>
             <Link to="/canvas" className="navbar-dropdown-submenu">
               Team Continuous
