@@ -1,5 +1,5 @@
 describe('Testing login functionality', function() {
-  it('should login', function() {
+  it('should login and logout', function() {
     cy.visit('/')
 
     cy.get('#email')
