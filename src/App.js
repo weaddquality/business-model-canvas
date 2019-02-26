@@ -20,7 +20,7 @@ function App(props) {
       userHasAuthenticated(true)
     } catch (e) {
       if (e !== 'No current user') {
-        alert(e)
+        alert(e.toString())
       }
     }
 
