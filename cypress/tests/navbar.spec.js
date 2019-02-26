@@ -1,5 +1,3 @@
-import { XRay } from 'aws-sdk/clients/all'
-
 describe('Testing the navbar', function() {
   beforeEach(function() {
     cy.visit('/')
