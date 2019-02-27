@@ -3,7 +3,6 @@ import './Create.css'
 import Form from 'react-bootstrap/Form'
 import LoadingButton from '../loading-button/Loading-button'
 import { API } from 'aws-amplify'
-import uuid from 'uuid'
 
 class Create extends Component {
   state = {
@@ -38,17 +37,25 @@ class Create extends Component {
   }
 
   createItem(input) {
-    const canvasId = 'Team-Continuous'
-    const blockName = 'value-proposition'
+    const item = {
+      tableName: 'BusinessModelCanvas',
+      teamName: 'Team-Continuous',
+      blockHeader: 'Value Propositions',
+      blockDescription: 'What value do we deliver to the customer',
+      itemHeader: 'Value props header',
+      itemText: input.content,
+    }
+
     return API.post('bmc-items', '/bmc-items', {
       body: {
-        TableName: 'BusinessModelCanvas',
+        TableName: item.tableName,
         Item: {
-          CanvasBlock: `${canvasId}-${blockName}`,
-          ItemId: uuid.v1(),
-          CanvasId: canvasId,
-          BlockName: blockName,
-          Content: input.content,
+          TeamNameBlockHeader: `${item.teamName}-${item.blockHeader}`,
+          TeamName: item.teamName,
+          BlockHeader: item.blockHeader,
+          BlockDescription: item.blockDescription,
+          ItemHeader: item.itemHeader,
+          ItemText: item.itemText,
         },
       },
     })
