@@ -15,9 +15,18 @@ const Canvas = () => {
     API.get('bmc-items', '/bmc-items').then(response => {
       const returnedResponse = {
         items: [
-          { header: response[0].ItemHeader, text: response[0].ItemText },
-          { header: response[0].ItemHeader, text: response[0].ItemText },
-          { header: response[0].ItemHeader, text: response[0].ItemText },
+          {
+            blockHeader: response[0].BlockHeader,
+            blockDescription: response[0].BlockDescription,
+            itemHeader: response[0].ItemHeader,
+            itemText: response[0].ItemText,
+          },
+          {
+            blockHeader: response[1].BlockHeader,
+            blockDescription: response[1].BlockDescription,
+            itemHeader: response[1].ItemHeader,
+            itemText: response[1].ItemText,
+          },
         ],
       }
       setListResponse(returnedResponse)
