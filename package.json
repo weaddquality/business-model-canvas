@@ -16,7 +16,13 @@
     "format": "prettier --write \"src/**/*.+(js|json|md|css|css|sass|jsx)\""
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {
+      "cypress/globals": true
+    },
+    "plugins": [
+      "eslint-plugin-cypress"
+    ]
   },
   "browserslist": [
     ">0.2%",
@@ -35,6 +41,7 @@
   "devDependencies": {
     "cypress": "^3.1.5",
     "cypress-testing-library": "^2.3.6",
+    "eslint-plugin-cypress": "^2.2.1",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.0",
     "prettier": "^1.16.1"
