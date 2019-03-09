@@ -4,8 +4,11 @@ import CanvasBlock from '../canvas-block/Canvas-block'
 import blocks from '../canvas-block/content'
 import { API } from 'aws-amplify'
 
-const Canvas = () => {
+const Canvas = props => {
   const [listResponse, setListResponse] = useState({ items: [] })
+  const testId = props.location.pathname === '/canvas' ? 'canvasView' : 'horizontalView'
+  const className =
+    props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
 
   useEffect(() => {
     getItems()
@@ -29,7 +32,7 @@ const Canvas = () => {
   })
   return (
     <div>
-      <div className="canvas-view canvas-horizontal-view" data-testid="canvasView">
+      <div className={className} data-testid={testId}>
         {canvasBlocks}
       </div>
     </div>
