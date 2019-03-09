@@ -38,24 +38,23 @@ class Create extends Component {
 
   createItem(input) {
     const item = {
-      tableName: 'BusinessModelCanvas',
-      teamName: 'Team-Continuous',
-      blockHeader: 'Value Propositions',
-      blockDescription: 'What value do we deliver to the customer',
-      itemHeader: 'Value props header',
-      itemText: input.content,
+      TableName: 'BusinessModelCanvas',
+      Team: 'Team Continuous',
+      Block: 'Value Propositions',
+      BlockDescription: 'What value do we deliver to the customer',
+      ItemHeader: 'Value props header',
+      ItemText: input.content,
     }
 
-    return API.post('bmc-items', '/bmc-items', {
+    return API.post('bmc-items', 'bmc-items/create', {
       body: {
-        TableName: item.tableName,
+        TableName: item.TableName,
         Item: {
-          TeamNameBlockHeader: `${item.teamName}-${item.blockHeader}`,
-          TeamName: item.teamName,
-          BlockHeader: item.blockHeader,
-          BlockDescription: item.blockDescription,
-          ItemHeader: item.itemHeader,
-          ItemText: item.itemText,
+          Team: item.Team,
+          Block: item.Block,
+          BlockDescription: item.BlockDescription,
+          ItemHeader: item.ItemHeader,
+          ItemText: item.ItemText,
         },
       },
     })

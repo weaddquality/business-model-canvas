@@ -19,6 +19,10 @@ const textSubString = item => {
   return item
 }
 
+const formatBlockHeader = headerText => {
+  return headerText.toLowerCase().replace(' ', '-')
+}
+
 const CanvasBlock = props => {
   const items = props.content.items.map(item => {
     return (
@@ -37,8 +41,8 @@ const CanvasBlock = props => {
 
   return (
     <Link
-      to={`/editor/${props.content.block.toLowerCase().replace(' ', '-')}`}
-      className={`${props.content.block.toLowerCase().replace(' ', '-')} block`}
+      to={`/editor/${formatBlockHeader(props.content.block)}`}
+      className={`${formatBlockHeader(props.content.block)} block`}
     >
       <div className="canvas-blocks-container">
         <div className="canvas-blocks canvas-block-header">{props.content.block}</div>

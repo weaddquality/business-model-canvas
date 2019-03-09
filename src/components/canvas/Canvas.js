@@ -10,6 +10,7 @@ const Canvas = () => {
     getItems()
   }, [])
 
+  // TODO: Replace hard coded Team value with a dynamically read value
   const getItems = () => {
     API.get('bmc-items', 'bmc-items/list?Team=Team Continuous').then(response => {
       const { blocks } = response
