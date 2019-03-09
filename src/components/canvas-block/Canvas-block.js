@@ -45,8 +45,8 @@ const CanvasBlock = props => {
         <div className="canvas-blocks canvas-block-description">
           {props.content.blockDescription}
         </div>
-        <div className="canvas-blocks canvas-block-item">{items}</div>
       </div>
+      <div className="canvas-blocks canvas-block-item">{items}</div>
     </Link>
   )
 }
