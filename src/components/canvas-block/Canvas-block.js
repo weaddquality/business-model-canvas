@@ -19,10 +19,6 @@ const textSubString = item => {
   return item
 }
 
-const logme = props => {
-  console.log(props.content.items)
-}
-
 const CanvasBlock = props => {
   const items = props.content.items.map(item => {
     return (
@@ -32,7 +28,7 @@ const CanvasBlock = props => {
             {headerSubString(item.itemHeader)}
           </Card.Header>
           <Card.Body>
-            <Card.Text>{textSubString(item.itemText)}</Card.Text>
+            <Card.Text>{textSubString(item.ItemText)}</Card.Text>
           </Card.Body>
         </Card>
       </div>
@@ -40,19 +36,18 @@ const CanvasBlock = props => {
   })
 
   return (
-    <div>
-      <div>{logme(props)}</div>
-      {/* // <Link to={`/editor/${props.content.className}`} className={`${props.content.className} block`}> */}
-      <Link to="/editor/key-partners" className="key-partners block">
-        <div>
-          <div className="canvas-blocks-container">
-            {/* <div className="canvas-blocks canvas-block-header">{props.content.items[0].blockHeader}</div> 
-          <div className="canvas-blocks canvas-block-description">{props.content.items[0].blockDescription}</div> */}
-          </div>
-          <div className="canvas-blocks canvas-block-item">{items}</div>
+    <Link
+      to={`/editor/${props.content.block.toLowerCase().replace(' ', '-')}`}
+      className={`${props.content.block.toLowerCase().replace(' ', '-')} block`}
+    >
+      <div className="canvas-blocks-container">
+        <div className="canvas-blocks canvas-block-header">{props.content.block}</div>
+        <div className="canvas-blocks canvas-block-description">
+          {props.content.blockDescription}
         </div>
-      </Link>
-    </div>
+        <div className="canvas-blocks canvas-block-item">{items}</div>
+      </div>
+    </Link>
   )
 }
 
