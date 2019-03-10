@@ -1,15 +1,3 @@
-.View {
-  padding-top: 5px;
-  position: relative;
-  float: right;
-}
-
-.CanvasId {
-  padding-top: 5px;
-  position: relative;
-  float: left;
-}
-
 .App {
   text-align: center;
   padding: 15px 15px 0px 15px;
@@ -35,6 +23,12 @@
   font-weight: bold;
 }
 
+.View {
+  padding-top: 5px;
+  position: relative;
+  float: right;
+}
+
 select.form-control,
 textarea.form-control,
 input.form-control {
@@ -46,7 +40,6 @@ input[type='file'] {
 }
 
 a {
-  text-decoration: none;
   color: gray;
 }
 

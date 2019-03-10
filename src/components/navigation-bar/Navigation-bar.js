@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import './Navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -13,10 +14,8 @@ const renderLeftDropdown = props => {
   if (props.isAuthenticated) {
     return (
       <Dropdown as={ButtonGroup}>
-        <Button variant="black" className="navbar-dropdown" data-testid="navbarDropdownSplitButton">
-          <Link to="/canvas" className="navbar-dropdown">
-            Team Continuous
-          </Link>
+        <Button variant="black" data-testid="navbarDropdownSplitButton">
+          <Link to="/canvas">Team Continuous</Link>
         </Button>
         <Dropdown.Toggle
           split
@@ -25,21 +24,15 @@ const renderLeftDropdown = props => {
           data-testid="navbarDropdownSubmenuToggle"
         />
         <Dropdown.Menu data-testid="navbarDropdownSubmenu">
-          <Dropdown.Item>
-            <Link to="/canvas" className="navbar-dropdown-submenu">
-              Team Continuous
-            </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/canvas-none-existing" className="navbar-dropdown-submenu">
-              Team Frontend Auto
-            </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/canvas-none-existing" className="navbar-dropdown-submenu">
-              Team Mobile
-            </Link>
-          </Dropdown.Item>
+          <LinkContainer to="/canvas" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Continuous</Dropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/canvas-frontend" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Frontend Auto</Dropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/canvas-mobile" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Mobile</Dropdown.Item>
+          </LinkContainer>
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -51,20 +44,20 @@ const renderRightComponents = props => {
     return (
       <Nav>
         <Fragment>
-          <Nav.Link>
-            <Link to="/item/create" className="navbar-link">
+          <Nav.Item className="navbar-react-router-link">
+            <Link to="/item/create">
               <i className="fa fa-plus" /> Create item
             </Link>
-          </Nav.Link>
-          <Nav.Link className="canvas-view-button">
+          </Nav.Item>
+          <Nav.Item className="canvas-view-button navbar-react-router-link">
             <ViewToggle />
-          </Nav.Link>
-          <Nav.Link className="canvas-view-button">|</Nav.Link>
-          <Nav.Link onClick={props.handleLogout}>
-            <Link to="/logout" className="navbar-link" data-testid="navbarLogoutButton">
+          </Nav.Item>
+          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">|</Nav.Item>
+          <Nav.Item className="navbar-react-router-link" onClick={props.handleLogout}>
+            <Link to="/logout" data-testid="navbarLogoutButton">
               <i className="fa fa-sign-out" /> Logout
             </Link>
-          </Nav.Link>
+          </Nav.Item>
         </Fragment>
       </Nav>
     )
@@ -72,16 +65,16 @@ const renderRightComponents = props => {
     return (
       <Nav>
         <Fragment>
-          <Nav.Link>
-            <Link to="/signup" className="navbar-link">
+          <Nav.Item className="navbar-react-router-link">
+            <Link to="/signup">
               <i className="fa fa-user" /> Signup
             </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/login" className="navbar-link">
+          </Nav.Item>
+          <Nav.Item className="navbar-react-router-link">
+            <Link to="/login">
               <i className="fa fa-sign-in" /> Login
             </Link>
-          </Nav.Link>
+          </Nav.Item>
         </Fragment>
       </Nav>
     )
