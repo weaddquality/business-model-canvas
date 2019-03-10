@@ -24,9 +24,9 @@ const formatBlockHeader = headerText => {
 }
 
 const CanvasBlock = props => {
-  const items = props.content.items.map(item => {
+  const items = props.content.items.map((item, index) => {
     return (
-      <div className="canvas-card-container">
+      <div className="canvas-card-container" key={`${index}-${item.itemHeader}`}>
         <Card border="dark" className="canvas-item-card">
           <Card.Header className="canvas-item-header">
             {headerSubString(item.itemHeader)}
