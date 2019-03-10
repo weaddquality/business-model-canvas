@@ -52,10 +52,7 @@ const renderRightComponents = props => {
           <Nav.Item className="canvas-view-button navbar-react-router-link">
             <ViewToggle />
           </Nav.Item>
-          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">
-            {' '}
-            |
-          </Nav.Item>
+          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">|</Nav.Item>
           <Nav.Item className="navbar-react-router-link" onClick={props.handleLogout}>
             <Link to="/logout" data-testid="navbarLogoutButton">
               <i className="fa fa-sign-out" /> Logout
@@ -78,48 +75,6 @@ const renderRightComponents = props => {
               <i className="fa fa-sign-in" /> Login
             </Link>
           </Nav.Item>
-        </Fragment>
-      </Nav>
-    )
-  }
-}
-
-const renderRightComponents = props => {
-  if (props.isAuthenticated) {
-    return (
-      <Nav>
-        <Fragment>
-          <Nav.Link>
-            <Link to="/item/create" className="navbar-link">
-              <i className="fa fa-plus" /> Create item
-            </Link>
-          </Nav.Link>
-          <Nav.Link className="canvas-view-button">
-            <ViewToggle />
-          </Nav.Link>
-          <Nav.Link className="canvas-view-button">|</Nav.Link>
-          <Nav.Link onClick={props.handleLogout}>
-            <Link to="/logout" className="navbar-link" data-testid="navbarLogoutButton">
-              <i className="fa fa-sign-out" /> Logout
-            </Link>
-          </Nav.Link>
-        </Fragment>
-      </Nav>
-    )
-  } else {
-    return (
-      <Nav>
-        <Fragment>
-          <Nav.Link>
-            <Link to="/signup" className="navbar-link">
-              <i className="fa fa-user" /> Signup
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/login" className="navbar-link">
-              <i className="fa fa-sign-in" /> Login
-            </Link>
-          </Nav.Link>
         </Fragment>
       </Nav>
     )
