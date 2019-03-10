@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ViewToggle from '../view-toggle/View-toggle'
 
-const renderCanvasDropdownIfAuthenticated = props => {
+const renderCanvasDropdown = props => {
   if (props.isAuthenticated) {
     return (
       <Dropdown as={ButtonGroup}>
@@ -57,7 +57,7 @@ const NavigationBar = ({ props }) => {
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>{renderCanvasDropdownIfAuthenticated(props)}</Navbar.Collapse>
+      <Navbar.Collapse>{renderCanvasDropdown(props)}</Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           {props.isAuthenticated ? (
