@@ -1,3 +1,7 @@
+a {
+  text-decoration: none !important;
+}
+
 .navbar-custom {
   background-color: black !important;
 }
@@ -9,12 +13,7 @@
 
 .navbar-header {
   font-size: 14pt;
-  padding-left: 5px;
-  text-decoration: none !important;
-}
-
-.navbar-dropdown {
-  color: gray;
+  padding-left: 6px;
   text-decoration: none !important;
 }
 
@@ -24,12 +23,14 @@
 
 .navbar-dropdown-submenu:hover {
   color: black;
-  text-decoration: none !important;
 }
 
-.navbar-link {
-  font-size: 12pt;
-  text-decoration: none !important;
+.navbar-react-router-link {
+  padding: 8px;
+}
+
+.navbar-separator {
+  color: gray;
 }
 
 @media (max-width: 991px) {
