@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ViewToggle from '../view-toggle/View-toggle'
 
-const renderCanvasDropdown = props => {
+const renderLeftDropdown = props => {
   if (props.isAuthenticated) {
     return (
       <Dropdown as={ButtonGroup}>
@@ -46,52 +46,61 @@ const renderCanvasDropdown = props => {
   }
 }
 
+const renderRightComponents = props => {
+  if (props.isAuthenticated) {
+    return (
+      <Nav>
+        <Fragment>
+          <Nav.Link>
+            <Link to="/item/create" className="navbar-link">
+              <i className="fa fa-plus" /> Create item
+            </Link>
+          </Nav.Link>
+          <Nav.Link className="canvas-view-button">
+            <ViewToggle />
+          </Nav.Link>
+          <Nav.Link className="canvas-view-button">|</Nav.Link>
+          <Nav.Link onClick={props.handleLogout}>
+            <Link to="/logout" className="navbar-link" data-testid="navbarLogoutButton">
+              <i className="fa fa-sign-out" /> Logout
+            </Link>
+          </Nav.Link>
+        </Fragment>
+      </Nav>
+    )
+  } else {
+    return (
+      <Nav>
+        <Fragment>
+          <Nav.Link>
+            <Link to="/signup" className="navbar-link">
+              <i className="fa fa-user" /> Signup
+            </Link>
+          </Nav.Link>
+          <Nav.Link>
+            <Link to="/login" className="navbar-link">
+              <i className="fa fa-sign-in" /> Login
+            </Link>
+          </Nav.Link>
+        </Fragment>
+      </Nav>
+    )
+  }
+}
+
 const NavigationBar = ({ props }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="navbar-custom rounded" collapseOnSelect>
       <Navbar.Brand>
-        <img alt="" src={QLogo} width="18" height="20" className="d-inline-block align-center" />
+        <img alt="" src={QLogo} className="navbar-logo-image" />
         <Link to="/" className="navbar-header">
-          {' '}
           Business Model Canvas
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>{renderCanvasDropdown(props)}</Navbar.Collapse>
+      <Navbar.Collapse>{renderLeftDropdown(props)}</Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
-        <Nav>
-          {props.isAuthenticated ? (
-            <Fragment>
-              <Nav.Link>
-                <Link to="/item/create" className="navbar-link">
-                  <i className="fa fa-plus" /> Create item
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="canvas-view-button">
-                <ViewToggle />
-              </Nav.Link>
-              <Nav.Link className="canvas-view-button">|</Nav.Link>
-              <Nav.Link onClick={props.handleLogout}>
-                <Link to="/logout" className="navbar-link" data-testid="navbarLogoutButton">
-                  <i className="fa fa-sign-out" /> Logout
-                </Link>
-              </Nav.Link>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <Nav.Link>
-                <Link to="/signup" className="navbar-link">
-                  <i className="fa fa-user" /> Signup
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/login" className="navbar-link">
-                  <i className="fa fa-sign-in" /> Login
-                </Link>
-              </Nav.Link>
-            </Fragment>
-          )}
-        </Nav>
+        {renderRightComponents(props)}
       </Navbar.Collapse>
     </Navbar>
   )
