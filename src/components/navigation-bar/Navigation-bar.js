@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import './Navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -23,21 +24,15 @@ const renderLeftDropdown = props => {
           data-testid="navbarDropdownSubmenuToggle"
         />
         <Dropdown.Menu data-testid="navbarDropdownSubmenu">
-          <Dropdown.Item>
-            <Link to="/canvas" className="navbar-dropdown-submenu">
-              Team Continuous
-            </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/canvas-none-existing" className="navbar-dropdown-submenu">
-              Team Frontend Auto
-            </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/canvas-none-existing" className="navbar-dropdown-submenu">
-              Team Mobile
-            </Link>
-          </Dropdown.Item>
+          <LinkContainer to="/canvas" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Continuous</Dropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/canvas-frontend" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Frontend Auto</Dropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/canvas-mobile" className="navbar-dropdown-submenu">
+            <Dropdown.Item>Team Mobile</Dropdown.Item>
+          </LinkContainer>
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -57,7 +52,10 @@ const renderRightComponents = props => {
           <Nav.Item className="canvas-view-button navbar-react-router-link">
             <ViewToggle />
           </Nav.Item>
-          <Nav.Item className="navbar-react-router-link navbar-separator"> |</Nav.Item>
+          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">
+            {' '}
+            |
+          </Nav.Item>
           <Nav.Item className="navbar-react-router-link" onClick={props.handleLogout}>
             <Link to="/logout" data-testid="navbarLogoutButton">
               <i className="fa fa-sign-out" /> Logout
