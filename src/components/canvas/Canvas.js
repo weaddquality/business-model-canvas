@@ -3,8 +3,11 @@ import './Canvas.css'
 import CanvasBlock from '../canvas-block/Canvas-block'
 import { API } from 'aws-amplify'
 
-const Canvas = () => {
+const Canvas = props => {
   const [listResponse, setListResponse] = useState([])
+  const testId = props.location.pathname === '/canvas' ? 'canvasView' : 'horizontalView'
+  const className =
+    props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
 
   useEffect(() => {
     getItems()
@@ -12,7 +15,7 @@ const Canvas = () => {
 
   // TODO: Replace hard coded Team value with a dynamically read value
   const getItems = () => {
-    API.get('bmc-items', 'bmc-items/list?Team=Team Continuous').then(response => {
+    API.get('bmc-items', '/bmc-items/list?Team=Team Continuous').then(response => {
       const { blocks } = response
       setListResponse(blocks)
     })
@@ -23,8 +26,10 @@ const Canvas = () => {
     return <CanvasBlock key={className} content={block} />
   })
   return (
-    <div className="canvas-view canvas-horizontal-view" data-testid="canvasView">
-      {canvasBlocks}
+    <div>
+      <div className={className} data-testid={testId}>
+        {canvasBlocks}
+      </div>
     </div>
   )
 }
