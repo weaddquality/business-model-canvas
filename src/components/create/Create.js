@@ -1,42 +1,38 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './Create.css'
 import Form from 'react-bootstrap/Form'
 import LoadingButton from '../loading-button/Loading-button'
+import { withRouter } from 'react-router-dom'
 import { API } from 'aws-amplify'
 
-class Create extends Component {
-  state = {
-    isLoading: null,
-    content: '',
+const Create = props => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [content, setContent] = useState('')
+
+  const validateForm = () => {
+    return content.length > 0
   }
 
-  validateForm() {
-    return this.state.content.length > 0
+  const handleChange = event => {
+    setContent(event.target.value)
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value,
-    })
-  }
-
-  handleSubmit = async event => {
+  const handleSubmit = async event => {
     event.preventDefault()
-
-    this.setState({ isLoading: true })
+    setIsLoading(true)
 
     try {
-      await this.createItem({
-        content: this.state.content,
+      await createItem({
+        content: content,
       })
-      this.props.history.push('/')
+      props.history.push('/')
     } catch (e) {
       alert(e)
-      this.setState({ isLoading: false })
+      setIsLoading(false)
     }
   }
 
-  createItem(input) {
+  const createItem = input => {
     const item = {
       TableName: 'BusinessModelCanvas',
       Team: 'Team Continuous',
@@ -46,7 +42,7 @@ class Create extends Component {
       ItemText: input.content,
     }
 
-    return API.post('bmc-items', 'bmc-items/create', {
+    return API.post('bmc-items', '/bmc-items/create', {
       body: {
         TableName: item.TableName,
         Item: {
@@ -60,31 +56,29 @@ class Create extends Component {
     })
   }
 
-  render() {
-    return (
-      <Form onSubmit={this.handleSubmit} className="create">
-        <Form.Group controlId="content">
-          <Form.Label>
-            <b>Create a Value proposition</b>
-          </Form.Label>
-          <Form.Control
-            as="input"
-            rows="6"
-            placeholder="Enter text here"
-            onChange={this.handleChange}
-            value={this.state.content}
-          />
-        </Form.Group>
-        <LoadingButton
-          disabled={!this.validateForm()}
-          type="submit"
-          isLoading={this.state.isLoading}
-          text="Create"
-          loadingText="Creating…"
+  return (
+    <Form onSubmit={handleSubmit} className="create">
+      <Form.Group controlId="content">
+        <Form.Label>
+          <b>Create a Value proposition</b>
+        </Form.Label>
+        <Form.Control
+          as="input"
+          rows="6"
+          placeholder="Enter text here"
+          onChange={handleChange}
+          value={content}
         />
-      </Form>
-    )
-  }
+      </Form.Group>
+      <LoadingButton
+        disabled={!validateForm()}
+        type="submit"
+        isLoading={isLoading}
+        text="Create"
+        loadingText="Creating…"
+      />
+    </Form>
+  )
 }
 
-export default Create
+export default withRouter(Create)
