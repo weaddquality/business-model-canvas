@@ -118,7 +118,10 @@ const Signup = props => {
             value={confirmationCode}
             onChange={handleConfirmationCodeChange}
           />
-          <Form.Text className="text-muted">Please check your email for the code.</Form.Text>
+          <Form.Text className="text-muted">
+            Please check your email for the code,
+            <br /> including your "Spam" folder.
+          </Form.Text>
         </FormGroup>
         <LoadingButton
           block
