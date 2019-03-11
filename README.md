@@ -24,7 +24,7 @@ The backend for this repository: https://github.com/weaddquality/bmc-aws-lambda-
 - `cd <your_repositories_catalog>`
 - `git clone git@github.com:weaddquality/business-model-canvas.git`
 - run `aws configure` in terminal and configure with your `iam user`'s credentials
-- create a `src/config.js` with backend the secret credentials:
+- create a `src/config.js` with backend credentials:
 
 ```
 export default {
