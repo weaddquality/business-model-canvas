@@ -9,6 +9,17 @@ import LoadingButton from '../loading-button/Loading-button'
 import { withRouter } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 
+export const validateForm = (email, password, confirmPassword) => {
+  const emailSuffix = '@addq.se'
+  return (
+    email.length > 0 &&
+    email.length > emailSuffix.length &&
+    email.endsWith(emailSuffix) &&
+    password.length > 0 &&
+    password === confirmPassword
+  )
+}
+
 const Signup = props => {
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
@@ -16,15 +27,6 @@ const Signup = props => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [confirmationCode, setConfirmationCode] = useState('')
   const [newUser, setNewUser] = useState(null)
-
-  const validateForm = () => {
-    return (
-      email.length > 0 &&
-      email.endsWith('@addq.se') &&
-      password.length > 0 &&
-      password === confirmPassword
-    )
-  }
 
   const validateConfirmationForm = () => {
     return confirmationCode.length > 0
@@ -97,7 +99,7 @@ const Signup = props => {
         </FormGroup>
         <LoadingButton
           block
-          disabled={!validateForm()}
+          disabled={!validateForm(email, password, confirmPassword)}
           type="submit"
           isLoading={isLoading}
           text="Signup"
