@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './Login.css'
 import logo from '../../images/addq-logo.png'
 import LoadingButton from '../loading-button/Loading-button'
@@ -6,78 +6,67 @@ import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import FormLabel from 'react-bootstrap/FormLabel'
+import { withRouter } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 
-class Login extends Component {
-  state = {
-    isLoading: false,
-    email: '',
-    password: '',
+const Login = props => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const validateForm = () => {
+    return email.length > 0 && password.length > 0
   }
 
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0
+  const handleEmailChange = event => {
+    setEmail(event.target.value)
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value,
-    })
+  const handlePasswordChange = event => {
+    setPassword(event.target.value)
   }
 
-  handleSubmit = async event => {
+  const handleSubmit = async event => {
     event.preventDefault()
-
-    this.setState({ isLoading: true })
+    setIsLoading(true)
 
     try {
-      await Auth.signIn(this.state.email, this.state.password)
-      this.props.userHasAuthenticated(true)
-      this.props.history.push('/')
+      await Auth.signIn(email, password)
+      props.userHasAuthenticated(true)
+      props.history.push('/')
     } catch (e) {
       alert(e.message)
-      this.setState({ isLoading: false })
+      setIsLoading(false)
     }
   }
 
-  render() {
-    return (
-      <div className="login-container">
-        <img src={logo} alt="" />
-        <div className="login-header">Business Model Canvas</div>
-        <div className="login">
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email">
-              <FormLabel>Email</FormLabel>
-              <FormControl
-                autoFocus
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="password">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-              />
-            </FormGroup>
-            <LoadingButton
-              block
-              disabled={!this.validateForm()}
-              type="submit"
-              isLoading={this.state.isLoading}
-              text="Login"
-              loadingText="Logging in…"
-              data-testid="loginSubmitButton"
-            />
-          </Form>
-        </div>
+  return (
+    <div className="login-container">
+      <img src={logo} alt="" />
+      <div className="login-header">Business Model Canvas</div>
+      <div className="login">
+        <Form onSubmit={handleSubmit}>
+          <FormGroup controlId="email">
+            <FormLabel>Email</FormLabel>
+            <FormControl autoFocus type="email" value={email} onChange={handleEmailChange} />
+          </FormGroup>
+          <FormGroup controlId="password">
+            <FormLabel>Password</FormLabel>
+            <FormControl value={password} onChange={handlePasswordChange} type="password" />
+          </FormGroup>
+          <LoadingButton
+            block
+            disabled={!validateForm()}
+            type="submit"
+            isLoading={isLoading}
+            text="Login"
+            loadingText="Logging in…"
+            data-testid="loginSubmitButton"
+          />
+        </Form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default Login
+export default withRouter(Login)
