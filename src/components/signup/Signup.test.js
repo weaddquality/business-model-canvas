@@ -1,5 +1,5 @@
-import { validateForm } from './Signup'
 import cases from 'jest-in-case'
+import { validateForm } from './Signup'
 
 cases(
   'validateForm(email, password, confirmPassword)',

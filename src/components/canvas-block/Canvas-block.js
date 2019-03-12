@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import './Canvas-block.css'
 
-const headerSubString = item => {
+export const headerSubString = item => {
   const maxCharacters = 34
   if (item.length > maxCharacters) {
     item = `${item.substring(0, maxCharacters)}...`
@@ -11,7 +11,7 @@ const headerSubString = item => {
   return item
 }
 
-const textSubString = item => {
+export const textSubString = item => {
   const maxCharacters = 70
   if (item.length > maxCharacters) {
     item = `${item.substring(0, maxCharacters)}...`
