@@ -3,23 +3,24 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import './Canvas-block.css'
 
-export const headerSubString = item => {
+const substring = (text, maxCharacters) => {
+  if (text.length > maxCharacters) {
+    text = `${text.substring(0, maxCharacters)}...`
+  }
+  return text
+}
+
+export const headerText = text => {
   const maxCharacters = 34
-  if (item.length > maxCharacters) {
-    item = `${item.substring(0, maxCharacters)}...`
-  }
-  return item
+  return substring(text, maxCharacters)
 }
 
-export const textSubString = item => {
+export const itemText = text => {
   const maxCharacters = 70
-  if (item.length > maxCharacters) {
-    item = `${item.substring(0, maxCharacters)}...`
-  }
-  return item
+  return substring(text, maxCharacters)
 }
 
-const formatBlockHeader = headerText => {
+export const formatBlockHeader = headerText => {
   return headerText.toLowerCase().replace(' ', '-')
 }
 
@@ -28,11 +29,9 @@ const CanvasBlock = props => {
     return (
       <div className="canvas-card-container" key={`${index}-${item.itemHeader}`}>
         <Card border="dark" className="canvas-item-card">
-          <Card.Header className="canvas-item-header">
-            {headerSubString(item.itemHeader)}
-          </Card.Header>
+          <Card.Header className="canvas-item-header">{headerText(item.itemHeader)}</Card.Header>
           <Card.Body>
-            <Card.Text>{textSubString(item.ItemText)}</Card.Text>
+            <Card.Text>{itemText(item.ItemText)}</Card.Text>
           </Card.Body>
         </Card>
       </div>
