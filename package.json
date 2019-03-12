@@ -11,6 +11,7 @@
     "postdeploy": "aws cloudfront create-invalidation --distribution-id E2ID8E7S1GJNTU --paths '/*'",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test --colors",
+    "test:all": "npm run test:ci && npm run cypress:ci",
     "cypress": "cypress open",
     "cypress:ci": "cypress run",
     "eject": "react-scripts eject",
