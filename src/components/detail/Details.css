@@ -1,0 +1,53 @@
+.details-form {
+  display: grid;
+  border: 3px solid;
+  grid-gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  height: 380px;
+  width: 60%;
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-rows: 35px 250px 35px;
+  grid-template-areas:
+    'header header header'
+    'text text text'
+    'empty cancel submit';
+}
+
+.details-block {
+  text-align: left;
+  padding-left: 10px;
+  font-size: 17pt;
+}
+
+.details-header {
+  grid-area: header;
+  text-align: left;
+  padding-left: 10px;
+  background-color: cadetblue;
+  color: red;
+}
+
+.details-text {
+  grid-area: text;
+  text-align: left;
+  padding-left: 10px;
+  background-color: green;
+  color: blue;
+}
+
+.details-cancel {
+  grid-area: cancel;
+  text-align: right;
+  padding-right: 10px;
+  background-color: orange;
+}
+
+.details-submit {
+  grid-area: submit;
+  text-align: right;
+  padding-right: 10px;
+  background-color: palevioletred;
+}
