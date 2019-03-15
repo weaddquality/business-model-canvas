@@ -1,4 +1,3 @@
-// cypress/plugins/index.js
 const webpack = require('@cypress/webpack-preprocessor')
 const webpackOptions = {
   module: {
