@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Stefan Franzén",
   "scripts": {
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && npm run test:ci",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run test:ci && npm run cypress:ci && react-scripts build",
