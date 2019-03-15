@@ -38,17 +38,9 @@ const CanvasBlock = props => {
     )
   })
 
-  // To be able to run the unit test:
-  // '../../../cypress/tests/components/canvas-block':
-  //
-  // I needed to change <Link> to a simple <a> tag due to the following error:
-  // "Invariant Violation: You should not use <Link> outside a <Router>"
-  // I guess this error occurs because we don't have any React Router...
-  // ... in the context of the canvas-block test
-
   return (
-    <a
-      href={`/editor/${formatBlockHeader(props.content.block)}`}
+    <Link
+      to={`/editor/${formatBlockHeader(props.content.block)}`}
       className={`${formatBlockHeader(props.content.block)} block`}
     >
       <div className="canvas-blocks-container">
@@ -58,7 +50,7 @@ const CanvasBlock = props => {
         </div>
       </div>
       <div className="canvas-blocks canvas-block-item">{items}</div>
-    </a>
+    </Link>
   )
 }
 
