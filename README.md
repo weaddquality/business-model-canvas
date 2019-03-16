@@ -45,7 +45,7 @@ export default {
 }
 ```
 
-- `npm install`
+- `npm ci`
 
 ## Start application
 
@@ -55,11 +55,17 @@ export default {
 
 - `npm run deploy`
 
-## Run cypress-tests
+## Run tests
+
+### Unit tests
+
+- `npm test`
+
+### Cypress tests
 
 #### Open cypress
 
-- `npm run cypress`
+- `npm run cypress:open`
 
 #### Run cypress tests headless
 
