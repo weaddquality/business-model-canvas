@@ -34,12 +34,15 @@ describe('Testing creating items', () => {
     cy.get('[data-testid="submitButton"]').click()
 
     cy.wait('@createItemRequest').then(http => {
-      expect(http.status).to.eq(200)
+      // request data
       expect(http.method).to.eq('POST')
-      expect(http.request.body.Item.Team).to.eq(expectedResultBody.Team)
-      expect(http.request.body.Item.Block).to.eq(expectedResultBody.Block)
-      expect(http.request.body.Item.ItemHeader).to.eq(expectedResultBody.ItemHeader)
       expect(http.request.body.Item.ItemText).to.eq(inputContent)
+
+      // response data
+      expect(http.status).to.eq(200)
+      expect(http.response.body.Team).to.eq(expectedResultBody.Team)
+      expect(http.response.body.Block).to.eq(expectedResultBody.Block)
+      expect(http.response.body.ItemHeader).to.eq(expectedResultBody.ItemHeader)
     })
   })
 })
