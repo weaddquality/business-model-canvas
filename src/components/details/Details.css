@@ -8,12 +8,12 @@
   padding-right: 0;
   height: 380px;
   width: 60%;
-  grid-template-columns: 3fr 1fr 1fr;
-  grid-template-rows: 35px 250px 35px;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-rows: 35px 250px 35px 100px;
   grid-template-areas:
-    'header header header'
-    'text text text'
-    'empty cancel submit';
+    'header header header list'
+    'text text text list'
+    'empty cancel submit list';
 }
 
 .details-block {
@@ -50,4 +50,21 @@
   text-align: right;
   padding-right: 10px;
   background-color: palevioletred;
+}
+
+.details-list {
+  grid-area: list;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: palevioletred;
+}
+
+.details-list-item {
+  border: solid 1px;
+  text-align: left;
+  height: 50px;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: coral;
 }
