@@ -14,6 +14,7 @@ const LoadingButton = ({
     <Button
       variant="secondary"
       className={`loaderButton ${className}`}
+      data-testid="submitButton"
       disabled={disabled || isLoading}
       {...props}
     >

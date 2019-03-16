@@ -68,6 +68,7 @@ const Create = props => {
           placeholder="Enter text here"
           onChange={handleChange}
           value={content}
+          data-testid="createItemInputForm"
         />
       </Form.Group>
       <LoadingButton
