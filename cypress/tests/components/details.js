@@ -4,22 +4,16 @@ import { StaticRouter } from 'react-router-dom'
 import Details from '../../../src/components/details/Details'
 
 describe('Component testing of Details', () => {
-  beforeEach(function() {
+  it('renders a form with items and a "go back to canvas" link', () => {
     cy.mount(
       <StaticRouter>
         <Details />
       </StaticRouter>
     )
-  })
-
-  //TODO: Can we test this without using a css selector?
-  it('renders a list of items', () => {
+    cy.get('.details-form')
     cy.get('.details-list a')
       .its('length')
       .should('be.gt', 0)
-  })
-
-  it('renders a "go back to canvas link"', () => {
     cy.contains(/go back to canvas/i)
   })
 })
