@@ -1,6 +1,7 @@
 import React from 'react'
 import './Details.css'
 import { Link } from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 export default function Details() {
   return (
@@ -12,9 +13,17 @@ export default function Details() {
         <div className="details-cancel">Cancel-button</div>
         <div className="details-submit">Submit-button</div>
         <div className="details-list">
-          <div className="details-list-item">item1</div>
-          <div className="details-list-item">item2</div>
-          <div className="details-list-item">item3</div>
+          <ListGroup>
+            <ListGroup.Item action href="/0109ad10-4783-11e9-824b-1fca161f126b">
+              Item 1
+            </ListGroup.Item>
+            <ListGroup.Item action href="/014a62c0-4787-11e9-824b-1fca161f126b">
+              Item 2
+            </ListGroup.Item>
+            <ListGroup.Item action href="/05a4ae70-4782-11e9-824b-1fca161f126b">
+              Item 3
+            </ListGroup.Item>
+          </ListGroup>
         </div>
       </div>
       <Link to="/canvas">Go back to Canvas</Link>
