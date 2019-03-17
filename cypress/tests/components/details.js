@@ -36,7 +36,7 @@ describe('Component testing of Details', () => {
 
   it('renders a link/text as "go back to canvas"', () => {
     cy.get('[data-testid="goBackToCanvasButton"]').then(element => {
-      expect(element.text()).equals('Go back to Canvas')
+      expect(element.text()).match(/go back to canvas/i)
     })
   })
 
