@@ -44,15 +44,12 @@ const renderRightComponents = props => {
     return (
       <Nav>
         <Fragment>
-          <Nav.Item className="navbar-react-router-link">
-            <Link to="/item/create">
-              <i className="fa fa-plus" /> Create item
-            </Link>
-          </Nav.Item>
           <Nav.Item className="canvas-view-button navbar-react-router-link">
             <ViewToggle />
           </Nav.Item>
-          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">|</Nav.Item>
+          <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">
+            |
+          </Nav.Item>
           <Nav.Item className="navbar-react-router-link" onClick={props.handleLogout}>
             <Link to="/logout" data-testid="navbarLogoutButton">
               <i className="fa fa-sign-out" /> Logout

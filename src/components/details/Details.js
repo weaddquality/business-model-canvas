@@ -10,6 +10,11 @@ export default function Details() {
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">Value Propositions</div>
+          <div className="details-create-team">
+            <Link to="/item/create">
+              <i className="fa fa-plus details-create-team" /> Create item
+            </Link>
+          </div>
           <div className="details-header">Header here</div>
           <div className="details-text">This is where the text goes</div>
           <div className="details-delete">

@@ -12,10 +12,10 @@
   padding-right: 0;
   /* height: 380px; */
   width: 60%;
-  grid-template-columns: 1fr 3fr 100px 1fr;
+  grid-template-columns: 1fr 3fr 1fr 170px;
   grid-template-rows: 30px 30px 400px 35px;
   grid-template-areas:
-    'block block block block'
+    'block block create empty'
     'header header header list'
     'text text text list'
     'delete cancel submit list';
@@ -26,6 +26,11 @@
   text-align: left;
   padding-left: 10px;
   font-size: 17pt;
+}
+
+.details-create-team {
+  grid-area: create;
+  text-align: right;
 }
 
 .details-header {
