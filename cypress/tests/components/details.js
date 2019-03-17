@@ -34,9 +34,21 @@ describe('Component testing of Details', () => {
       .should('be.gt', 0)
   })
 
-  it('renders a "go back to canvas"-link', () => {
-    cy.contains(/go back to canvas/i).then(element => {
-      expect(element[0].pathname).equals('/canvas')
+  it('renders a link/text as "go back to canvas"', () => {
+    cy.get('[data-testid="goBackToCanvasButton"]').then(element => {
+      expect(element.text()).equals('Go back to Canvas')
+    })
+  })
+
+  it('renders a link to canvas', () => {
+    cy.get('[data-testid="goBackToCanvasButton"]').then(href => {
+      expect(href[0].pathname).equals('/canvas')
+    })
+  })
+
+  it('renders a create-item link', () => {
+    cy.get('[data-testid="createItemButton"]').then(element => {
+      expect(element[0].pathname).equals('/item/create')
     })
   })
 })

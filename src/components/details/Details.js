@@ -11,7 +11,7 @@ export default function Details() {
         <div className="details-form">
           <div className="details-block">Value Propositions</div>
           <div className="details-create-team">
-            <Link to="/item/create">
+            <Link to="/item/create" data-testid="createItemButton">
               <i className="fa fa-plus details-create-team" /> Create item
             </Link>
           </div>
@@ -40,7 +40,9 @@ export default function Details() {
             </ListGroup>
           </div>
         </div>
-        <Link to="/canvas">Go back to Canvas</Link>
+        <Link to="/canvas" data-testid="goBackToCanvasButton">
+          Go back to Canvas
+        </Link>
       </div>
     </div>
   )
