@@ -1,22 +1,28 @@
+.details-container {
+  height: 10px;
+  padding-top: 10px;
+}
+
 .details-form {
   display: grid;
-  border: 3px solid;
-  grid-gap: 10px;
-  padding-top: 10px;
+  border: 2px solid;
+  grid-gap: 5px;
   padding-bottom: 10px;
   padding-left: 0;
   padding-right: 0;
-  height: 380px;
+  /* height: 380px; */
   width: 60%;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  grid-template-rows: 35px 250px 35px 100px;
+  grid-template-columns: 1fr 3fr 100px 1fr;
+  grid-template-rows: 30px 30px 400px 35px;
   grid-template-areas:
+    'block block block block'
     'header header header list'
     'text text text list'
-    'empty cancel submit list';
+    'delete cancel submit list';
 }
 
 .details-block {
+  grid-area: block;
   text-align: left;
   padding-left: 10px;
   font-size: 17pt;
@@ -38,18 +44,22 @@
   color: blue;
 }
 
+.details-delete {
+  grid-area: delete;
+  text-align: left;
+  padding-left: 10px;
+}
+
 .details-cancel {
   grid-area: cancel;
   text-align: right;
   padding-right: 10px;
-  background-color: orange;
 }
 
 .details-submit {
   grid-area: submit;
   text-align: right;
   padding-right: 10px;
-  background-color: palevioletred;
 }
 
 .details-list {
@@ -58,7 +68,6 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
-  background-color: palevioletred;
 }
 
 .details-list-item {
@@ -67,5 +76,4 @@
   height: 50px;
   padding-top: 10px;
   padding-left: 10px;
-  background-color: coral;
 }
