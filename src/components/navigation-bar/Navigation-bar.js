@@ -45,6 +45,12 @@ const renderRightComponents = props => {
       <Nav>
         <Fragment>
           <Nav.Item className="canvas-view-button navbar-react-router-link">
+            <Link to="/details">Read</Link>
+          </Nav.Item>
+          <Nav.Item className="canvas-view-button navbar-react-router-link">
+            <Link to="/create">Create</Link>
+          </Nav.Item>
+          <Nav.Item className="canvas-view-button navbar-react-router-link">
             <ViewToggle />
           </Nav.Item>
           <Nav.Item className="navbar-react-router-link canvas-view-button navbar-separator">

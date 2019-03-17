@@ -22,6 +22,7 @@ export default ({ props }) => (
     <AppliedRoute exact path="/item/create" component={Create} props={props} />
     <AppliedRoute exact path="/editor/:blockType" component={Editor} props={props} />
     <AppliedRoute exact path="/details" component={Details} props={props} />
+    <AppliedRoute exact path="/create" component={Create} props={props} />
     <Route component={NotFound} />
   </Switch>
 )
