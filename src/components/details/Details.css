@@ -32,10 +32,6 @@
   text-align: right;
 }
 
-.test {
-  size: 7px;
-}
-
 .details-create {
   grid-area: create;
   text-align: right;
