@@ -10,10 +10,9 @@
   padding-bottom: 10px;
   padding-left: 0;
   padding-right: 0;
-  /* height: 380px; */
-  width: 60%;
-  grid-template-columns: 1fr 3fr 1fr 170px;
-  grid-template-rows: 30px 30px 400px 35px;
+  width: 70%;
+  grid-template-rows: 30px 35px 400px 35px;
+  grid-template-columns: 1fr 3fr 105px 170px;
   grid-template-areas:
     'block block create empty'
     'header header header list'
@@ -23,8 +22,8 @@
 
 .details-block {
   grid-area: block;
-  text-align: left;
   padding-left: 10px;
+  text-align: left;
   font-size: 17pt;
 }
 
@@ -35,50 +34,52 @@
 
 .details-header {
   grid-area: header;
-  text-align: left;
+  border: solid 1px;
+  margin-top: 10px;
+  margin-left: 6px;
   padding-left: 10px;
-  background-color: cadetblue;
-  color: red;
+  text-align: left;
 }
 
 .details-text {
   grid-area: text;
-  text-align: left;
+  border: solid 1px;
+  margin-left: 6px;
+  margin-top: 6px;
+  padding-top: 10px;
   padding-left: 10px;
-  background-color: green;
-  color: blue;
+  text-align: left;
 }
 
 .details-delete {
   grid-area: delete;
-  text-align: left;
   padding-left: 10px;
+  text-align: left;
 }
 
 .details-cancel {
   grid-area: cancel;
-  text-align: right;
   padding-right: 10px;
+  text-align: right;
 }
 
 .details-submit {
   grid-area: submit;
-  text-align: right;
   padding-right: 10px;
+  text-align: right;
 }
 
 .details-list {
   grid-area: list;
-  text-align: left;
+  padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 10px;
+  text-align: left;
 }
 
 .details-list-item {
   border: solid 1px;
-  text-align: left;
-  height: 50px;
   padding-top: 10px;
   padding-left: 10px;
+  text-align: left;
 }
