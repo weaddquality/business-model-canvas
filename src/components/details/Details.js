@@ -3,6 +3,7 @@ import './Details.css'
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 export default function Details() {
   const [writeMode, setWriteMode] = useState(false)
@@ -15,8 +16,14 @@ export default function Details() {
     if (writeMode) {
       return (
         <div>
-          <div className="details-header">Header here</div>
-          <div className="details-text">WRITE MODE</div>
+          <Form>
+            <Form.Group>
+              <Form.Control placeholder="Header" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control as="textarea" rows="15" placeholder="Text" />
+            </Form.Group>
+          </Form>
         </div>
       )
     } else {
