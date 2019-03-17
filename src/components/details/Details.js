@@ -1,22 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Details.css'
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
 export default function Details() {
+  const [writeMode, setWriteMode] = useState(false)
+
+  const handleMode = () => {
+    setWriteMode(!writeMode)
+  }
+
+  const card = () => {
+    if (writeMode) {
+      return (
+        <div>
+          <div className="details-header">Header here</div>
+          <div className="details-text">WRITE MODE</div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div className="details-header">Header here</div>
+          <div className="details-text">This is where the text goes</div>
+        </div>
+      )
+    }
+  }
   return (
     <div>
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">Value Propositions</div>
-          <div className="details-create-team">
+          <div className="details-edit">
+            <i className="fa fa-edit" onClick={handleMode} />
+          </div>
+          <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
-              <i className="fa fa-plus details-create-team" /> Create item
+              <i className="fa fa-plus details-create" /> Create item
             </Link>
           </div>
-          <div className="details-header">Header here</div>
-          <div className="details-text">This is where the text goes</div>
+          <div className="details-card">{card()}</div>
           <div className="details-delete">
             <Button variant="danger">Delete</Button>
           </div>
