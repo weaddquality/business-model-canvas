@@ -15,22 +15,22 @@ export default function Details() {
   const card = () => {
     if (writeMode) {
       return (
-        <div>
-          <Form>
+        <div className="details-card-container">
+          <Form className="details-card-write">
             <Form.Group>
               <Form.Control placeholder="Header" />
             </Form.Group>
             <Form.Group>
-              <Form.Control as="textarea" rows="15" placeholder="Text" />
+              <Form.Control as="textarea" rows="15" placeholder="This is where the text goes" />
             </Form.Group>
           </Form>
         </div>
       )
     } else {
       return (
-        <div>
-          <div className="details-header">Header here</div>
-          <div className="details-text">This is where the text goes</div>
+        <div className="details-card-container">
+          <div className="details-card-read-header">Header</div>
+          <div className="details-card-read-text">This is where the text goes</div>
         </div>
       )
     }

@@ -41,23 +41,35 @@
   grid-area: card;
 }
 
-.details-header {
+.details-card-container {
+  margin-left: 6px;
+}
+.details-card-write {
+  padding-top: 10px;
+  padding-left: 6px;
+}
+
+.details-card-read-header {
   grid-area: header;
+  border-radius: 4px;
   border: solid 1px;
   margin-top: 10px;
   margin-left: 6px;
-  padding-left: 10px;
+  padding-left: 12px;
   text-align: left;
+  height: 39px;
+  line-height: 37px;
 }
 
-.details-text {
+.details-card-read-text {
   grid-area: text;
-  height: 400px;
+  border-radius: 4px;
+  height: 373px;
   border: solid 1px;
   margin-left: 6px;
-  margin-top: 6px;
-  padding-top: 10px;
-  padding-left: 10px;
+  margin-top: 16px;
+  padding-top: 5px;
+  padding-left: 12px;
   text-align: left;
 }
 
@@ -92,10 +104,4 @@
   padding-top: 10px;
   padding-left: 10px;
   text-align: left;
-}
-
-.details-form-header {
-  margin-left: 6px;
-  text-align: left;
-  font-weight: bold;
 }
