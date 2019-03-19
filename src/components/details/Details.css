@@ -1,0 +1,107 @@
+.details-container {
+  height: 10px;
+  padding-top: 10px;
+}
+
+.details-form {
+  display: grid;
+  border: 2px solid;
+  grid-gap: 5px;
+  padding-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 70%;
+  grid-template-rows: 30px 35px 400px 35px;
+  grid-template-columns: 1fr 3fr 105px 170px;
+  grid-template-areas:
+    'block edit create empty'
+    'card card card list'
+    'card card card list'
+    'delete cancel submit list';
+}
+
+.details-block {
+  grid-area: block;
+  padding-left: 10px;
+  text-align: left;
+  font-size: 17pt;
+}
+
+.details-edit {
+  grid-area: edit;
+  text-align: right;
+}
+
+.details-create {
+  grid-area: create;
+  text-align: right;
+}
+
+.details-card {
+  grid-area: card;
+}
+
+.details-card-container {
+  margin-left: 6px;
+}
+.details-card-write {
+  padding-top: 10px;
+  padding-left: 6px;
+}
+
+.details-card-read-header {
+  grid-area: header;
+  border-radius: 4px;
+  border: solid 1px;
+  margin-top: 10px;
+  margin-left: 6px;
+  padding-left: 12px;
+  text-align: left;
+  height: 39px;
+  line-height: 37px;
+}
+
+.details-card-read-text {
+  grid-area: text;
+  border-radius: 4px;
+  height: 373px;
+  border: solid 1px;
+  margin-left: 6px;
+  margin-top: 16px;
+  padding-top: 5px;
+  padding-left: 12px;
+  text-align: left;
+}
+
+.details-delete {
+  grid-area: delete;
+  padding-left: 10px;
+  text-align: left;
+}
+
+.details-cancel {
+  grid-area: cancel;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.details-submit {
+  grid-area: submit;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.details-list {
+  grid-area: list;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.details-list-item {
+  border: solid 1px;
+  padding-top: 10px;
+  padding-left: 10px;
+  text-align: left;
+}
