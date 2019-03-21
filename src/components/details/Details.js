@@ -35,6 +35,25 @@ export default function Details() {
       )
     }
   }
+
+  const listItems = () => {
+    return (
+      <div className="details-list">
+        <ListGroup>
+          <ListGroup.Item action href="/0109ad10-4783-11e9-824b-1fca161f126b">
+            Item 1
+          </ListGroup.Item>
+          <ListGroup.Item action href="/014a62c0-4787-11e9-824b-1fca161f126b">
+            Item 2
+          </ListGroup.Item>
+          <ListGroup.Item action href="/05a4ae70-4782-11e9-824b-1fca161f126b">
+            Item 3
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
+    )
+  }
+
   return (
     <div>
       <div className="details-container">
@@ -58,19 +77,7 @@ export default function Details() {
           <div className="details-submit">
             <Button variant="success">Submit</Button>
           </div>
-          <div className="details-list">
-            <ListGroup>
-              <ListGroup.Item action href="/0109ad10-4783-11e9-824b-1fca161f126b">
-                Item 1
-              </ListGroup.Item>
-              <ListGroup.Item action href="/014a62c0-4787-11e9-824b-1fca161f126b">
-                Item 2
-              </ListGroup.Item>
-              <ListGroup.Item action href="/05a4ae70-4782-11e9-824b-1fca161f126b">
-                Item 3
-              </ListGroup.Item>
-            </ListGroup>
-          </div>
+          {listItems()}
         </div>
         <Link to="/canvas" data-testid="goBackToCanvasButton">
           Go back to Canvas
