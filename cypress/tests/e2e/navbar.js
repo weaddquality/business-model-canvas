@@ -38,11 +38,6 @@ describe('Testing the navbar', function() {
     cy.contains('404')
   })
 
-  it('the create button', function() {
-    cy.getByText('Create item').click()
-    cy.contains('Create a Value proposition')
-  })
-
   it('the view toggle', function() {
     cy.get('[data-testid="viewToggleButton"]').click()
     cy.url().should('include', '/horizontal')

@@ -8,7 +8,7 @@ Cypress.Commands.add('login', () => {
     .type('ADDQbmc123!')
     .should('have.value', 'ADDQbmc123!')
   cy.get('[data-testid="loginSubmitButton"]').click()
-  cy.contains('You are now logged in..')
+  cy.contains('You are now logged in..', { timeout: 10000 })
 })
 
 Cypress.Commands.add('logout', () => {

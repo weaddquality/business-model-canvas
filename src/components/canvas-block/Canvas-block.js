@@ -40,7 +40,7 @@ const CanvasBlock = props => {
 
   return (
     <Link
-      to={`/editor/${formatBlockHeader(props.content.block)}`}
+      to={`/details/${formatBlockHeader(props.content.block)}`}
       className={`${formatBlockHeader(props.content.block)} block`}
     >
       <div className="canvas-blocks-container">

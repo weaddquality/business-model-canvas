@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './Canvas.css'
 import CanvasBlock from '../canvas-block/Canvas-block'
 import { API } from 'aws-amplify'
 
 const Canvas = props => {
-  const [listResponse, setListResponse] = useState([])
   const testId = props.location.pathname === '/canvas' ? 'canvasView' : 'horizontalView'
   const className =
     props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
@@ -17,11 +16,11 @@ const Canvas = props => {
   const getItems = () => {
     API.get('bmc-items', '/bmc-items/list?Team=Team Continuous').then(response => {
       const { blocks } = response
-      setListResponse(blocks)
+      props.setListResponse(blocks)
     })
   }
 
-  const canvasBlocks = listResponse.map(block => {
+  const canvasBlocks = props.listResponse.map(block => {
     const className = block.block.toLowerCase().replace(' ', '-')
     return <CanvasBlock key={className} content={block} />
   })
