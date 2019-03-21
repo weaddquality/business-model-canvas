@@ -2,12 +2,13 @@ import React from 'react'
 import 'cypress-react-unit-test'
 import { StaticRouter } from 'react-router-dom'
 import Details from '../../../src/components/details/Details'
+import props from './details-props.js'
 
-describe('Component testing of Details', () => {
+describe.skip('Component testing of Details', () => {
   beforeEach(() => {
     cy.mount(
       <StaticRouter>
-        <Details />
+        <Details props={props} />
       </StaticRouter>
     )
   })

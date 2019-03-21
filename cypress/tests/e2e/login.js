@@ -16,6 +16,6 @@ describe('Testing login functionality', function() {
 
     cy.get('[data-testid="navbarLogoutButton"]').click()
 
-    cy.contains('You are now logged out..')
+    cy.getByText('You are now logged out..', { timeout: 10000 })
   })
 })

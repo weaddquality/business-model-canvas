@@ -9,6 +9,7 @@ import { Auth } from 'aws-amplify'
 function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthenticating, setIsAuthenticating] = useState(true)
+  const [listResponse, setListResponse] = useState([])
 
   useEffect(() => {
     userHasSession()
@@ -50,6 +51,8 @@ function App(props) {
     userHasAuthenticated: userHasAuthenticated,
     handleLogout: handleLogout,
     redirectToLogin: redirectToLogin,
+    setListResponse: setListResponse,
+    listResponse: listResponse,
   }
 
   return (
