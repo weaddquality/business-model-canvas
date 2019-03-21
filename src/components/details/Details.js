@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import './Details.css'
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -12,25 +12,40 @@ export default function Details() {
     setWriteMode(!writeMode)
   }
 
-  const card = () => {
+  const form = () => {
     if (writeMode) {
       return (
-        <div className="details-card-container">
-          <Form className="details-card-write">
-            <Form.Group>
-              <Form.Control placeholder="Header" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control as="textarea" rows="15" placeholder="This is where the text goes" />
-            </Form.Group>
-          </Form>
-        </div>
+        <Fragment>
+          <div className="details-card">
+            <div className="details-card-container">
+              <Form className="details-card-write">
+                <Form.Group>
+                  <Form.Control placeholder="Header" />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control as="textarea" rows="15" placeholder="This is where the text goes" />
+                </Form.Group>
+              </Form>
+            </div>
+          </div>
+          <div className="details-delete">
+            <Button variant="danger">Delete</Button>
+          </div>
+          <div className="details-cancel">
+            <Button variant="secondary">Cancel</Button>
+          </div>
+          <div className="details-submit">
+            <Button variant="success">Submit</Button>
+          </div>
+        </Fragment>
       )
     } else {
       return (
-        <div className="details-card-container">
-          <div className="details-card-read-header">Header</div>
-          <div className="details-card-read-text">This is where the text goes</div>
+        <div className="details-card">
+          <div className="details-card-container">
+            <div className="details-card-read-header">Header</div>
+            <div className="details-card-read-text">This is where the text goes</div>
+          </div>
         </div>
       )
     }
@@ -67,16 +82,7 @@ export default function Details() {
               <i className="fa fa-plus details-create" /> Create item
             </Link>
           </div>
-          <div className="details-card">{card()}</div>
-          <div className="details-delete">
-            <Button variant="danger">Delete</Button>
-          </div>
-          <div className="details-cancel">
-            <Button variant="secondary">Cancel</Button>
-          </div>
-          <div className="details-submit">
-            <Button variant="success">Submit</Button>
-          </div>
+          {form()}
           {listItems()}
         </div>
         <Link to="/canvas" data-testid="goBackToCanvasButton">
