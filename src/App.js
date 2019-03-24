@@ -4,7 +4,7 @@ import './App.css'
 import './components/navigation-bar/Navigation-bar.css'
 import { withRouter } from 'react-router-dom'
 import NavigationBar from './components/navigation-bar/Navigation-bar'
-import { Auth } from 'aws-amplify'
+import { Auth, API } from 'aws-amplify'
 
 function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -36,6 +36,14 @@ function App(props) {
     setIsAuthenticated(authenticated)
   }
 
+  // TODO: Replace hard coded Team value with a dynamically read value
+  const getCanvasData = () => {
+    API.get('bmc-items', '/bmc-items/list?Team=Team Continuous').then(response => {
+      const { blocks } = response
+      setListResponse(blocks)
+    })
+  }
+
   const handleLogout = async () => {
     await Auth.signOut()
     userHasAuthenticated(false)
@@ -51,7 +59,7 @@ function App(props) {
     userHasAuthenticated: userHasAuthenticated,
     handleLogout: handleLogout,
     redirectToLogin: redirectToLogin,
-    setListResponse: setListResponse,
+    getCanvasData: getCanvasData,
     listResponse: listResponse,
   }
 
