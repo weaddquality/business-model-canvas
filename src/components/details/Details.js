@@ -28,10 +28,14 @@ export default function Details(props) {
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
-                  <Form.Control placeholder={currentBlock.block} />
+                  <Form.Control defaultValue={currentBlock.items[0].itemHeader} />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Control as="textarea" rows="15" placeholder="Enter text here" />
+                  <Form.Control
+                    as="textarea"
+                    rows="15"
+                    defaultValue={currentBlock.items[0].ItemText}
+                  />
                 </Form.Group>
               </Form>
             </div>
@@ -53,6 +57,9 @@ export default function Details(props) {
           <div className="details-card-container">
             <div className="details-card-read-header">{currentBlock.items[0].itemHeader}</div>
             <div className="details-card-read-text">{currentBlock.items[0].ItemText}</div>
+          </div>
+          <div className="details-submit">
+            <Button variant="success">Edit</Button>
           </div>
         </div>
       )
