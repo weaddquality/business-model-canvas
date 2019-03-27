@@ -7,18 +7,22 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
-  const [currentBlock, setCurrentBlock] = useState({
-    block: '',
-    blockDescription: '',
-    items: [{ itemHeader: '', ItemText: '' }],
-  })
-
   useEffect(() => {
-    const currentBlockFromUrl = props.listResponse.find(block => {
+    props.getCanvasData()
+  }, [])
+
+  const getCurrentBlockFromUrl = () => {
+    const emptyBlock = {
+      block: '',
+      blockDescription: '',
+      items: [{ itemHeader: '', ItemText: '' }],
+    }
+
+    const foundBlock = props.listResponse.find(block => {
       return block.block.replace(' ', '-').toLowerCase() === props.match.params.blockType
     })
-    setCurrentBlock(currentBlockFromUrl)
-  }, [])
+    return foundBlock ? foundBlock : emptyBlock
+  }
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
@@ -32,13 +36,13 @@ export default function Details(props) {
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
-                  <Form.Control defaultValue={currentBlock.items[0].itemHeader} />
+                  <Form.Control defaultValue={getCurrentBlockFromUrl().items[0].itemHeader} />
                 </Form.Group>
                 <Form.Group>
                   <Form.Control
                     as="textarea"
                     rows="15"
-                    defaultValue={currentBlock.items[0].ItemText}
+                    defaultValue={getCurrentBlockFromUrl().items[0].ItemText}
                   />
                 </Form.Group>
               </Form>
@@ -61,8 +65,12 @@ export default function Details(props) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
-            <div className="details-card-read-header">{currentBlock.items[0].itemHeader}</div>
-            <div className="details-card-read-text">{currentBlock.items[0].ItemText}</div>
+            <div className="details-card-read-header">
+              {getCurrentBlockFromUrl().items[0].itemHeader}
+            </div>
+            <div className="details-card-read-text">
+              {getCurrentBlockFromUrl().items[0].ItemText}
+            </div>
           </div>
           <div className="details-submit">
             <Button variant="success" onClick={toggleMode}>
@@ -96,7 +104,7 @@ export default function Details(props) {
     <div>
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{currentBlock.block}</div>
+          <div className="details-block">{getCurrentBlockFromUrl().block}</div>
           <div className="details-edit">
             <i className="fa fa-edit" onClick={toggleMode} />
           </div>
