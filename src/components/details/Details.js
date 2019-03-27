@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form'
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
   useEffect(() => {
-    props.getCanvasData()
+    if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
 
   const getCurrentBlockFromUrl = () => {
