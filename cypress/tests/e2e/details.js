@@ -17,12 +17,12 @@ describe('Testing the details', function() {
     cy.visit('/canvas')
     cy.getByText('Channels').click()
 
-    cy.get('[data-testid="details-readmode"]')
+    cy.getByTestId('details-readmode')
 
     cy.getByText('Edit').click()
-    cy.get('[data-testid="details-writemode"]')
+    cy.getByTestId('details-writemode')
 
     cy.getByText('Cancel').click()
-    cy.get('[data-testid="details-readmode"]')
+    cy.getByTestId('details-readmode')
   })
 })
