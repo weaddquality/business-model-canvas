@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import './Canvas-block.css'
 
 const substring = (text, maxCharacters) => {
-  if (text.length > maxCharacters) {
+  if (text && text.length > maxCharacters) {
     text = `${text.substring(0, maxCharacters)}...`
   }
   return text

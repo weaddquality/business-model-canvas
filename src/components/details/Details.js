@@ -20,18 +20,26 @@ export default function Details(props) {
     setCurrentBlock(currentBlockFromUrl)
   }, [])
 
+  const toggleMode = () => {
+    setWriteMode(!writeMode)
+  }
+
   const form = () => {
     if (writeMode) {
       return (
         <Fragment>
-          <div className="details-card">
+          <div className="details-card" data-testid="details-writemode">
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
-                  <Form.Control placeholder={currentBlock.block} />
+                  <Form.Control defaultValue={currentBlock.items[0].itemHeader} />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Control as="textarea" rows="15" placeholder="Enter text here" />
+                  <Form.Control
+                    as="textarea"
+                    rows="15"
+                    defaultValue={currentBlock.items[0].ItemText}
+                  />
                 </Form.Group>
               </Form>
             </div>
@@ -40,7 +48,9 @@ export default function Details(props) {
             <Button variant="danger">Delete</Button>
           </div>
           <div className="details-cancel">
-            <Button variant="secondary">Cancel</Button>
+            <Button variant="secondary" onClick={toggleMode}>
+              Cancel
+            </Button>
           </div>
           <div className="details-submit">
             <Button variant="success">Submit</Button>
@@ -49,10 +59,15 @@ export default function Details(props) {
       )
     } else {
       return (
-        <div className="details-card">
+        <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
             <div className="details-card-read-header">{currentBlock.items[0].itemHeader}</div>
             <div className="details-card-read-text">{currentBlock.items[0].ItemText}</div>
+          </div>
+          <div className="details-submit">
+            <Button variant="success" onClick={toggleMode}>
+              Edit
+            </Button>
           </div>
         </div>
       )
@@ -83,12 +98,7 @@ export default function Details(props) {
         <div className="details-form">
           <div className="details-block">{currentBlock.block}</div>
           <div className="details-edit">
-            <i
-              className="fa fa-edit"
-              onClick={() => {
-                setWriteMode(!writeMode)
-              }}
-            />
+            <i className="fa fa-edit" onClick={toggleMode} />
           </div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
