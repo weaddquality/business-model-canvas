@@ -28,7 +28,7 @@ export default function Details(props) {
     if (writeMode) {
       return (
         <Fragment>
-          <div className="details-card">
+          <div className="details-card" data-testid="details-writemode">
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
@@ -59,7 +59,7 @@ export default function Details(props) {
       )
     } else {
       return (
-        <div className="details-card">
+        <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
             <div className="details-card-read-header">{currentBlock.items[0].itemHeader}</div>
             <div className="details-card-read-text">{currentBlock.items[0].ItemText}</div>
