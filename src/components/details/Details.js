@@ -10,7 +10,7 @@ export default function Details(props) {
   const [currentBlock, setCurrentBlock] = useState({
     block: '',
     blockDescription: '',
-    items: [{ itemHeader: '', ItemText: '' }],
+    items: [{ ItemHeader: '', ItemText: '' }],
   })
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Details(props) {
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
-                  <Form.Control defaultValue={currentBlock.items[0].itemHeader} />
+                  <Form.Control defaultValue={currentBlock.items[0].ItemHeader} />
                 </Form.Group>
                 <Form.Group>
                   <Form.Control
@@ -61,7 +61,7 @@ export default function Details(props) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
-            <div className="details-card-read-header">{currentBlock.items[0].itemHeader}</div>
+            <div className="details-card-read-header">{currentBlock.items[0].ItemHeader}</div>
             <div className="details-card-read-text">{currentBlock.items[0].ItemText}</div>
           </div>
           <div className="details-submit">
