@@ -25,7 +25,6 @@ export const formatBlockHeader = headerText => {
 }
 
 const CanvasBlock = props => {
-  console.log(props)
   const items = props.content.items.map((item, index) => {
     return (
       <div className="canvas-card-container" key={`${index}-${item.itemHeader}`}>
