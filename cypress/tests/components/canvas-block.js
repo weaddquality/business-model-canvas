@@ -7,7 +7,7 @@ const content = {
   block: 'Value Propositions',
   items: [
     {
-      itemHeader: 'my header',
+      ItemHeader: 'my header',
       ItemText: 'my text',
     },
   ],

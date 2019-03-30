@@ -5,11 +5,11 @@ export const props = {
       blockDescription: 'Who are our key partners',
       items: [
         {
-          itemHeader: 'This is our keypartners',
+          ItemHeader: 'This is our keypartners',
           ItemText: 'Partner X, Partner Y',
         },
         {
-          itemHeader: 'This is our keypartners',
+          ItemHeader: 'This is our keypartners',
           ItemText: 'Partner X, Partner Y',
         },
       ],
@@ -19,11 +19,11 @@ export const props = {
       blockDescription: 'What key activities do our value propositions require',
       items: [
         {
-          itemHeader: 'Do this',
+          ItemHeader: 'Do this',
           ItemText: 'So that we can achieve X',
         },
         {
-          itemHeader: 'Do this',
+          ItemHeader: 'Do this',
           ItemText: 'So that we can achieve X',
         },
       ],
@@ -33,11 +33,11 @@ export const props = {
       blockDescription: 'What key resources do our value propositions require',
       items: [
         {
-          itemHeader: 'Resource Z',
+          ItemHeader: 'Resource Z',
           ItemText: 'With resource Z we could do words words words',
         },
         {
-          itemHeader: 'Resource Z',
+          ItemHeader: 'Resource Z',
           ItemText: 'With resource Z we could do words words words',
         },
       ],
@@ -46,501 +46,501 @@ export const props = {
       block: 'Value Propositions',
       items: [
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest adding an item',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Our biggest value',
+          ItemHeader: 'Our biggest value',
           ItemText:
             'Is that we continuously evolve, adapt and empower developers in their challenges with X',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'Test Value Prop 1',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Our biggest value',
+          ItemHeader: 'Our biggest value',
           ItemText:
             'Is that we continuously evolve, adapt and empower developers in their challenges with X',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest ',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest content',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'hej',
         },
         {
-          itemHeader: 'Value props header',
+          ItemHeader: 'Value props header',
           ItemText: 'createItemtest pushing a string',
         },
       ],
@@ -550,11 +550,11 @@ export const props = {
       blockDescription: 'What type of relationships do our customer segments expect',
       items: [
         {
-          itemHeader: 'Our customers demand',
+          ItemHeader: 'Our customers demand',
           ItemText: "That we're always available for consultations, at choice of time and XYZ",
         },
         {
-          itemHeader: 'Our customers demand',
+          ItemHeader: 'Our customers demand',
           ItemText: "That we're always available for consultations, at choice of time and XYZ",
         },
       ],
@@ -564,12 +564,12 @@ export const props = {
       blockDescription: 'How do we reach our customer segments',
       items: [
         {
-          itemHeader: 'LinkedIn',
+          ItemHeader: 'LinkedIn',
           ItemText:
             'LinkedIn is our main place since people we can recruit as well as people who buy from us, is present in this channel',
         },
         {
-          itemHeader: 'LinkedIn',
+          ItemHeader: 'LinkedIn',
           ItemText:
             'LinkedIn is our main place since people we can recruit as well as people who buy from us, is present in this channel',
         },
@@ -580,11 +580,11 @@ export const props = {
       blockDescription: 'Who are we creating value for',
       items: [
         {
-          itemHeader: 'Mature customers',
+          ItemHeader: 'Mature customers',
           ItemText: 'Customers who has bought consultants before and XYZ',
         },
         {
-          itemHeader: 'Mature customers',
+          ItemHeader: 'Mature customers',
           ItemText: 'Customers who has bought consultants before and XYZ',
         },
       ],
@@ -594,11 +594,11 @@ export const props = {
       blockDescription: 'What are the important costs inherent in our business model',
       items: [
         {
-          itemHeader: 'This costs a lot of stuff',
+          ItemHeader: 'This costs a lot of stuff',
           ItemText: 'Here I describe that cost in detail, for instance XYZ',
         },
         {
-          itemHeader: 'This costs a lot of stuff',
+          ItemHeader: 'This costs a lot of stuff',
           ItemText: 'Here I describe that cost in detail, for instance XYZ',
         },
       ],
@@ -608,11 +608,11 @@ export const props = {
       blockDescription: 'What value are our customers willing to pay for',
       items: [
         {
-          itemHeader: 'Consultancy',
+          ItemHeader: 'Consultancy',
           ItemText: 'We collect our income by consulting',
         },
         {
-          itemHeader: 'Consultancy',
+          ItemHeader: 'Consultancy',
           ItemText: 'We collect our income by consulting',
         },
       ],
