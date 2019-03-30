@@ -18,8 +18,9 @@ export default function Details(props) {
       items: [{ itemHeader: '', ItemText: '' }],
     }
 
-    const foundBlock = props.listResponse.find(block => {
-      return block.block.replace(' ', '-').toLowerCase() === props.match.params.blockType
+    const foundBlock = props.listResponse.find(({ block }) => {
+      const blockKebabCased = block.replace(' ', '-').toLowerCase()
+      return blockKebabCased === props.match.params.blockType
     })
     return foundBlock ? foundBlock : emptyBlock
   }
