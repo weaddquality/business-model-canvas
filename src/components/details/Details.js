@@ -43,6 +43,21 @@ export default function Details(props) {
     })
   }
 
+  const deleteItem = () => {
+    API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
+      body: {
+        TableName: 'BusinessModelCanvas',
+      },
+      queryStringParameters: {
+        Team: 'Team Continuous',
+        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+      },
+    }).then(() => {
+      toggleMode()
+      props.getCanvasData()
+    })
+  }
+
   const getCurrentBlockFromUrl = () => {
     const emptyBlock = {
       block: '',
@@ -84,7 +99,9 @@ export default function Details(props) {
             </div>
           </div>
           <div className="details-delete">
-            <Button variant="danger">Delete</Button>
+            <Button variant="danger" onClick={deleteItem}>
+              Delete
+            </Button>
           </div>
           <div className="details-cancel">
             <Button variant="secondary" onClick={toggleMode}>
