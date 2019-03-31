@@ -29,12 +29,13 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readmode')
   })
 
-  it('can update text on an item', function() {
+  it.only('can update text on an item', function() {
     cy.visit('/')
     cy.login()
     cy.visit('/details/channels')
 
     // change to a new text
+    cy.wait(3000)
     cy.getByText('Edit').click()
 
     cy.getByTestId('details-updateform-text')
