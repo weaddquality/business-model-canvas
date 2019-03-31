@@ -14,7 +14,7 @@
   grid-template-rows: 30px 35px 400px 35px;
   grid-template-columns: 1fr 3fr 105px 170px;
   grid-template-areas:
-    'block edit create empty'
+    'block create create create'
     'card card card list'
     'card card card list'
     'delete cancel submit list';
@@ -27,14 +27,15 @@
   font-size: 17pt;
 }
 
-.details-edit {
-  grid-area: edit;
-  text-align: right;
-}
-
 .details-create {
   grid-area: create;
   text-align: right;
+  padding-top: 14px;
+  padding-right: 54px;
+}
+
+.details-create a:hover {
+  color: black;
 }
 
 .details-card {
