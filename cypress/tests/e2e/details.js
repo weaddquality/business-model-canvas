@@ -1,7 +1,10 @@
 describe('Testing the details', function() {
-  it('renders details-page', function() {
+  beforeEach(function() {
     cy.visit('/')
     cy.login()
+  })
+
+  it('renders details-page', function() {
     cy.visit('/details/key-partners')
     cy.contains('Key Partners')
   })
@@ -14,8 +17,6 @@ describe('Testing the details', function() {
   })
 
   it('switch between read and write-mode', function() {
-    cy.visit('/')
-    cy.login()
     cy.visit('/canvas', { timeout: 15000 })
 
     cy.getByText('Channels').click()
@@ -34,8 +35,6 @@ describe('Testing the details', function() {
     cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
 
-    cy.visit('/')
-    cy.login()
     cy.visit('/details/channels')
 
     cy.wait('@getUpdatedCanvasData')
