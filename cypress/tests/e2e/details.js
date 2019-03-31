@@ -65,10 +65,6 @@ describe('Testing the details', function() {
       .type('Old value')
       .should('have.value', 'Old value')
 
-    cy.server()
-    cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
-    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
-
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
@@ -100,7 +96,7 @@ describe('Testing the details', function() {
 
     cy.wait('@getUpdatedCanvasData')
 
-    cy.route('delete', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
     cy.getByText('Delete').click()
 
     cy.wait('@deleteRequest').then(response => {
