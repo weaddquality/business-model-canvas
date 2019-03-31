@@ -4,12 +4,48 @@ import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import { API } from 'aws-amplify'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
+  const [header, setHeader] = useState('')
+  const [text, setText] = useState('')
+
+  const handleHeaderChange = event => {
+    setHeader(event.target.value)
+  }
+
+  const handleTextChange = event => {
+    setText(event.target.value)
+  }
+
   useEffect(() => {
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
+
+  useEffect(() => {
+    props.getCanvasData()
+  }, [])
+
+  const toggleMode = () => {
+    setWriteMode(!writeMode)
+  }
+
+  const updateItem = () => {
+    API.put('bmc-items', '/bmc-items/update?Team=Team Continuous', {
+      body: {
+        TableName: 'BusinessModelCanvas',
+        ItemText: text,
+      },
+      queryStringParameters: {
+        Team: 'Team Continuous',
+        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+      },
+    }).then(() => {
+      toggleMode()
+      props.getCanvasData()
+    })
+  }
 
   const getCurrentBlockFromUrl = () => {
     const emptyBlock = {
@@ -25,10 +61,6 @@ export default function Details(props) {
     return foundBlock ? foundBlock : emptyBlock
   }
 
-  const toggleMode = () => {
-    setWriteMode(!writeMode)
-  }
-
   const form = () => {
     if (writeMode) {
       return (
@@ -37,12 +69,18 @@ export default function Details(props) {
             <div className="details-card-container">
               <Form className="details-card-write">
                 <Form.Group>
-                  <Form.Control defaultValue={getCurrentBlockFromUrl().items[0].ItemHeader} />
+                  <Form.Control
+                    onChange={handleHeaderChange}
+                    defaultValue={getCurrentBlockFromUrl().items[0].ItemHeader}
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Control
                     as="textarea"
                     rows="15"
+                    autoFocus
+                    data-testid="details-updateform-text"
+                    onChange={handleTextChange}
                     defaultValue={getCurrentBlockFromUrl().items[0].ItemText}
                   />
                 </Form.Group>
@@ -58,7 +96,9 @@ export default function Details(props) {
             </Button>
           </div>
           <div className="details-submit">
-            <Button variant="success">Submit</Button>
+            <Button variant="success" onClick={updateItem}>
+              Update
+            </Button>
           </div>
         </Fragment>
       )
@@ -69,7 +109,7 @@ export default function Details(props) {
             <div className="details-card-read-header">
               {getCurrentBlockFromUrl().items[0].ItemHeader}
             </div>
-            <div className="details-card-read-text">
+            <div className="details-card-read-text" data-testid="details-readform-text">
               {getCurrentBlockFromUrl().items[0].ItemText}
             </div>
           </div>
