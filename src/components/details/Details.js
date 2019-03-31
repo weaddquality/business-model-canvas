@@ -23,10 +23,6 @@ export default function Details(props) {
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
 
-  useEffect(() => {
-    props.getCanvasData()
-  }, [])
-
   const toggleMode = () => {
     setWriteMode(!writeMode)
   }
