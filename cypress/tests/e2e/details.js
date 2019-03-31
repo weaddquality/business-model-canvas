@@ -76,4 +76,35 @@ describe('Testing the details', function() {
 
     cy.getByTestId('details-readform-text').should('have.text', 'Old value')
   })
+
+  it('can delete an item', function() {
+    cy.visit('/')
+    cy.login()
+    cy.visit('/item/create')
+
+    const inputText = 'A new item'
+    cy.getByTestId('createItemInputForm')
+      .type(inputText)
+      .should('have.value', inputText)
+
+    cy.server()
+    cy.route('POST', '**/prod/bmc-items/create*').as('createRequest')
+    cy.getByText('Create').click()
+
+    cy.wait('@createRequest')
+
+    cy.visit('/details/value-propositions')
+
+    cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
+    cy.getByText('Edit').click()
+
+    cy.wait('@getUpdatedCanvasData')
+
+    cy.route('delete', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
+    })
+  })
 })
