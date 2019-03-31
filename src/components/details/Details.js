@@ -159,12 +159,9 @@ export default function Details(props) {
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">{getCurrentBlockFromUrl().block}</div>
-          <div className="details-edit">
-            <i className="fa fa-edit" onClick={toggleMode} />
-          </div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
-              <i className="fa fa-plus details-create" /> Create item
+              <i className="fa fa-plus" /> Create item
             </Link>
           </div>
           {form()}
