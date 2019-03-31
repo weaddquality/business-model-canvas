@@ -1,7 +1,10 @@
 describe('Testing the details', function() {
-  it('renders details-page', function() {
+  beforeEach(function() {
     cy.visit('/')
     cy.login()
+  })
+
+  it('renders details-page', function() {
     cy.visit('/details/key-partners')
     cy.contains('Key Partners')
   })
@@ -14,8 +17,6 @@ describe('Testing the details', function() {
   })
 
   it('switch between read and write-mode', function() {
-    cy.visit('/')
-    cy.login()
     cy.visit('/canvas', { timeout: 15000 })
 
     cy.getByText('Channels').click()
@@ -30,23 +31,21 @@ describe('Testing the details', function() {
   })
 
   it('can update text on an item', function() {
-    cy.visit('/')
-    cy.login()
+    cy.server()
+    cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
+    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+
     cy.visit('/details/channels')
+
+    cy.wait('@getUpdatedCanvasData')
 
     // change to a new text
     cy.getByText('Edit').click()
 
     cy.getByTestId('details-updateform-text')
-      .type(
-        '{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}'
-      )
+      .clear()
       .type('New value')
       .should('have.value', 'New value')
-
-    cy.server()
-    cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
-    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
 
     cy.getByText('Update').click()
 
@@ -59,9 +58,7 @@ describe('Testing the details', function() {
     cy.getByText('Edit').click()
 
     cy.getByTestId('details-updateform-text')
-      .type(
-        '{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}'
-      )
+      .clear()
       .type('Old value')
       .should('have.value', 'Old value')
 
@@ -74,8 +71,6 @@ describe('Testing the details', function() {
   })
 
   it('can delete an item', function() {
-    cy.visit('/')
-    cy.login()
     cy.visit('/item/create')
 
     const inputText = 'A new item'
