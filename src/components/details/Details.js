@@ -27,10 +27,17 @@ export default function Details(props) {
     setWriteMode(!writeMode)
   }
 
-  const updateItem = () => {
+  const updateItem = async () => {
+    if (header === '') {
+      setHeader(getCurrentBlockFromUrl().items[0].ItemHeader)
+    }
+    if (text === '') {
+      setText(getCurrentBlockFromUrl().items[0].ItemText)
+    }
     API.put('bmc-items', '/bmc-items/update?Team=Team Continuous', {
       body: {
         TableName: 'BusinessModelCanvas',
+        ItemHeader: header,
         ItemText: text,
       },
       queryStringParameters: {
@@ -38,8 +45,8 @@ export default function Details(props) {
         BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
       },
     }).then(() => {
-      toggleMode()
       props.getCanvasData()
+      toggleMode()
     })
   }
 
@@ -53,8 +60,8 @@ export default function Details(props) {
         BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
       },
     }).then(() => {
-      toggleMode()
       props.getCanvasData()
+      toggleMode()
     })
   }
 
