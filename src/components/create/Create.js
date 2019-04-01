@@ -7,14 +7,19 @@ import { API } from 'aws-amplify'
 
 const Create = props => {
   const [isLoading, setIsLoading] = useState(false)
-  const [content, setContent] = useState('')
+  const [header, setHeader] = useState('')
+  const [text, setText] = useState('')
 
   const validateForm = () => {
-    return content.length > 0
+    return text.length > 0
   }
 
-  const handleChange = event => {
-    setContent(event.target.value)
+  const handleHeaderChange = event => {
+    setHeader(event.target.value)
+  }
+
+  const handleTextChange = event => {
+    setText(event.target.value)
   }
 
   const handleSubmit = async event => {
@@ -23,7 +28,8 @@ const Create = props => {
 
     try {
       await createItem({
-        content: content,
+        header: header,
+        text: text,
       })
       props.history.push('/')
     } catch (e) {
@@ -38,8 +44,8 @@ const Create = props => {
       Team: 'Team Continuous',
       Block: 'Value Propositions',
       BlockDescription: 'What value do we deliver to the customer',
-      ItemHeader: 'Value props header',
-      ItemText: input.content,
+      ItemHeader: input.header,
+      ItemText: input.text,
     }
 
     return API.post('bmc-items', '/bmc-items/create', {
@@ -64,11 +70,19 @@ const Create = props => {
         </Form.Label>
         <Form.Control
           as="input"
+          rows="1"
+          placeholder="Enter header here"
+          onChange={handleHeaderChange}
+          value={header}
+          data-testid="createItemInputHeader"
+        />
+        <Form.Control
+          as="input"
           rows="6"
           placeholder="Enter text here"
-          onChange={handleChange}
-          value={content}
-          data-testid="createItemInputForm"
+          onChange={handleTextChange}
+          value={text}
+          data-testid="createItemInputText"
         />
       </Form.Group>
       <LoadingButton
