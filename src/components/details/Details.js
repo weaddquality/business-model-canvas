@@ -27,13 +27,7 @@ export default function Details(props) {
     setWriteMode(!writeMode)
   }
 
-  const updateItem = async () => {
-    if (header === '') {
-      setHeader(getCurrentBlockFromUrl().items[0].ItemHeader)
-    }
-    if (text === '') {
-      setText(getCurrentBlockFromUrl().items[0].ItemText)
-    }
+  const updateItem = () => {
     API.put('bmc-items', '/bmc-items/update?Team=Team Continuous', {
       body: {
         TableName: 'BusinessModelCanvas',
