@@ -116,7 +116,7 @@ export default function Details(props) {
           </div>
         </Fragment>
       )
-    } else {
+    } else if (getCurrentBlockFromUrl().items[0] !== undefined) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
@@ -134,25 +134,41 @@ export default function Details(props) {
           </div>
         </div>
       )
+    } else {
+      return (
+        <div className="details-card" data-testid="details-readmode">
+          <div className="details-card-container">
+            <div className="details-card-read-header" />
+            <div className="details-card-read-text" data-testid="details-readform-text" />
+          </div>
+        </div>
+      )
     }
   }
 
   const listItems = () => {
-    return (
-      <div className="details-list">
-        <ListGroup>
-          <ListGroup.Item action href="/0109ad10-4783-11e9-824b-1fca161f126b">
-            Item 1
-          </ListGroup.Item>
-          <ListGroup.Item action href="/014a62c0-4787-11e9-824b-1fca161f126b">
-            Item 2
-          </ListGroup.Item>
-          <ListGroup.Item action href="/05a4ae70-4782-11e9-824b-1fca161f126b">
-            Item 3
-          </ListGroup.Item>
-        </ListGroup>
-      </div>
-    )
+    const block = getCurrentBlockFromUrl()
+      .block.replace(' ', '-')
+      .toLowerCase()
+    const list = getCurrentBlockFromUrl().items.map(item => {
+      return (
+        <ListGroup.Item
+          action
+          data-testid="details-list-item"
+          href={`/details/${block}/${item.BlockUuid}`}
+        >
+          {item.ItemHeader}
+        </ListGroup.Item>
+      )
+    })
+
+    if (getCurrentBlockFromUrl().items[0] !== undefined) {
+      return (
+        <div className="details-list">
+          <ListGroup>{list}</ListGroup>
+        </div>
+      )
+    }
   }
 
   return (

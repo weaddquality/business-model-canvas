@@ -74,7 +74,7 @@ describe('Testing the details', function() {
     cy.visit('/item/create')
 
     const inputText = 'A new item'
-    cy.getByTestId('createItemInputForm')
+    cy.getByTestId('createItemInputText')
       .type(inputText)
       .should('have.value', inputText)
 
@@ -97,5 +97,29 @@ describe('Testing the details', function() {
     cy.wait('@deleteRequest').then(response => {
       expect(response.status).to.eq(200)
     })
+  })
+
+  it('should have a list item', function() {
+    cy.visit('/item/create')
+
+    const inputHeader = `random: ${Math.random() * 999}`
+    cy.getByTestId('createItemInputHeader')
+      .type(inputHeader)
+      .should('have.value', inputHeader)
+
+    const inputText = `a unique post`
+    cy.getByTestId('createItemInputText')
+      .type(inputText)
+      .should('have.value', inputText)
+
+    cy.server()
+    cy.route('POST', '**/prod/bmc-items/create*').as('createRequest')
+    cy.getByText('Create').click()
+
+    cy.wait('@createRequest')
+
+    cy.visit('/details/value-propositions')
+
+    cy.contains(inputHeader)
   })
 })
