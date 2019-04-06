@@ -8,20 +8,53 @@ import { API } from 'aws-amplify'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
-  const [header, setHeader] = useState('')
-  const [text, setText] = useState('')
+  const [card, setCard] = useState({
+    header: '',
+    text: '',
+  })
 
   const handleHeaderChange = event => {
-    setHeader(event.target.value)
+    setCard({ ...card, header: event.target.value })
   }
 
   const handleTextChange = event => {
-    setText(event.target.value)
+    setCard({ ...card, text: event.target.value })
+  }
+
+  const getCurrentBlockFromUrl = () => {
+    const emptyBlock = {
+      block: '',
+      blockDescription: '',
+      items: [{ ItemHeader: '', ItemText: '' }],
+    }
+
+    const foundBlock = props.listResponse.find(({ block }) => {
+      const blockKebabCased = block.replace(' ', '-').toLowerCase()
+      return blockKebabCased === props.match.params.blockType
+    })
+
+    if (!foundBlock) {
+      return emptyBlock
+    }
+
+    if (foundBlock.items.length === 0) {
+      foundBlock.items = [{ ItemHeader: '', ItemText: '' }]
+    }
+    return foundBlock ? foundBlock : emptyBlock
   }
 
   useEffect(() => {
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
+
+  useEffect(() => {
+    if (card.header === '') {
+      setCard({ ...card, header: getCurrentBlockFromUrl().items[0].ItemHeader })
+    }
+    if (card.text === '') {
+      setCard({ ...card, text: getCurrentBlockFromUrl().items[0].ItemText })
+    }
+  }, [getCurrentBlockFromUrl().items[0].ItemHeader, getCurrentBlockFromUrl().items[0].ItemText])
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
@@ -31,8 +64,8 @@ export default function Details(props) {
     API.put('bmc-items', '/bmc-items/update?Team=Team Continuous', {
       body: {
         TableName: 'BusinessModelCanvas',
-        ItemHeader: header,
-        ItemText: text,
+        ItemHeader: card.header,
+        ItemText: card.text,
       },
       queryStringParameters: {
         Team: 'Team Continuous',
@@ -59,20 +92,6 @@ export default function Details(props) {
     })
   }
 
-  const getCurrentBlockFromUrl = () => {
-    const emptyBlock = {
-      block: '',
-      blockDescription: '',
-      items: [{ itemHeader: '', ItemText: '' }],
-    }
-
-    const foundBlock = props.listResponse.find(({ block }) => {
-      const blockKebabCased = block.replace(' ', '-').toLowerCase()
-      return blockKebabCased === props.match.params.blockType
-    })
-    return foundBlock ? foundBlock : emptyBlock
-  }
-
   const form = () => {
     if (writeMode) {
       return (
@@ -82,6 +101,7 @@ export default function Details(props) {
               <Form className="details-card-write">
                 <Form.Group>
                   <Form.Control
+                    data-testid="details-updateform-header"
                     onChange={handleHeaderChange}
                     defaultValue={getCurrentBlockFromUrl().items[0].ItemHeader}
                   />
@@ -120,7 +140,7 @@ export default function Details(props) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
-            <div className="details-card-read-header">
+            <div className="details-card-read-header" data-testid="details-readform-header">
               {getCurrentBlockFromUrl().items[0].ItemHeader}
             </div>
             <div className="details-card-read-text" data-testid="details-readform-text">
@@ -155,6 +175,7 @@ export default function Details(props) {
         <ListGroup.Item
           action
           data-testid="details-list-item"
+          key={item.BlockUuid}
           href={`/details/${block}/${item.BlockUuid}`}
         >
           {item.ItemHeader}

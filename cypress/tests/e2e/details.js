@@ -30,7 +30,7 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readmode')
   })
 
-  it('can update text on an item', function() {
+  it('can update an item', function() {
     cy.server()
     cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
@@ -42,32 +42,44 @@ describe('Testing the details', function() {
     // change to a new text
     cy.getByText('Edit').click()
 
+    cy.getByTestId('details-updateform-header')
+      .clear()
+      .type('New value header')
+      .should('have.value', 'New value header')
+
     cy.getByTestId('details-updateform-text')
       .clear()
-      .type('New value')
-      .should('have.value', 'New value')
+      .type('New value text')
+      .should('have.value', 'New value text')
 
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
     cy.wait('@getUpdatedCanvasData')
 
-    cy.getByTestId('details-readform-text').should('have.text', 'New value')
+    cy.getByTestId('details-readform-header').should('have.text', 'New value header')
+    cy.getByTestId('details-readform-text').should('have.text', 'New value text')
 
     // change to a old text
     cy.getByText('Edit').click()
 
+    cy.getByTestId('details-updateform-header')
+      .clear()
+      .type('Old value header')
+      .should('have.value', 'Old value header')
+
     cy.getByTestId('details-updateform-text')
       .clear()
-      .type('Old value')
-      .should('have.value', 'Old value')
+      .type('Old value text')
+      .should('have.value', 'Old value text')
 
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
     cy.wait('@getUpdatedCanvasData')
 
-    cy.getByTestId('details-readform-text').should('have.text', 'Old value')
+    cy.getByTestId('details-readform-header').should('have.text', 'Old value header')
+    cy.getByTestId('details-readform-text').should('have.text', 'Old value text')
   })
 
   it('can delete an item', function() {
