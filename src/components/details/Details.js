@@ -48,12 +48,11 @@ export default function Details(props) {
   }, [])
 
   useEffect(() => {
-    if (card.header === '') {
-      setCard({ ...card, header: getCurrentBlockFromUrl().items[0].ItemHeader })
-    }
-    if (card.text === '') {
-      setCard({ ...card, text: getCurrentBlockFromUrl().items[0].ItemText })
-    }
+    setCard({
+      ...card,
+      header: getCurrentBlockFromUrl().items[0].ItemHeader,
+      text: getCurrentBlockFromUrl().items[0].ItemText,
+    })
   }, [getCurrentBlockFromUrl().items[0].ItemHeader, getCurrentBlockFromUrl().items[0].ItemText])
 
   const toggleMode = () => {
@@ -103,7 +102,7 @@ export default function Details(props) {
                   <Form.Control
                     data-testid="details-updateform-header"
                     onChange={handleHeaderChange}
-                    defaultValue={getCurrentBlockFromUrl().items[0].ItemHeader}
+                    defaultValue={card.header}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -113,7 +112,7 @@ export default function Details(props) {
                     autoFocus
                     data-testid="details-updateform-text"
                     onChange={handleTextChange}
-                    defaultValue={getCurrentBlockFromUrl().items[0].ItemText}
+                    defaultValue={card.text}
                   />
                 </Form.Group>
               </Form>
@@ -141,10 +140,10 @@ export default function Details(props) {
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
             <div className="details-card-read-header" data-testid="details-readform-header">
-              {getCurrentBlockFromUrl().items[0].ItemHeader}
+              {card.header}
             </div>
             <div className="details-card-read-text" data-testid="details-readform-text">
-              {getCurrentBlockFromUrl().items[0].ItemText}
+              {card.text}
             </div>
           </div>
           <div className="details-submit">
