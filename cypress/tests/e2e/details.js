@@ -1,6 +1,5 @@
 describe('Testing the details', function() {
   beforeEach(function() {
-    cy.visit('/')
     cy.login()
   })
 
