@@ -1,14 +1,12 @@
 import 'cypress-testing-library/add-commands'
+import Amplify, { Auth } from 'aws-amplify'
+import aws_exports from '../../src/aws-exports'
+Amplify.configure(aws_exports)
 
 Cypress.Commands.add('login', () => {
-  cy.get('#email')
-    .type('stefan.franzen@addq.se')
-    .should('have.value', 'stefan.franzen@addq.se')
-  cy.get('#password')
-    .type('ADDQbmc123!')
-    .should('have.value', 'ADDQbmc123!')
-  cy.get('[data-testid="loginSubmitButton"]').click()
-  cy.contains('You are now logged in..', { timeout: 10000 })
+  return Auth.signIn('stefan.franzen@addq.se', 'ADDQbmc123!').catch(err =>
+    console.log('An error occured when authenticating using AWS Amplify: ', err)
+  )
 })
 
 Cypress.Commands.add('logout', () => {
