@@ -1,6 +1,5 @@
 describe('Testing the navbar', function() {
   beforeEach(function() {
-    cy.visit('/')
     cy.login()
     cy.visit('/notfound')
     cy.contains('404')

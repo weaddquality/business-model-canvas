@@ -1,6 +1,5 @@
 describe('Testing creating items', () => {
   before(() => {
-    cy.visit('/')
     cy.login()
   })
 
