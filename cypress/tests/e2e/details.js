@@ -133,4 +133,39 @@ describe('Testing the details', function() {
 
     cy.contains(inputHeader)
   })
+
+  it.only('can select a specific item', function() {
+    cy.visit('/item/create')
+
+    const inputHeader = `random: ${Math.random() * 999}`
+    cy.getByTestId('createItemInputHeader')
+      .type(inputHeader)
+      .should('have.value', inputHeader)
+
+    const inputText = 'A new item'
+    cy.getByTestId('createItemInputText')
+      .type(inputText)
+      .should('have.value', inputText)
+
+    cy.server()
+    cy.route('POST', '**/prod/bmc-items/create*').as('createRequest')
+    cy.getByText('Create').click()
+
+    cy.wait('@createRequest')
+
+    cy.visit('/details/value-propositions')
+
+    cy.contains(inputHeader).click()
+
+    cy.getByTestId('details-readform-header').should('have.text', inputHeader)
+    cy.getByTestId('details-readform-text').should('have.text', inputText)
+
+    cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
+    cy.getByText('Edit').click()
+
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@getUpdatedCanvasData')
+  })
 })

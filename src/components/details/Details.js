@@ -9,6 +9,7 @@ import { API } from 'aws-amplify'
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
   const [card, setCard] = useState({
+    blockUuid: '',
     header: '',
     text: '',
   })
@@ -21,11 +22,26 @@ export default function Details(props) {
     setCard({ ...card, text: event.target.value })
   }
 
+  const handleItemChange = event => {
+    event.preventDefault()
+    const href = event.target.getAttribute('href')
+    const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
+    const currentBlock = getCurrentBlockFromUrl()
+    const card = currentBlock.items.findIndex(item => {
+      return item.BlockUuid === selectedItemBlockUuid
+    })
+    setCard({
+      blockUuid: currentBlock.items[card].BlockUuid,
+      header: currentBlock.items[card].ItemHeader,
+      text: currentBlock.items[card].ItemText,
+    })
+  }
+
   const getCurrentBlockFromUrl = () => {
     const emptyBlock = {
       block: '',
       blockDescription: '',
-      items: [{ ItemHeader: '', ItemText: '' }],
+      items: [{ ItemHeader: '', ItemText: '', BlockUuid: '' }],
     }
 
     const foundBlock = props.listResponse.find(({ block }) => {
@@ -48,11 +64,15 @@ export default function Details(props) {
   }, [])
 
   useEffect(() => {
-    setCard({
-      ...card,
-      header: getCurrentBlockFromUrl().items[0].ItemHeader,
-      text: getCurrentBlockFromUrl().items[0].ItemText,
-    })
+    if (card.blockUuid === '') {
+      const currentBlock = getCurrentBlockFromUrl()
+      setCard({
+        ...card,
+        blockUuid: currentBlock.items[0].BlockUuid,
+        header: currentBlock.items[0].ItemHeader,
+        text: currentBlock.items[0].ItemText,
+      })
+    }
   }, [getCurrentBlockFromUrl().items[0].ItemHeader, getCurrentBlockFromUrl().items[0].ItemText])
 
   const toggleMode = () => {
@@ -176,6 +196,7 @@ export default function Details(props) {
           data-testid="details-list-item"
           key={item.BlockUuid}
           href={`/details/${block}/${item.BlockUuid}`}
+          onClick={handleItemChange}
         >
           {item.ItemHeader}
         </ListGroup.Item>
