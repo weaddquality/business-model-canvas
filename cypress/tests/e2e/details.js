@@ -134,7 +134,7 @@ describe('Testing the details', function() {
     cy.contains(inputHeader)
   })
 
-  it.only('can select a specific item', function() {
+  it('can select a specific item', function() {
     cy.visit('/item/create')
 
     const inputHeader = `random: ${Math.random() * 999}`
