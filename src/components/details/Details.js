@@ -25,6 +25,7 @@ export default function Details(props) {
   const handleItemChange = event => {
     event.preventDefault()
     const href = event.target.getAttribute('href')
+    props.history.replace(href)
     const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
     const currentBlock = getCurrentBlockFromUrl()
     const card = currentBlock.items.findIndex(item => {
@@ -60,6 +61,8 @@ export default function Details(props) {
   }
 
   useEffect(() => {
+    const currentBlock = getCurrentBlockFromUrl()
+    props.history.push(currentBlock.block)
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
 
@@ -72,8 +75,13 @@ export default function Details(props) {
         header: currentBlock.items[0].ItemHeader,
         text: currentBlock.items[0].ItemText,
       })
+      props.history.push(`${currentBlock.items[0].BlockUuid}`)
     }
-  }, [getCurrentBlockFromUrl().items[0].ItemHeader, getCurrentBlockFromUrl().items[0].ItemText])
+  }, [
+    getCurrentBlockFromUrl().items[0].ItemHeader,
+    getCurrentBlockFromUrl().items[0].ItemText,
+    getCurrentBlockFromUrl().items.length,
+  ])
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
@@ -103,7 +111,7 @@ export default function Details(props) {
       },
       queryStringParameters: {
         Team: 'Team Continuous',
-        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+        BlockUuid: card.blockUuid,
       },
     }).then(() => {
       props.getCanvasData()
@@ -187,15 +195,15 @@ export default function Details(props) {
 
   const listItems = () => {
     const block = getCurrentBlockFromUrl()
-      .block.replace(' ', '-')
-      .toLowerCase()
-    const list = getCurrentBlockFromUrl().items.map(item => {
+    const blockKebabCased = block.block.replace(' ', '-').toLowerCase()
+    const list = block.items.map((item, index) => {
       return (
         <ListGroup.Item
           action
+          active={index === 0 && card.blockUuid === block.items[0].BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
-          href={`/details/${block}/${item.BlockUuid}`}
+          href={`/details/${blockKebabCased}/${item.BlockUuid}`}
           onClick={handleItemChange}
         >
           {item.ItemHeader}
@@ -203,7 +211,7 @@ export default function Details(props) {
       )
     })
 
-    if (getCurrentBlockFromUrl().items[0] !== undefined) {
+    if (block.items[0] !== undefined) {
       return (
         <div className="details-list">
           <ListGroup>{list}</ListGroup>
