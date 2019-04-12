@@ -25,7 +25,7 @@ export default function Details(props) {
   const handleItemChange = event => {
     event.preventDefault()
     const href = event.target.getAttribute('href')
-    props.history.replace(href)
+    props.history.push(href)
     const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
     const currentBlock = getCurrentBlockFromUrl()
     const card = currentBlock.items.findIndex(item => {
@@ -61,8 +61,7 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    const currentBlock = getCurrentBlockFromUrl()
-    props.history.push(currentBlock.block)
+    props.history.push(props.match.url)
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
 
@@ -75,7 +74,7 @@ export default function Details(props) {
         header: currentBlock.items[0].ItemHeader,
         text: currentBlock.items[0].ItemText,
       })
-      props.history.push(`${currentBlock.items[0].BlockUuid}`)
+      props.history.push(props.match.url)
     }
   }, [
     getCurrentBlockFromUrl().items[0].ItemHeader,
