@@ -135,6 +135,7 @@ export default function Details(props) {
     }).then(() => {
       props.getCanvasData()
       toggleMode()
+      props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
     })
   }
 
