@@ -84,6 +84,11 @@ describe('Testing the details', function() {
   it('can delete an item', function() {
     cy.visit('/item/create')
 
+    const inputHeader = `random: ${Math.random() * 999}`
+    cy.getByTestId('createItemInputHeader')
+      .type(inputHeader)
+      .should('have.value', inputHeader)
+
     const inputText = 'A new item'
     cy.getByTestId('createItemInputText')
       .type(inputText)
