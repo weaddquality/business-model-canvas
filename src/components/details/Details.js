@@ -55,26 +55,46 @@ export default function Details(props) {
     }
 
     if (foundBlock.items.length === 0) {
-      foundBlock.items = [{ ItemHeader: '', ItemText: '' }]
+      foundBlock.items = [{ ItemHeader: '', ItemText: '', BlockUuid: '' }]
     }
     return foundBlock ? foundBlock : emptyBlock
   }
 
   useEffect(() => {
-    props.history.push(props.match.url)
     if (props.listResponse.length === 0) props.getCanvasData()
   }, [])
 
   useEffect(() => {
-    if (card.blockUuid === '') {
-      const currentBlock = getCurrentBlockFromUrl()
+    const currentBlock = getCurrentBlockFromUrl()
+    if (props.match.url.includes(currentBlock.block)) {
+      const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
+      const card = currentBlock.items.findIndex(item => {
+        return item.BlockUuid === selectedItemBlockUuid
+      })
+
+      if (card === -1) {
+        setCard({
+          ...card,
+          blockUuid: currentBlock.items[0].BlockUuid,
+          header: currentBlock.items[0].ItemHeader,
+          text: currentBlock.items[0].ItemText,
+        })
+      } else {
+        setCard({
+          ...card,
+          blockUuid: currentBlock.items[card].BlockUuid,
+          header: currentBlock.items[card].ItemHeader,
+          text: currentBlock.items[card].ItemText,
+        })
+      }
+    } else {
+      props.history.push(props.match.url + '/' + currentBlock.items[0].BlockUuid)
       setCard({
         ...card,
         blockUuid: currentBlock.items[0].BlockUuid,
         header: currentBlock.items[0].ItemHeader,
         text: currentBlock.items[0].ItemText,
       })
-      props.history.push(props.match.url)
     }
   }, [
     getCurrentBlockFromUrl().items[0].ItemHeader,
@@ -95,7 +115,7 @@ export default function Details(props) {
       },
       queryStringParameters: {
         Team: 'Team Continuous',
-        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+        BlockUuid: card.blockUuid,
       },
     }).then(() => {
       props.getCanvasData()
@@ -199,7 +219,7 @@ export default function Details(props) {
       return (
         <ListGroup.Item
           action
-          active={index === 0 && card.blockUuid === block.items[0].BlockUuid}
+          active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
           href={`/details/${blockKebabCased}/${item.BlockUuid}`}
