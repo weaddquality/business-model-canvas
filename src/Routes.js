@@ -20,6 +20,7 @@ export default ({ props }) => (
     <AppliedRoute exact path="/horizontal" component={Canvas} props={props} />
     <AppliedRoute exact path="/item/create" component={Create} props={props} />
     <AppliedRoute exact path="/details/:blockType" component={Details} props={props} />
+    <AppliedRoute exact path="/details/:blockType/:blockUuid" component={Details} props={props} />
     <AppliedRoute exact path="/create" component={Create} props={props} />
     <Route component={NotFound} />
   </Switch>

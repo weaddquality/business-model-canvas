@@ -9,6 +9,7 @@ import { API } from 'aws-amplify'
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
   const [card, setCard] = useState({
+    blockUuid: '',
     header: '',
     text: '',
   })
@@ -21,11 +22,28 @@ export default function Details(props) {
     setCard({ ...card, text: event.target.value })
   }
 
-  const getCurrentBlockFromUrl = () => {
+  const handleItemChange = event => {
+    event.preventDefault()
+    const href = event.target.getAttribute('href')
+    props.history.push(href)
+    const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
+    const currentBlock = getCurrentBlock()
+    const card = currentBlock.items.findIndex(item => {
+      return item.BlockUuid === selectedItemBlockUuid
+    })
+    setCard({
+      blockUuid: currentBlock.items[card].BlockUuid,
+      header: currentBlock.items[card].ItemHeader,
+      text: currentBlock.items[card].ItemText,
+    })
+    setWriteMode(false)
+  }
+
+  const getCurrentBlock = () => {
     const emptyBlock = {
       block: '',
       blockDescription: '',
-      items: [{ ItemHeader: '', ItemText: '' }],
+      items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
     }
 
     const foundBlock = props.listResponse.find(({ block }) => {
@@ -38,7 +56,7 @@ export default function Details(props) {
     }
 
     if (foundBlock.items.length === 0) {
-      foundBlock.items = [{ ItemHeader: '', ItemText: '' }]
+      foundBlock.items = [{ BlockUuid: '', ItemHeader: '', ItemText: '' }]
     }
     return foundBlock ? foundBlock : emptyBlock
   }
@@ -48,12 +66,42 @@ export default function Details(props) {
   }, [])
 
   useEffect(() => {
-    setCard({
-      ...card,
-      header: getCurrentBlockFromUrl().items[0].ItemHeader,
-      text: getCurrentBlockFromUrl().items[0].ItemText,
-    })
-  }, [getCurrentBlockFromUrl().items[0].ItemHeader, getCurrentBlockFromUrl().items[0].ItemText])
+    const currentBlock = getCurrentBlock()
+    if (props.match.url.includes(currentBlock.block)) {
+      const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
+      const card = currentBlock.items.findIndex(item => {
+        return item.BlockUuid === selectedItemBlockUuid
+      })
+
+      if (card === -1) {
+        setCard({
+          ...card,
+          blockUuid: currentBlock.items[0].BlockUuid,
+          header: currentBlock.items[0].ItemHeader,
+          text: currentBlock.items[0].ItemText,
+        })
+      } else {
+        setCard({
+          ...card,
+          blockUuid: currentBlock.items[card].BlockUuid,
+          header: currentBlock.items[card].ItemHeader,
+          text: currentBlock.items[card].ItemText,
+        })
+      }
+    } else {
+      props.history.push(props.match.url + '/' + currentBlock.items[0].BlockUuid)
+      setCard({
+        ...card,
+        blockUuid: currentBlock.items[0].BlockUuid,
+        header: currentBlock.items[0].ItemHeader,
+        text: currentBlock.items[0].ItemText,
+      })
+    }
+  }, [
+    getCurrentBlock().items[0].ItemHeader,
+    getCurrentBlock().items[0].ItemText,
+    getCurrentBlock().items.length,
+  ])
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
@@ -68,7 +116,7 @@ export default function Details(props) {
       },
       queryStringParameters: {
         Team: 'Team Continuous',
-        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+        BlockUuid: card.blockUuid,
       },
     }).then(() => {
       props.getCanvasData()
@@ -83,11 +131,12 @@ export default function Details(props) {
       },
       queryStringParameters: {
         Team: 'Team Continuous',
-        BlockUuid: getCurrentBlockFromUrl().items[0].BlockUuid,
+        BlockUuid: card.blockUuid,
       },
     }).then(() => {
       props.getCanvasData()
       toggleMode()
+      props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
     })
   }
 
@@ -135,7 +184,7 @@ export default function Details(props) {
           </div>
         </Fragment>
       )
-    } else if (getCurrentBlockFromUrl().items[0] !== undefined) {
+    } else if (getCurrentBlock().items[0] !== undefined) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
@@ -166,25 +215,26 @@ export default function Details(props) {
   }
 
   const listItems = () => {
-    const block = getCurrentBlockFromUrl()
-      .block.replace(' ', '-')
-      .toLowerCase()
-    const list = getCurrentBlockFromUrl().items.map(item => {
+    const block = getCurrentBlock()
+    const blockKebabCased = block.block.replace(' ', '-').toLowerCase()
+    const list = block.items.map(item => {
       return (
         <ListGroup.Item
           action
+          active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
-          href={`/details/${block}/${item.BlockUuid}`}
+          href={`/details/${blockKebabCased}/${item.BlockUuid}`}
+          onClick={handleItemChange}
         >
           {item.ItemHeader}
         </ListGroup.Item>
       )
     })
 
-    if (getCurrentBlockFromUrl().items[0] !== undefined) {
+    if (block.items[0] !== undefined) {
       return (
-        <div className="details-list">
+        <div className="details-list" data-testid="details-list">
           <ListGroup>{list}</ListGroup>
         </div>
       )
@@ -195,7 +245,7 @@ export default function Details(props) {
     <div>
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{getCurrentBlockFromUrl().block}</div>
+          <div className="details-block">{getCurrentBlock().block}</div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
