@@ -36,6 +36,7 @@ export default function Details(props) {
       header: currentBlock.items[card].ItemHeader,
       text: currentBlock.items[card].ItemText,
     })
+    setWriteMode(false)
   }
 
   const getCurrentBlockFromUrl = () => {
