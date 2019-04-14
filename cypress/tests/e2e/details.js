@@ -166,13 +166,8 @@ describe('Testing the details', function() {
 
     cy.getByTestId('details-readform-header').should('have.text', inputHeader)
     cy.getByTestId('details-readform-text').should('have.text', inputText)
-
-    cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
-    cy.getByText('Edit').click()
-
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@getUpdatedCanvasData')
+    cy.getByTestId('details-list').within(() => {
+      cy.get('.active').contains(inputHeader)
+    })
   })
 })
