@@ -100,19 +100,21 @@ describe('Testing the details', function() {
 
     cy.wait('@createRequest')
 
-    cy.visit('/details/value-propositions')
-
     cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
-    cy.getByText('Edit').click()
+    cy.visit('/details/value-propositions')
 
     cy.wait('@getUpdatedCanvasData')
 
+    cy.getByText(inputHeader).click()
+    cy.getByText('Edit').click()
     cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
     cy.getByText('Delete').click()
 
     cy.wait('@deleteRequest').then(response => {
       expect(response.status).to.eq(200)
     })
+
+    cy.contains(inputHeader).should('not.be.visible')
   })
 
   it('should have a list item', function() {
