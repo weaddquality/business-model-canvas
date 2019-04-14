@@ -82,6 +82,7 @@ describe('Testing the details', function() {
   })
 
   it('can delete an item', function() {
+    // prepare testdata
     cy.visit('/item/create')
 
     const inputHeader = `random: ${Math.random() * 999}`
@@ -100,6 +101,7 @@ describe('Testing the details', function() {
 
     cy.wait('@createRequest')
 
+    // test starts
     cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
     cy.visit('/details/value-propositions')
 
@@ -142,6 +144,7 @@ describe('Testing the details', function() {
   })
 
   it('can select a specific item', function() {
+    // prepare testdata
     cy.visit('/item/create')
 
     const inputHeader = `random: ${Math.random() * 999}`
@@ -160,6 +163,7 @@ describe('Testing the details', function() {
 
     cy.wait('@createRequest')
 
+    // test starts
     cy.visit('/details/value-propositions')
 
     cy.contains(inputHeader).click()
@@ -168,6 +172,88 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readform-text').should('have.text', inputText)
     cy.getByTestId('details-list').within(() => {
       cy.get('.active').contains(inputHeader)
+    })
+  })
+
+  it('can change selected item back and forth', function() {
+    // prepare testdata
+    // item 1
+    cy.visit('/item/create')
+
+    const firstItemHeader = `first item: ${Math.random() * 999}`
+    cy.getByTestId('createItemInputHeader')
+      .type(firstItemHeader)
+      .should('have.value', firstItemHeader)
+
+    const firstItemText = 'A new item'
+    cy.getByTestId('createItemInputText')
+      .type(firstItemText)
+      .should('have.value', firstItemText)
+
+    cy.server()
+    cy.route('POST', '**/prod/bmc-items/create*').as('firstItem')
+    cy.getByText('Create').click()
+
+    cy.wait('@firstItem')
+
+    // item 2
+    cy.visit('/item/create')
+
+    const secondItemHeader = `second item: ${Math.random() * 999}`
+    cy.getByTestId('createItemInputHeader')
+      .type(secondItemHeader)
+      .should('have.value', secondItemHeader)
+
+    const secondItemText = 'A new item'
+    cy.getByTestId('createItemInputText')
+      .type(secondItemText)
+      .should('have.value', secondItemText)
+
+    cy.route('POST', '**/prod/bmc-items/create*').as('secondItem')
+    cy.getByText('Create').click()
+
+    cy.wait('@secondItem')
+
+    // test starts
+    cy.visit('/details/value-propositions')
+
+    // click first created item
+    cy.contains(firstItemHeader).click()
+
+    cy.getByTestId('details-readform-header').should('have.text', firstItemHeader)
+    cy.getByTestId('details-readform-text').should('have.text', firstItemText)
+    cy.getByTestId('details-list').within(() => {
+      cy.get('.active').contains(firstItemHeader)
+    })
+
+    cy.get('@firstItem').then(http => {
+      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+    })
+
+    // click second created item
+    cy.contains(secondItemHeader).click()
+
+    cy.getByTestId('details-readform-header').should('have.text', secondItemHeader)
+    cy.getByTestId('details-readform-text').should('have.text', secondItemText)
+    cy.getByTestId('details-list').within(() => {
+      cy.get('.active').contains(secondItemHeader)
+    })
+
+    cy.get('@secondItem').then(http => {
+      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+    })
+
+    // click first created item
+    cy.contains(firstItemHeader).click()
+
+    cy.getByTestId('details-readform-header').should('have.text', firstItemHeader)
+    cy.getByTestId('details-readform-text').should('have.text', firstItemText)
+    cy.getByTestId('details-list').within(() => {
+      cy.get('.active').contains(firstItemHeader)
+    })
+
+    cy.get('@firstItem').then(http => {
+      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
     })
   })
 })
