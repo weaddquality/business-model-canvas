@@ -117,6 +117,10 @@ describe('Testing the details', function() {
     })
 
     cy.contains(inputHeader).should('not.be.visible')
+
+    cy.getByTestId('details-list-item')
+      .first()
+      .should('have.class', 'active')
   })
 
   it('should have a list item', function() {
