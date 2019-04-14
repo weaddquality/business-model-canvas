@@ -27,7 +27,7 @@ export default function Details(props) {
     const href = event.target.getAttribute('href')
     props.history.push(href)
     const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
-    const currentBlock = getCurrentBlockFromUrl()
+    const currentBlock = getCurrentBlock()
     const card = currentBlock.items.findIndex(item => {
       return item.BlockUuid === selectedItemBlockUuid
     })
@@ -39,11 +39,11 @@ export default function Details(props) {
     setWriteMode(false)
   }
 
-  const getCurrentBlockFromUrl = () => {
+  const getCurrentBlock = () => {
     const emptyBlock = {
       block: '',
       blockDescription: '',
-      items: [{ ItemHeader: '', ItemText: '', BlockUuid: '' }],
+      items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
     }
 
     const foundBlock = props.listResponse.find(({ block }) => {
@@ -56,7 +56,7 @@ export default function Details(props) {
     }
 
     if (foundBlock.items.length === 0) {
-      foundBlock.items = [{ ItemHeader: '', ItemText: '', BlockUuid: '' }]
+      foundBlock.items = [{ BlockUuid: '', ItemHeader: '', ItemText: '' }]
     }
     return foundBlock ? foundBlock : emptyBlock
   }
@@ -66,7 +66,7 @@ export default function Details(props) {
   }, [])
 
   useEffect(() => {
-    const currentBlock = getCurrentBlockFromUrl()
+    const currentBlock = getCurrentBlock()
     if (props.match.url.includes(currentBlock.block)) {
       const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
       const card = currentBlock.items.findIndex(item => {
@@ -98,9 +98,9 @@ export default function Details(props) {
       })
     }
   }, [
-    getCurrentBlockFromUrl().items[0].ItemHeader,
-    getCurrentBlockFromUrl().items[0].ItemText,
-    getCurrentBlockFromUrl().items.length,
+    getCurrentBlock().items[0].ItemHeader,
+    getCurrentBlock().items[0].ItemText,
+    getCurrentBlock().items.length,
   ])
 
   const toggleMode = () => {
@@ -184,7 +184,7 @@ export default function Details(props) {
           </div>
         </Fragment>
       )
-    } else if (getCurrentBlockFromUrl().items[0] !== undefined) {
+    } else if (getCurrentBlock().items[0] !== undefined) {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
@@ -215,9 +215,9 @@ export default function Details(props) {
   }
 
   const listItems = () => {
-    const block = getCurrentBlockFromUrl()
+    const block = getCurrentBlock()
     const blockKebabCased = block.block.replace(' ', '-').toLowerCase()
-    const list = block.items.map((item, index) => {
+    const list = block.items.map(item => {
       return (
         <ListGroup.Item
           action
@@ -245,7 +245,7 @@ export default function Details(props) {
     <div>
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{getCurrentBlockFromUrl().block}</div>
+          <div className="details-block">{getCurrentBlock().block}</div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
