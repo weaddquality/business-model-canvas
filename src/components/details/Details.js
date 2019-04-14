@@ -234,7 +234,7 @@ export default function Details(props) {
 
     if (block.items[0] !== undefined) {
       return (
-        <div className="details-list">
+        <div className="details-list" data-testid="details-list">
           <ListGroup>{list}</ListGroup>
         </div>
       )
