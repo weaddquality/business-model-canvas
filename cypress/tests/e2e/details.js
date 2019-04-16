@@ -114,22 +114,15 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `list item-test: ${Math.random() * 999}`
     const inputText = 'list item-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText })
+    cy.createItem({ header: inputHeader, text: inputText }).as('createdItem')
 
     // tests starts
     cy.visit('/details/value-propositions')
 
     cy.contains(inputHeader)
 
-    cy.getByText(inputHeader).click()
-    cy.getByText('Edit').click()
-
-    cy.server()
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@deleteRequest').then(response => {
-      expect(response.status).to.eq(200)
+    cy.get('@createdItem').then(data => {
+      cy.deleteItem(data.BlockUuid)
     })
   })
 
@@ -137,7 +130,7 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `specific-test: ${Math.random() * 999}`
     const inputText = 'specific-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText })
+    cy.createItem({ header: inputHeader, text: inputText }).as('createdItem')
 
     // test starts
     cy.visit('/details/value-propositions')
@@ -151,15 +144,8 @@ describe('Testing the details', function() {
     })
 
     // clean up
-    cy.getByText(inputHeader).click()
-    cy.getByText('Edit').click()
-
-    cy.server()
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@deleteRequest').then(response => {
-      expect(response.status).to.eq(200)
+    cy.get('@createdItem').then(data => {
+      cy.deleteItem(data.BlockUuid)
     })
   })
 
@@ -220,24 +206,11 @@ describe('Testing the details', function() {
     })
 
     // clean up
-    // first item
-    cy.getByText(firstItemHeader).click()
-    cy.getByText('Edit').click()
-    cy.server()
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@deleteRequest').then(response => {
-      expect(response.status).to.eq(200)
+    cy.get('@firstItem').then(data => {
+      cy.deleteItem(data.BlockUuid)
     })
-    // second item
-    cy.getByText(secondItemHeader).click()
-    cy.getByText('Edit').click()
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@deleteRequest').then(response => {
-      expect(response.status).to.eq(200)
+    cy.get('@secondItem').then(data => {
+      cy.deleteItem(data.BlockUuid)
     })
   })
 })
