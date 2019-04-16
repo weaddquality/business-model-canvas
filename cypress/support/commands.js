@@ -2,6 +2,8 @@ import 'cypress-testing-library/add-commands'
 import Amplify, { Auth, API } from 'aws-amplify'
 import aws_exports from '../../src/aws-exports'
 Amplify.configure(aws_exports)
+import { createItem } from '../../src/components/create/Create'
+import { deleteItem } from '../../src/components/details/Details'
 
 Cypress.Commands.add('login', () => {
   return Auth.signIn('stefan.franzen@addq.se', 'ADDQbmc123!').catch(err =>
@@ -15,36 +17,12 @@ Cypress.Commands.add('logout', () => {
 })
 
 Cypress.Commands.add('createItem', input => {
-  const item = {
-    TableName: 'BusinessModelCanvas',
-    Team: 'Team Continuous',
-    Block: 'Value Propositions',
-    BlockDescription: 'What value do we deliver to the customer',
-    ItemHeader: input.header,
-    ItemText: input.text,
-  }
-  return API.post('bmc-items', '/bmc-items/create', {
-    body: {
-      TableName: item.TableName,
-      Item: {
-        Team: item.Team,
-        Block: item.Block,
-        BlockDescription: item.BlockDescription,
-        ItemHeader: item.ItemHeader,
-        ItemText: item.ItemText,
-      },
-    },
+  return createItem({
+    header: input.header,
+    text: input.text,
   })
 })
 
 Cypress.Commands.add('deleteItem', blockUuid => {
-  return API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
-    body: {
-      TableName: 'BusinessModelCanvas',
-    },
-    queryStringParameters: {
-      Team: 'Team Continuous',
-      BlockUuid: blockUuid,
-    },
-  })
+  return deleteItem(blockUuid)
 })

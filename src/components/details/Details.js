@@ -6,6 +6,18 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { API } from 'aws-amplify'
 
+export const deleteItem = blockUuid => {
+  return API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
+    body: {
+      TableName: 'BusinessModelCanvas',
+    },
+    queryStringParameters: {
+      Team: 'Team Continuous',
+      BlockUuid: blockUuid,
+    },
+  })
+}
+
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
   const [card, setCard] = useState({
@@ -13,6 +25,14 @@ export default function Details(props) {
     header: '',
     text: '',
   })
+
+  const handleDelete = () => {
+    deleteItem(card.blockUuid).then(() => {
+      props.getCanvasData()
+      toggleMode()
+      props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
+    })
+  }
 
   const handleHeaderChange = event => {
     setCard({ ...card, header: event.target.value })
@@ -124,22 +144,6 @@ export default function Details(props) {
     })
   }
 
-  const deleteItem = () => {
-    API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
-      body: {
-        TableName: 'BusinessModelCanvas',
-      },
-      queryStringParameters: {
-        Team: 'Team Continuous',
-        BlockUuid: card.blockUuid,
-      },
-    }).then(() => {
-      props.getCanvasData()
-      toggleMode()
-      props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
-    })
-  }
-
   const form = () => {
     if (writeMode) {
       return (
@@ -168,7 +172,7 @@ export default function Details(props) {
             </div>
           </div>
           <div className="details-delete">
-            <Button variant="danger" onClick={deleteItem}>
+            <Button variant="danger" onClick={handleDelete}>
               Delete
             </Button>
           </div>
