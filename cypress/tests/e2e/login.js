@@ -19,7 +19,7 @@ describe('Testing login functionality', function() {
     cy.getByText('You are now logged out..', { timeout: 10000 })
   })
 
-  it.only('should decline login on wrong credentials', function() {
+  it('should decline login on wrong credentials', function() {
     cy.visit('/')
 
     cy.get('#email')
