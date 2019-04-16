@@ -1,16 +1,13 @@
 describe('Testing the navbar', function() {
   beforeEach(function() {
     cy.login()
-    cy.visit('/notfound')
-    cy.contains('404')
-  })
-
-  after(function() {
-    cy.logout()
+    cy.visit('/')
   })
 
   it('the home-button', function() {
+    cy.visit('/notfound')
     cy.getByText('Business Model Canvas').click()
+    cy.contains('You are now logged in..')
   })
 
   it('the dropdown', function() {
@@ -53,5 +50,11 @@ describe('Testing the navbar', function() {
     cy.get('[data-testid="viewToggleButton"]').click()
     cy.url().should('include', '/canvas')
     cy.contains('Revenue Streams')
+  })
+
+  it('should have a logout button', function() {
+    cy.get('[data-testid="navbarLogoutButton"]')
+      .should('have.attr', 'href', '/logout')
+      .should('have.text', ' Logout')
   })
 })

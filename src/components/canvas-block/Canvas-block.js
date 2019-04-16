@@ -40,6 +40,7 @@ const CanvasBlock = props => {
 
   return (
     <Link
+      id="canvas-block"
       to={`/details/${formatBlockHeader(props.content.block)}`}
       className={`${formatBlockHeader(props.content.block)} block`}
     >
