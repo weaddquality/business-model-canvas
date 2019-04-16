@@ -166,41 +166,16 @@ describe('Testing the details', function() {
   it('can change selected item back and forth', function() {
     // prepare testdata
     // item 1
-    cy.visit('/item/create')
-
     const firstItemHeader = `first item: ${Math.random() * 999}`
-    cy.getByTestId('createItemInputHeader')
-      .type(firstItemHeader)
-      .should('have.value', firstItemHeader)
-
     const firstItemText = 'first item: A new item'
-    cy.getByTestId('createItemInputText')
-      .type(firstItemText)
-      .should('have.value', firstItemText)
-
-    cy.server()
-    cy.route('POST', '**/prod/bmc-items/create*').as('firstItem')
-    cy.getByText('Create').click()
-
-    cy.wait('@firstItem')
+    cy.createItem({ header: firstItemHeader, text: firstItemText }).as('firstItem')
 
     // item 2
     cy.visit('/item/create')
 
     const secondItemHeader = `second item: ${Math.random() * 999}`
-    cy.getByTestId('createItemInputHeader')
-      .type(secondItemHeader)
-      .should('have.value', secondItemHeader)
-
     const secondItemText = 'second item: A new item'
-    cy.getByTestId('createItemInputText')
-      .type(secondItemText)
-      .should('have.value', secondItemText)
-
-    cy.route('POST', '**/prod/bmc-items/create*').as('secondItem')
-    cy.getByText('Create').click()
-
-    cy.wait('@secondItem')
+    cy.createItem({ header: secondItemHeader, text: secondItemText }).as('secondItem')
 
     // test starts
     cy.visit('/details/value-propositions')
@@ -215,7 +190,7 @@ describe('Testing the details', function() {
     })
 
     cy.get('@firstItem').then(http => {
-      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+      cy.url().should('include', encodeURI(http.BlockUuid))
     })
 
     // click second created item
@@ -228,7 +203,7 @@ describe('Testing the details', function() {
     })
 
     cy.get('@secondItem').then(http => {
-      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+      cy.url().should('include', encodeURI(http.BlockUuid))
     })
 
     // click first created item
@@ -241,13 +216,14 @@ describe('Testing the details', function() {
     })
 
     cy.get('@firstItem').then(http => {
-      cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+      cy.url().should('include', encodeURI(http.BlockUuid))
     })
 
     // clean up
     // first item
     cy.getByText(firstItemHeader).click()
     cy.getByText('Edit').click()
+    cy.server()
     cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
     cy.getByText('Delete').click()
 
