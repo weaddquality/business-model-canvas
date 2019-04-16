@@ -85,12 +85,12 @@ describe('Testing the details', function() {
     // prepare testdata
     cy.visit('/item/create')
 
-    const inputHeader = `random: ${Math.random() * 999}`
+    const inputHeader = `delete test: ${Math.random() * 999}`
     cy.getByTestId('createItemInputHeader')
       .type(inputHeader)
       .should('have.value', inputHeader)
 
-    const inputText = 'A new item'
+    const inputText = 'delete test: A new item'
     cy.getByTestId('createItemInputText')
       .type(inputText)
       .should('have.value', inputText)
@@ -126,12 +126,12 @@ describe('Testing the details', function() {
   it('should have a list item', function() {
     cy.visit('/item/create')
 
-    const inputHeader = `random: ${Math.random() * 999}`
+    const inputHeader = `list item-test: ${Math.random() * 999}`
     cy.getByTestId('createItemInputHeader')
       .type(inputHeader)
       .should('have.value', inputHeader)
 
-    const inputText = `a unique post`
+    const inputText = `list item-test: a unique post`
     cy.getByTestId('createItemInputText')
       .type(inputText)
       .should('have.value', inputText)
@@ -145,18 +145,27 @@ describe('Testing the details', function() {
     cy.visit('/details/value-propositions')
 
     cy.contains(inputHeader)
+
+    cy.getByText(inputHeader).click()
+    cy.getByText('Edit').click()
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
+    })
   })
 
   it('can select a specific item', function() {
     // prepare testdata
     cy.visit('/item/create')
 
-    const inputHeader = `random: ${Math.random() * 999}`
+    const inputHeader = `specific-test: ${Math.random() * 999}`
     cy.getByTestId('createItemInputHeader')
       .type(inputHeader)
       .should('have.value', inputHeader)
 
-    const inputText = 'A new item'
+    const inputText = 'specific-test: A new item'
     cy.getByTestId('createItemInputText')
       .type(inputText)
       .should('have.value', inputText)
@@ -177,6 +186,16 @@ describe('Testing the details', function() {
     cy.getByTestId('details-list').within(() => {
       cy.get('.active').contains(inputHeader)
     })
+
+    // clean up
+    cy.getByText(inputHeader).click()
+    cy.getByText('Edit').click()
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
+    })
   })
 
   it('can change selected item back and forth', function() {
@@ -189,7 +208,7 @@ describe('Testing the details', function() {
       .type(firstItemHeader)
       .should('have.value', firstItemHeader)
 
-    const firstItemText = 'A new item'
+    const firstItemText = 'first item: A new item'
     cy.getByTestId('createItemInputText')
       .type(firstItemText)
       .should('have.value', firstItemText)
@@ -208,7 +227,7 @@ describe('Testing the details', function() {
       .type(secondItemHeader)
       .should('have.value', secondItemHeader)
 
-    const secondItemText = 'A new item'
+    const secondItemText = 'second item: A new item'
     cy.getByTestId('createItemInputText')
       .type(secondItemText)
       .should('have.value', secondItemText)
@@ -258,6 +277,26 @@ describe('Testing the details', function() {
 
     cy.get('@firstItem').then(http => {
       cy.url().should('include', encodeURI(http.response.body.BlockUuid))
+    })
+
+    // clean up
+    // first item
+    cy.getByText(firstItemHeader).click()
+    cy.getByText('Edit').click()
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
+    })
+    // second item
+    cy.getByText(secondItemHeader).click()
+    cy.getByText('Edit').click()
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
     })
   })
 })
