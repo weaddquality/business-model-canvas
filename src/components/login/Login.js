@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import './Login.css'
 import logo from '../../images/addq-logo.png'
 import LoadingButton from '../loading-button/Loading-button'
@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import FormLabel from 'react-bootstrap/FormLabel'
+import Alert from 'react-bootstrap/Alert'
 import { withRouter } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 
@@ -13,6 +14,7 @@ const Login = props => {
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0
@@ -35,8 +37,19 @@ const Login = props => {
       props.userHasAuthenticated(true)
       props.history.push('/')
     } catch (e) {
-      alert(e.message)
       setIsLoading(false)
+      setError(true)
+    }
+  }
+
+  const errorMessage = () => {
+    if (error) {
+      return (
+        <Fragment>
+          <br />
+          <Alert variant="danger">Error logging in, try again</Alert>
+        </Fragment>
+      )
     }
   }
 
@@ -63,6 +76,7 @@ const Login = props => {
             loadingText="Logging in…"
             data-testid="loginSubmitButton"
           />
+          {errorMessage()}
         </Form>
       </div>
     </div>
