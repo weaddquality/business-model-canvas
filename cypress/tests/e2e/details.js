@@ -175,8 +175,8 @@ describe('Testing the details', function() {
       cy.get('.active').contains(firstItemHeader)
     })
 
-    cy.get('@firstItem').then(http => {
-      cy.url().should('include', encodeURI(http.BlockUuid))
+    cy.get('@firstItem').then(data => {
+      cy.url().should('include', encodeURI(data.BlockUuid))
     })
 
     // click second created item
@@ -188,8 +188,8 @@ describe('Testing the details', function() {
       cy.get('.active').contains(secondItemHeader)
     })
 
-    cy.get('@secondItem').then(http => {
-      cy.url().should('include', encodeURI(http.BlockUuid))
+    cy.get('@secondItem').then(data => {
+      cy.url().should('include', encodeURI(data.BlockUuid))
     })
 
     // click first created item
@@ -201,8 +201,8 @@ describe('Testing the details', function() {
       cy.get('.active').contains(firstItemHeader)
     })
 
-    cy.get('@firstItem').then(http => {
-      cy.url().should('include', encodeURI(http.BlockUuid))
+    cy.get('@firstItem').then(data => {
+      cy.url().should('include', encodeURI(data.BlockUuid))
     })
 
     // clean up
