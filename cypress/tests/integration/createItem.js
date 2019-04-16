@@ -9,8 +9,8 @@ describe('Testing creating items', () => {
     const expectedResultBody = {
       Team: 'Team Continuous',
       Block: 'Value Propositions',
-      ItemHeader: 'CreateItem Header',
-      ItemText: 'CreateItem Text',
+      ItemHeader: inputHeader,
+      ItemText: inputText,
     }
 
     cy.visit('/item/create')
@@ -36,6 +36,19 @@ describe('Testing creating items', () => {
       expect(http.response.body.Block).to.eq(expectedResultBody.Block)
       expect(http.response.body.ItemHeader).to.eq(expectedResultBody.ItemHeader)
       expect(http.response.body.ItemText).to.eq(expectedResultBody.ItemText)
+    })
+
+    // clean up
+    cy.visit('/details/value-propositions')
+
+    cy.getByText(inputHeader).click()
+    cy.getByText('Edit').click()
+
+    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
+    cy.getByText('Delete').click()
+
+    cy.wait('@deleteRequest').then(response => {
+      expect(response.status).to.eq(200)
     })
   })
 })

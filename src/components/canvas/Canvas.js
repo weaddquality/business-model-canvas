@@ -16,7 +16,7 @@ const Canvas = props => {
     return <CanvasBlock key={className} content={block} />
   })
   return (
-    <div>
+    <div id="canvas">
       <div className={className} data-testid={testId}>
         {canvasBlocks}
       </div>
