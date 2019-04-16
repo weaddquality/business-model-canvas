@@ -3,5 +3,6 @@
   "integrationFolder": "cypress/tests",
   "pluginsFile": "cypress/background/index.js",
   "viewportWidth": 1280,
-  "viewportHeight": 800
+  "viewportHeight": 800,
+  "fixturesFolder": false
 }
