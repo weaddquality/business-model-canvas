@@ -11,11 +11,6 @@ Cypress.Commands.add('login', () => {
   )
 })
 
-Cypress.Commands.add('logout', () => {
-  cy.get('[data-testid="navbarLogoutButton"]').click()
-  cy.contains('You are now logged out..')
-})
-
 Cypress.Commands.add('createItem', input => {
   return createItem({
     header: input.header,

@@ -4,10 +4,6 @@ describe('Testing the navbar', function() {
     cy.visit('/')
   })
 
-  after(function() {
-    cy.logout()
-  })
-
   it('the home-button', function() {
     cy.visit('/notfound')
     cy.getByText('Business Model Canvas').click()
