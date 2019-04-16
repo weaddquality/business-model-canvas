@@ -3,12 +3,15 @@ import './Canvas.css'
 import CanvasBlock from '../canvas-block/Canvas-block'
 
 const Canvas = props => {
-  const testId = props.location.pathname === '/canvas' ? 'canvasView' : 'horizontalView'
+  const testId =
+    props.location.pathname === `${props.match.params.team}/canvas`
+      ? 'canvasView'
+      : 'horizontalView'
   const className =
     props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
 
   useEffect(() => {
-    props.getCanvasData()
+    props.getCanvasData(props.match.params.team)
   }, [])
 
   const canvasBlocks = props.listResponse.map(block => {

@@ -15,7 +15,7 @@ const renderLeftDropdown = props => {
     return (
       <Dropdown as={ButtonGroup}>
         <Button variant="black" data-testid="navbarDropdownSplitButton">
-          <Link to="/canvas">Team Continuous</Link>
+          <Link to="team-continuous/canvas">Team Continuous</Link>
         </Button>
         <Dropdown.Toggle
           split
@@ -24,13 +24,13 @@ const renderLeftDropdown = props => {
           data-testid="navbarDropdownSubmenuToggle"
         />
         <Dropdown.Menu data-testid="navbarDropdownSubmenu">
-          <LinkContainer to="/canvas" className="navbar-dropdown-submenu">
+          <LinkContainer to="team-continuous/canvas" className="navbar-dropdown-submenu">
             <Dropdown.Item>Team Continuous</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/canvas-frontend" className="navbar-dropdown-submenu">
+          <LinkContainer to="team-frontendauto/canvas-frontend" className="navbar-dropdown-submenu">
             <Dropdown.Item>Team Frontend Auto</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/canvas-mobile" className="navbar-dropdown-submenu">
+          <LinkContainer to="team-mobileux/canvas" className="navbar-dropdown-submenu">
             <Dropdown.Item>Team Mobile</Dropdown.Item>
           </LinkContainer>
         </Dropdown.Menu>

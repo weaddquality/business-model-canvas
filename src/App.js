@@ -37,8 +37,9 @@ function App(props) {
   }
 
   // TODO: Replace hard coded Team value with a dynamically read value
-  const getCanvasData = () => {
-    API.get('bmc-items', '/bmc-items/list?Team=Team Continuous').then(response => {
+  const getCanvasData = team => {
+    const teamFixed = team.replace('-', ' ')
+    API.get('bmc-items', `/bmc-items/list?Team=${teamFixed}`).then(response => {
       const { blocks } = response
       setListResponse(blocks)
     })
