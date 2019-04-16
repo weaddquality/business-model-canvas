@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import './Canvas-block.css'
@@ -40,6 +40,7 @@ const CanvasBlock = props => {
 
   return (
     <Link
+      id="canvas-block"
       to={`/details/${formatBlockHeader(props.content.block)}`}
       className={`${formatBlockHeader(props.content.block)} block`}
     >

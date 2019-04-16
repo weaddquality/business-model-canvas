@@ -242,7 +242,7 @@ export default function Details(props) {
   }
 
   return (
-    <div>
+    <div id="details">
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">{getCurrentBlock().block}</div>
