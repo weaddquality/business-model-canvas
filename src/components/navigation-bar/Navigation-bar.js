@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import './Navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
 import { Link } from 'react-router-dom'
