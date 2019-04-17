@@ -3,6 +3,7 @@
   background-color: rgba(180, 180, 180, 0.2);
   color: black;
   text-align: left;
+  overflow: scroll;
 }
 
 .block:hover {
@@ -62,8 +63,8 @@
   padding-left: 0;
   padding-right: 0;
   width: 100%;
-  height: 1400px;
-  grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+  height: 2000px;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     'key-partners'
     'key-activities'
@@ -88,8 +89,8 @@
     padding-left: 0;
     padding-right: 0;
     width: 100%;
-    height: 1400px;
-    grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    height: 2260px;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
       'key-partners'
       'key-activities'
@@ -118,7 +119,7 @@
     width: 100%;
     height: 750px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
       'key-partners key-activities value-propositions customer-relationships customer-segments'
       'key-partners key-resources value-propositions channels customer-segments'
