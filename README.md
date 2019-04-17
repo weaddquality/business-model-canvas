@@ -71,6 +71,6 @@ export default {
 
 - `npm run cypress:ci`
 
-### ALL tests
+### Run all tests
 
 - `npm run test:all`
