@@ -1,22 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
 import { Link } from 'react-router-dom'
+import { updateItem } from '../../api/updateItem'
+import { deleteItem } from '../../api/deleteItem'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { API } from 'aws-amplify'
-
-export const deleteItem = blockUuid => {
-  return API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
-    body: {
-      TableName: 'BusinessModelCanvas',
-    },
-    queryStringParameters: {
-      Team: 'Team Continuous',
-      BlockUuid: blockUuid,
-    },
-  })
-}
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
@@ -25,6 +14,13 @@ export default function Details(props) {
     header: '',
     text: '',
   })
+
+  const handleUpdate = () => {
+    updateItem({ blockUuid: card.blockUuid, header: card.header, text: card.text }).then(() => {
+      props.getCanvasData()
+      toggleMode()
+    })
+  }
 
   const handleDelete = () => {
     deleteItem(card.blockUuid).then(() => {
@@ -127,23 +123,6 @@ export default function Details(props) {
     setWriteMode(!writeMode)
   }
 
-  const updateItem = () => {
-    API.put('bmc-items', '/bmc-items/update?Team=Team Continuous', {
-      body: {
-        TableName: 'BusinessModelCanvas',
-        ItemHeader: card.header,
-        ItemText: card.text,
-      },
-      queryStringParameters: {
-        Team: 'Team Continuous',
-        BlockUuid: card.blockUuid,
-      },
-    }).then(() => {
-      props.getCanvasData()
-      toggleMode()
-    })
-  }
-
   const form = () => {
     if (writeMode) {
       return (
@@ -182,7 +161,7 @@ export default function Details(props) {
             </Button>
           </div>
           <div className="details-submit">
-            <Button variant="success" onClick={updateItem}>
+            <Button variant="success" onClick={handleUpdate}>
               Update
             </Button>
           </div>

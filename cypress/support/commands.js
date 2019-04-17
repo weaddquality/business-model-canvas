@@ -2,8 +2,8 @@ import 'cypress-testing-library/add-commands'
 import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from '../../src/aws-exports'
 Amplify.configure(aws_exports)
-import { createItem } from '../../src/components/create/Create'
-import { deleteItem } from '../../src/components/details/Details'
+import { createItem } from '../../src/api/createItem'
+import { deleteItem } from '../../src/api/deleteItem'
 
 Cypress.Commands.add('login', () => {
   return Auth.signIn('stefan.franzen@addq.se', 'ADDQbmc123!').catch(err =>
