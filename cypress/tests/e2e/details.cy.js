@@ -157,8 +157,6 @@ describe('Testing the details', function() {
     cy.createItem({ header: firstItemHeader, text: firstItemText }).as('firstItem')
 
     // item 2
-    cy.visit('/item/create')
-
     const secondItemHeader = `second item: ${Math.random() * 999}`
     const secondItemText = 'second item: A new item'
     cy.createItem({ header: secondItemHeader, text: secondItemText }).as('secondItem')
