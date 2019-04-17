@@ -43,6 +43,8 @@ function App(props) {
   }
 
   const getCanvasData = team => {
+    if (selectedTeam.text === 'Select team...')
+      setSelectedTeam({ text: team, href: `/${team}/canvas` })
     getItems(team).then(response => {
       const { blocks } = response
       setListResponse(blocks)
