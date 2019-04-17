@@ -1,4 +1,4 @@
-describe('Testing creating items', () => {
+describe('Integrationtest of creating items', () => {
   before(() => {
     cy.login()
   })
