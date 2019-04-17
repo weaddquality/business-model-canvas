@@ -1,7 +1,7 @@
 {
   "name": "business-model-canvas",
   "version": "0.1.0",
-  "author": "Stefan Franzén",
+  "author": "Stefan Franzén, Måns Nilsson",
   "scripts": {
     "precommit": "lint-staged && npm run test:ci",
     "start": "react-scripts start",
