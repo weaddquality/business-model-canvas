@@ -1,12 +1,13 @@
 describe('Testing the canvas', function() {
   beforeEach(function() {
     cy.login()
-    cy.visit('/canvas')
+    cy.visit('/Team-Continuous/canvas')
   })
 
   it('navigate to canvas from navbar', function() {
     cy.visit('/')
-    cy.get('[data-testid="navbarDropdownSplitButton"]').click()
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Continuous').click()
     cy.get('#canvas')
   })
 
