@@ -26,9 +26,9 @@ describe('Integrationtest of updating items', function() {
       .should('have.value', `${inputText} updated`)
 
     cy.server()
-    cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
+    cy.route('PUT', '**/prod/bmc-items/update**').as('updateRequest')
     cy.getByText('Update').click()
-    cy.wait('@updateCanvasData').then(http => {
+    cy.wait('@updateRequest').then(http => {
       // request data
       expect(http.method).to.eq('PUT')
       expect(http.request.body.ItemHeader).to.eq(`${inputHeader} updated`)
