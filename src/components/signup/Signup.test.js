@@ -1,4 +1,4 @@
-import cases from 'jest-in-case'
+const cases = require('jest-in-case')
 import { validateForm } from './Signup'
 
 cases(

@@ -70,3 +70,7 @@ export default {
 #### Run cypress tests headless
 
 - `npm run cypress:ci`
+
+### Run all tests
+
+- `npm run test:all`
