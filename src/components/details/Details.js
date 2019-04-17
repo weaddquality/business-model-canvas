@@ -117,6 +117,7 @@ export default function Details(props) {
     getCurrentBlock().items[0].ItemHeader,
     getCurrentBlock().items[0].ItemText,
     getCurrentBlock().items.length,
+    props.selectedTeam,
   ])
 
   const toggleMode = () => {
@@ -230,7 +231,7 @@ export default function Details(props) {
         <div className="details-form">
           <div className="details-block">{getCurrentBlock().block}</div>
           <div className="details-create">
-            <Link to="/item/create" data-testid="createItemButton">
+            <Link to="item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
             </Link>
           </div>
