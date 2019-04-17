@@ -1,9 +1,9 @@
-describe('Testing creating items', () => {
+describe('Integrationtest of creating items', function() {
   before(() => {
     cy.login()
   })
 
-  it('should have correct request body', () => {
+  it('testing the request data and response data', function() {
     const inputHeader = 'CreateItem Header'
     const inputText = 'CreateItem Text'
     const expectedResultBody = {
