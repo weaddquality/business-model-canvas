@@ -78,7 +78,7 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    if (props.listResponse.length === 0) props.getCanvasData()
+    if (props.listResponse.length === 0) props.getCanvasData(props.match.params.team)
   }, [])
 
   useEffect(() => {

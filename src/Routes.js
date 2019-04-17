@@ -22,7 +22,7 @@ export default ({ props }) => (
     <AppliedRoute exact path="/:team/details/:blockType" component={Details} props={props} />
     <AppliedRoute
       exact
-      path=":team/details/:blockType/:blockUuid"
+      path="/:team/details/:blockType/:blockUuid"
       component={Details}
       props={props}
     />
