@@ -42,7 +42,7 @@ const Create = props => {
     <Form onSubmit={handleSubmit} className="create">
       <Form.Group controlId="content">
         <Form.Label>
-          <b>Create a Value proposition</b>
+          <b>{Constant.CREATE_VALUE_PROPOSITIONS}</b>
         </Form.Label>
         <Form.Control
           as="input"

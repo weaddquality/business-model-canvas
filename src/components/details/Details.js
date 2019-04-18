@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
 import { Link } from 'react-router-dom'
+import * as Constant from '../../constants/constants'
 import { updateItem } from '../../api/updateItem'
 import { deleteItem } from '../../api/deleteItem'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -152,17 +153,17 @@ export default function Details(props) {
           </div>
           <div className="details-delete">
             <Button variant="danger" onClick={handleDelete}>
-              Delete
+              {Constant.DETAILS_DELETE_BUTTON_TEXT}
             </Button>
           </div>
           <div className="details-cancel">
             <Button variant="secondary" onClick={toggleMode}>
-              Cancel
+              {Constant.DETAILS_CANCEL_BUTTON_TEXT}
             </Button>
           </div>
           <div className="details-submit">
             <Button variant="success" onClick={handleUpdate}>
-              Update
+              {Constant.DETAILS_UPDATE_BUTTON_TEXT}
             </Button>
           </div>
         </Fragment>
@@ -180,7 +181,7 @@ export default function Details(props) {
           </div>
           <div className="details-submit">
             <Button variant="success" onClick={toggleMode}>
-              Edit
+              {Constant.DETAILS_EDIT_BUTTON_TEXT}
             </Button>
           </div>
         </div>
@@ -231,14 +232,14 @@ export default function Details(props) {
           <div className="details-block">{getCurrentBlock().block}</div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
-              <i className="fa fa-plus" /> Create item
+              <i className="fa fa-plus" /> {Constant.DETAILS_CREATE_ITEM_BUTTON_TEXT}
             </Link>
           </div>
           {form()}
           {listItems()}
         </div>
         <Link to="/canvas" data-testid="goBackToCanvasButton">
-          Go back to Canvas
+          {Constant.GO_BACK_TO_CANVAS}
         </Link>
       </div>
     </div>

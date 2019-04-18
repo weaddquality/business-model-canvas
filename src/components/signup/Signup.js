@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Signup.css'
 import logo from '../../images/addq-logo.png'
+import * as Constant from '../../constants/constants'
 import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormControl from 'react-bootstrap/FormControl'
@@ -82,15 +83,15 @@ const Signup = props => {
     return (
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email">
-          <FormLabel>Email</FormLabel>
+          <FormLabel>{Constant.SIGNUP_EMAIL_HEADER}</FormLabel>
           <FormControl autoFocus type="email" value={email} onChange={handleEmailChange} />
         </FormGroup>
         <FormGroup controlId="password">
-          <FormLabel>Password</FormLabel>
+          <FormLabel>{Constant.SIGNUP_PASSWORD_HEADER}</FormLabel>
           <FormControl value={password} onChange={handlePasswordChange} type="password" />
         </FormGroup>
         <FormGroup controlId="confirmPassword">
-          <FormLabel>Confirm Password</FormLabel>
+          <FormLabel>{Constant.SIGNUP_CONFIRM_PASSWORD_HEADER}</FormLabel>
           <FormControl
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
@@ -102,8 +103,8 @@ const Signup = props => {
           disabled={!validateForm(email, password, confirmPassword)}
           type="submit"
           isLoading={isLoading}
-          text="Signup"
-          loadingText="Signing up…"
+          text={Constant.SIGNUP_BUTTON_TEXT}
+          loadingText={Constant.SIGNUP_BUTTON_LOADINGTEXT}
         />
       </form>
     )
@@ -113,7 +114,7 @@ const Signup = props => {
     return (
       <form onSubmit={handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode">
-          <FormLabel>Confirmation Code</FormLabel>
+          <FormLabel>{Constant.SIGNUP_CONFIRMATION_CODE}</FormLabel>
           <FormControl
             autoFocus
             type="tel"
@@ -121,8 +122,9 @@ const Signup = props => {
             onChange={handleConfirmationCodeChange}
           />
           <Form.Text className="text-muted">
-            Please check your email for the code,
-            <br /> including your "Spam" folder.
+            {Constant.SIGNUP_CHECK_EMAIL_LINE1}
+            <br />
+            {Constant.SIGNUP_CHECK_EMAIL_LINE2}
           </Form.Text>
         </FormGroup>
         <LoadingButton
@@ -130,8 +132,8 @@ const Signup = props => {
           disabled={!validateConfirmationForm()}
           type="submit"
           isLoading={isLoading}
-          text="Verify"
-          loadingText="Verifying…"
+          text={Constant.SIGNUP_VERIFY_BUTTON_TEXT}
+          loadingText={Constant.SIGNUP_VERIFY_BUTTON_LOADINGTEXT}
         />
       </form>
     )
@@ -140,7 +142,7 @@ const Signup = props => {
   return (
     <div className="signup-container">
       <img src={logo} alt="" />
-      <div className="signup-header">Business Model Canvas</div>
+      <div className="signup-header">{Constant.APP_NAME}</div>
       <div className="signup">{newUser === null ? renderForm() : renderConfirmationForm()}</div>
     </div>
   )

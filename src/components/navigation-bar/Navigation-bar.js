@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import './Navigation-bar.css'
 import QLogo from '../../images/q-logo.png'
+import * as Constant from '../../constants/constants'
 import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import Nav from 'react-bootstrap/Nav'
@@ -15,7 +16,7 @@ const renderLeftDropdown = props => {
     return (
       <Dropdown as={ButtonGroup}>
         <Button variant="black" data-testid="navbarDropdownSplitButton">
-          <Link to="/canvas">Team Continuous</Link>
+          <Link to="/canvas">{Constant.TEAM_CONTINUOUS}</Link>
         </Button>
         <Dropdown.Toggle
           split
@@ -25,13 +26,13 @@ const renderLeftDropdown = props => {
         />
         <Dropdown.Menu data-testid="navbarDropdownSubmenu">
           <LinkContainer to="/canvas" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Continuous</Dropdown.Item>
+            <Dropdown.Item>{Constant.TEAM_CONTINUOUS}</Dropdown.Item>
           </LinkContainer>
           <LinkContainer to="/canvas-frontend" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Frontend Auto</Dropdown.Item>
+            <Dropdown.Item>{Constant.TEAM_FRONTEND_AUTO}</Dropdown.Item>
           </LinkContainer>
           <LinkContainer to="/canvas-mobile" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Mobile</Dropdown.Item>
+            <Dropdown.Item>{Constant.TEAM_MOBILE}</Dropdown.Item>
           </LinkContainer>
         </Dropdown.Menu>
       </Dropdown>
@@ -52,7 +53,7 @@ const renderRightComponents = props => {
           </Nav.Item>
           <Nav.Item className="navbar-react-router-link" onClick={props.handleLogout}>
             <Link to="/logout" data-testid="navbarLogoutButton">
-              <i className="fa fa-sign-out" /> Logout
+              <i className="fa fa-sign-out" /> {Constant.LOGIN_LOGOUT_BUTTON_TEXT}
             </Link>
           </Nav.Item>
         </Fragment>
@@ -64,12 +65,12 @@ const renderRightComponents = props => {
         <Fragment>
           <Nav.Item className="navbar-react-router-link">
             <Link to="/signup">
-              <i className="fa fa-user" /> Signup
+              <i className="fa fa-user" /> {Constant.SIGNUP_BUTTON_TEXT}
             </Link>
           </Nav.Item>
           <Nav.Item className="navbar-react-router-link">
             <Link to="/login">
-              <i className="fa fa-sign-in" /> Login
+              <i className="fa fa-sign-in" /> {Constant.LOGIN_LOGIN_BUTTON_TEXT}
             </Link>
           </Nav.Item>
         </Fragment>
@@ -84,7 +85,7 @@ const NavigationBar = ({ props }) => {
       <Navbar.Brand>
         <img alt="" src={QLogo} className="navbar-logo-image" />
         <Link to="/" className="navbar-header">
-          Business Model Canvas
+          {Constant.APP_NAME}
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />

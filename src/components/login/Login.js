@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import './Login.css'
 import logo from '../../images/addq-logo.png'
+import * as Constant from '../../constants/constants'
 import LoadingButton from '../loading-button/Loading-button'
 import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
@@ -47,7 +48,7 @@ const Login = props => {
       return (
         <Fragment>
           <br />
-          <Alert variant="danger">Error logging in, try again</Alert>
+          <Alert variant="danger">{Constant.LOGIN_ERROR_MESSAGE_FAILED}</Alert>
         </Fragment>
       )
     }
@@ -56,15 +57,15 @@ const Login = props => {
   return (
     <div className="login-container">
       <img src={logo} alt="" />
-      <div className="login-header">Business Model Canvas</div>
+      <div className="login-header">{Constant.APP_NAME}</div>
       <div className="login">
         <Form onSubmit={handleSubmit}>
           <FormGroup controlId="email">
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{Constant.LOGIN_EMAIL_HEADER}</FormLabel>
             <FormControl autoFocus type="email" value={email} onChange={handleEmailChange} />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormLabel>Password</FormLabel>
+            <FormLabel>{Constant.LOGIN_PASSWORD_HEADER}</FormLabel>
             <FormControl value={password} onChange={handlePasswordChange} type="password" />
           </FormGroup>
           <LoadingButton
@@ -72,8 +73,8 @@ const Login = props => {
             disabled={!validateForm()}
             type="submit"
             isLoading={isLoading}
-            text="Login"
-            loadingText="Logging in…"
+            text={Constant.LOGIN_BUTTON_TEXT}
+            loadingText={Constant.LOGIN_BUTTON_LOADINGTEXT}
             data-testid="loginSubmitButton"
           />
           {errorMessage()}
