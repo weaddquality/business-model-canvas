@@ -39,6 +39,7 @@ function App(props) {
 
   const getCanvasData = () => {
     getItems().then(response => {
+      console.log(response)
       const { blocks } = response
       setListResponse(blocks)
     })

@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
+  const [currentBlock, setCurrentBlock] = useState('')
   const [card, setCard] = useState({
     blockUuid: '',
     header: '',
@@ -62,10 +63,12 @@ export default function Details(props) {
       items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
     }
 
-    const foundBlock = props.listResponse.find(({ block }) => {
-      const blockKebabCased = block.replace(' ', '-').toLowerCase()
-      return blockKebabCased === props.match.params.blockType
-    })
+    // const foundBlock = props.listResponse.find(({ block }) => {
+    //   const blockKebabCased = block.replace(' ', '-').toLowerCase()
+    //   return blockKebabCased === props.match.params.blockType
+    // })
+
+    const foundBlock = props.listResponse[props.location.state.blockId]
 
     if (!foundBlock) {
       return emptyBlock
@@ -199,7 +202,6 @@ export default function Details(props) {
 
   const listItems = () => {
     const block = getCurrentBlock()
-    const blockKebabCased = block.block.replace(' ', '-').toLowerCase()
     const list = block.items.map(item => {
       return (
         <ListGroup.Item
@@ -207,7 +209,7 @@ export default function Details(props) {
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
-          href={`/details/${blockKebabCased}/${item.BlockUuid}`}
+          href={`/details/${block.kebabCase}/${item.BlockUuid}`}
           onClick={handleItemChange}
         >
           {item.ItemHeader}

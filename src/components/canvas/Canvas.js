@@ -8,12 +8,12 @@ const Canvas = props => {
     props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
 
   useEffect(() => {
+    console.log(props)
     props.getCanvasData()
   }, [])
 
-  const canvasBlocks = props.listResponse.map(block => {
-    const className = block.block.toLowerCase().replace(' ', '-')
-    return <CanvasBlock key={className} content={block} />
+  const canvasBlocks = Object.entries(props.listResponse).map(block => {
+    return <CanvasBlock key={block.kebabCase} blockId={block[0]} content={block[1]} />
   })
   return (
     <div id="canvas">
