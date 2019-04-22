@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
-  const [currentBlock, setCurrentBlock] = useState({ name: '', description: '' })
+  const [currentBlock, setCurrentBlock] = useState({ name: '' })
   const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
   const [card, setCard] = useState({
     blockUuid: '',
@@ -92,7 +92,6 @@ export default function Details(props) {
           return item.BlockUuid === selectedItemBlockUuid
         })
 
-        // set current card
         if (card === -1) {
           setCard({
             ...card,
