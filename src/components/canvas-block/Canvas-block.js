@@ -41,10 +41,7 @@ const CanvasBlock = props => {
   return (
     <Link
       id="canvas-block"
-      to={{
-        pathname: `/details/${props.content.kebabCase}`,
-        state: { blockId: props.blockId },
-      }}
+      to={`/details/${props.content.kebabCase}`}
       className={`${props.content.kebabCase} block`}
     >
       <div className="canvas-blocks-container">
