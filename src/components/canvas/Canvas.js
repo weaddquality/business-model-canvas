@@ -8,7 +8,6 @@ const Canvas = props => {
     props.location.pathname === '/canvas' ? 'canvas-view canvas-horizontal-view' : 'horizontal-view'
 
   useEffect(() => {
-    console.log(props)
     props.getCanvasData()
   }, [])
 
