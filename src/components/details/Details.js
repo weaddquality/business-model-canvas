@@ -177,7 +177,7 @@ export default function Details(props) {
           </div>
         </Fragment>
       )
-    } else if (getCurrentBlock().items[0] !== undefined) {
+    } else {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
@@ -192,15 +192,6 @@ export default function Details(props) {
             <Button variant="success" onClick={toggleMode}>
               Edit
             </Button>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="details-card" data-testid="details-readmode">
-          <div className="details-card-container">
-            <div className="details-card-read-header" />
-            <div className="details-card-read-text" data-testid="details-readform-text" />
           </div>
         </div>
       )
@@ -224,13 +215,11 @@ export default function Details(props) {
       )
     })
 
-    if (items[0] !== undefined) {
-      return (
-        <div className="details-list" data-testid="details-list">
-          <ListGroup>{list}</ListGroup>
-        </div>
-      )
-    }
+    return (
+      <div className="details-list" data-testid="details-list">
+        <ListGroup>{list}</ListGroup>
+      </div>
+    )
   }
 
   return (
