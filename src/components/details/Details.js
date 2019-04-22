@@ -214,7 +214,7 @@ export default function Details(props) {
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
-          href={`/details/${block.kebabCase}/${item.BlockUuid}`}
+          href={`${item.BlockUuid}`}
           onClick={handleItemChange}
         >
           {item.ItemHeader}
