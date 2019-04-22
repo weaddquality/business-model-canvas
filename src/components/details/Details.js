@@ -109,9 +109,11 @@ export default function Details(props) {
           })
         }
       } else {
-        props.history.push(
-          props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
-        )
+        if (props.listResponse[matchedBlock.name].items[0].BlockUuid !== '') {
+          props.history.push(
+            props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
+          )
+        }
         setCard({
           ...card,
           blockUuid: items[0].BlockUuid,
@@ -222,7 +224,7 @@ export default function Details(props) {
       )
     })
 
-    if (block.items[0] !== undefined) {
+    if (items[0] !== undefined) {
       return (
         <div className="details-list" data-testid="details-list">
           <ListGroup>{list}</ListGroup>
