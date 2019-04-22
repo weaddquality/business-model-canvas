@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
-  const [currentBlock, setCurrentBlock] = useState({ name: '' })
+  const [currentBlock, setCurrentBlock] = useState('')
   const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
   const [card, setCard] = useState({
     blockUuid: '',
@@ -84,12 +84,11 @@ export default function Details(props) {
   useEffect(() => {
     if (props.listResponse) {
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
-      setCurrentBlock({ name: matchedBlock.name, description: matchedBlock.description })
+      setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
-      if (props.match.url.includes(matchedBlock.name)) {
-        const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
+      if (props.match.params.blockUuid) {
         const card = items.findIndex(item => {
-          return item.BlockUuid === selectedItemBlockUuid
+          return item.BlockUuid === props.match.params.blockUuid
         })
 
         if (card === -1) {
@@ -122,7 +121,7 @@ export default function Details(props) {
       }
     }
   }, [
-    currentBlock.name,
+    currentBlock,
     getCurrentBlock().items[0].ItemHeader,
     getCurrentBlock().items[0].ItemText,
     getCurrentBlock().items.length,
@@ -225,7 +224,7 @@ export default function Details(props) {
     <div id="details">
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{currentBlock.name}</div>
+          <div className="details-block">{currentBlock}</div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
