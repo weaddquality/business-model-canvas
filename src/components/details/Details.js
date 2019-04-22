@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
+import { BLOCKS } from '../../constants/constants'
 import { Link } from 'react-router-dom'
 import { updateItem } from '../../api/updateItem'
 import { deleteItem } from '../../api/deleteItem'
@@ -9,7 +10,8 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
-  const [currentBlock, setCurrentBlock] = useState('')
+  const [currentBlock, setCurrentBlock] = useState({ name: '', description: '' })
+  const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
   const [card, setCard] = useState({
     blockUuid: '',
     header: '',
@@ -62,13 +64,8 @@ export default function Details(props) {
       blockDescription: '',
       items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
     }
-
-    // const foundBlock = props.listResponse.find(({ block }) => {
-    //   const blockKebabCased = block.replace(' ', '-').toLowerCase()
-    //   return blockKebabCased === props.match.params.blockType
-    // })
-
-    const foundBlock = props.listResponse[props.location.state.blockId]
+    const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
+    const foundBlock = props.listResponse[matchedBlock.name]
 
     if (!foundBlock) {
       return emptyBlock
@@ -81,42 +78,50 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    if (props.listResponse.length === 0) props.getCanvasData()
+    if (!props.listResponse) props.getCanvasData()
   }, [])
 
   useEffect(() => {
-    const currentBlock = getCurrentBlock()
-    if (props.match.url.includes(currentBlock.block)) {
-      const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
-      const card = currentBlock.items.findIndex(item => {
-        return item.BlockUuid === selectedItemBlockUuid
-      })
-
-      if (card === -1) {
-        setCard({
-          ...card,
-          blockUuid: currentBlock.items[0].BlockUuid,
-          header: currentBlock.items[0].ItemHeader,
-          text: currentBlock.items[0].ItemText,
+    if (props.listResponse) {
+      const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
+      setCurrentBlock({ name: matchedBlock.name, description: matchedBlock.description })
+      setItems(props.listResponse[matchedBlock.name].items)
+      if (props.match.url.includes(matchedBlock.name)) {
+        const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
+        const card = items.findIndex(item => {
+          return item.BlockUuid === selectedItemBlockUuid
         })
+
+        // set current card
+        if (card === -1) {
+          setCard({
+            ...card,
+            blockUuid: items[0].BlockUuid,
+            header: items[0].ItemHeader,
+            text: items[0].ItemText,
+          })
+        } else {
+          setCard({
+            ...card,
+            blockUuid: items[card].BlockUuid,
+            header: items[card].ItemHeader,
+            text: items[card].ItemText,
+          })
+        }
       } else {
+        props.history.push(
+          props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
+        )
         setCard({
           ...card,
-          blockUuid: currentBlock.items[card].BlockUuid,
-          header: currentBlock.items[card].ItemHeader,
-          text: currentBlock.items[card].ItemText,
+          blockUuid: items[0].BlockUuid,
+          header: items[0].ItemHeader,
+          text: items[0].ItemText,
         })
       }
-    } else {
-      props.history.push(props.match.url + '/' + currentBlock.items[0].BlockUuid)
-      setCard({
-        ...card,
-        blockUuid: currentBlock.items[0].BlockUuid,
-        header: currentBlock.items[0].ItemHeader,
-        text: currentBlock.items[0].ItemText,
-      })
     }
   }, [
+    currentBlock.name,
     getCurrentBlock().items[0].ItemHeader,
     getCurrentBlock().items[0].ItemText,
     getCurrentBlock().items.length,
@@ -230,7 +235,7 @@ export default function Details(props) {
     <div id="details">
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{getCurrentBlock().block}</div>
+          <div className="details-block">{currentBlock.name}</div>
           <div className="details-create">
             <Link to="/item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
