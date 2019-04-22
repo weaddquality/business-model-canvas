@@ -82,6 +82,7 @@ export default function Details(props) {
   }, [])
 
   useEffect(() => {
+    // Only run this if we have a ready listResponse
     if (props.listResponse) {
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
       setCurrentBlock(matchedBlock.name)
@@ -120,12 +121,8 @@ export default function Details(props) {
         })
       }
     }
-  }, [
-    currentBlock,
-    getCurrentBlock().items[0].ItemHeader,
-    getCurrentBlock().items[0].ItemText,
-    getCurrentBlock().items.length,
-  ])
+    // Only run this useEffect if any of the below changes
+  }, [props.listResponse, items[0].ItemHeader, items[0].ItemText, items.length])
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
