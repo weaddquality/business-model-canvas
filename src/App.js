@@ -10,7 +10,7 @@ import { getItems } from './api/getItems'
 function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthenticating, setIsAuthenticating] = useState(true)
-  const [listResponse, setListResponse] = useState([])
+  const [listResponse, setListResponse] = useState(false)
 
   useEffect(() => {
     userHasSession()
@@ -39,7 +39,6 @@ function App(props) {
 
   const getCanvasData = () => {
     getItems().then(response => {
-      console.log(response)
       const { blocks } = response
       setListResponse(blocks)
     })
