@@ -45,36 +45,15 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
-    const currentBlock = getCurrentBlock()
-    const card = currentBlock.items.findIndex(item => {
-      return item.BlockUuid === selectedItemBlockUuid
+    const card = items.findIndex(item => {
+      return item.BlockUuid === props.match.params.blockUuid
     })
     setCard({
-      blockUuid: currentBlock.items[card].BlockUuid,
-      header: currentBlock.items[card].ItemHeader,
-      text: currentBlock.items[card].ItemText,
+      blockUuid: items[card].BlockUuid,
+      header: items[card].ItemHeader,
+      text: items[card].ItemText,
     })
     setWriteMode(false)
-  }
-
-  const getCurrentBlock = () => {
-    const emptyBlock = {
-      block: '',
-      blockDescription: '',
-      items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
-    }
-    const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
-    const foundBlock = props.listResponse[matchedBlock.name]
-
-    if (!foundBlock) {
-      return emptyBlock
-    }
-
-    if (foundBlock.items.length === 0) {
-      foundBlock.items = [{ BlockUuid: '', ItemHeader: '', ItemText: '' }]
-    }
-    return foundBlock ? foundBlock : emptyBlock
   }
 
   useEffect(() => {
@@ -194,8 +173,7 @@ export default function Details(props) {
   }
 
   const listItems = () => {
-    const block = getCurrentBlock()
-    const list = block.items.map(item => {
+    const list = items.map(item => {
       return (
         <ListGroup.Item
           action
