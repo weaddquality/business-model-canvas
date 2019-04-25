@@ -45,14 +45,6 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    const card = items.findIndex(item => {
-      return item.BlockUuid === props.match.params.blockUuid
-    })
-    setCard({
-      blockUuid: items[card].BlockUuid,
-      header: items[card].ItemHeader,
-      text: items[card].ItemText,
-    })
     setWriteMode(false)
   }
 
@@ -101,7 +93,13 @@ export default function Details(props) {
       }
     }
     // Only run this useEffect if any of the below changes
-  }, [props.listResponse, items[0].ItemHeader, items[0].ItemText, items.length])
+  }, [
+    props.listResponse,
+    items[0].ItemHeader,
+    items[0].ItemText,
+    items.length,
+    props.match.params.blockUuid,
+  ])
 
   const toggleMode = () => {
     setWriteMode(!writeMode)
