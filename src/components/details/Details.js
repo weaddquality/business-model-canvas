@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
-  const [writeMode, setWriteMode] = useState(false)
+  const [formMode, setFormMode] = useState('read')
   const [currentBlock, setCurrentBlock] = useState('')
   const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
   const [card, setCard] = useState({
@@ -17,6 +17,11 @@ export default function Details(props) {
     header: '',
     text: '',
   })
+
+  const handleCreate = () => {
+    setItems([...items, { BlockUuid: '', ItemHeader: '', ItemText: '' }])
+    toggleCreateMode()
+  }
 
   const handleUpdate = () => {
     updateItem({ blockUuid: card.blockUuid, header: card.header, text: card.text }).then(() => {
@@ -45,7 +50,7 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    setWriteMode(false)
+    setFormMode('read')
   }
 
   useEffect(() => {
@@ -93,84 +98,130 @@ export default function Details(props) {
       }
     }
     // Only run this useEffect if any of the below changes
-  }, [
-    props.listResponse,
-    items[0].ItemHeader,
-    items[0].ItemText,
-    items.length,
-    props.match.params.blockUuid,
-  ])
+  }, [props.listResponse, items[0].ItemHeader, items[0].ItemText, props.match.params.blockUuid])
 
   const toggleMode = () => {
-    setWriteMode(!writeMode)
+    return formMode === 'read' ? setFormMode('write') : setFormMode('read')
+  }
+
+  const toggleCreateMode = () => {
+    setFormMode('create')
   }
 
   const form = () => {
-    if (writeMode) {
-      return (
-        <Fragment>
-          <div className="details-card" data-testid="details-writemode">
-            <div className="details-card-container">
-              <Form className="details-card-write">
-                <Form.Group>
-                  <Form.Control
-                    data-testid="details-updateform-header"
-                    onChange={handleHeaderChange}
-                    defaultValue={card.header}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    as="textarea"
-                    rows="15"
-                    autoFocus
-                    data-testid="details-updateform-text"
-                    onChange={handleTextChange}
-                    defaultValue={card.text}
-                  />
-                </Form.Group>
-              </Form>
-            </div>
+    const readForm = (
+      <div className="details-card" data-testid="details-readmode">
+        <div className="details-card-container">
+          <div className="details-card-read-header" data-testid="details-readform-header">
+            {card.header}
           </div>
-          <div className="details-delete">
-            <Button variant="danger" onClick={handleDelete}>
-              Delete
-            </Button>
-          </div>
-          <div className="details-cancel">
-            <Button variant="secondary" onClick={toggleMode}>
-              Cancel
-            </Button>
-          </div>
-          <div className="details-submit">
-            <Button variant="success" onClick={handleUpdate}>
-              Update
-            </Button>
-          </div>
-        </Fragment>
-      )
-    } else {
-      return (
-        <div className="details-card" data-testid="details-readmode">
-          <div className="details-card-container">
-            <div className="details-card-read-header" data-testid="details-readform-header">
-              {card.header}
-            </div>
-            <div className="details-card-read-text" data-testid="details-readform-text">
-              {card.text}
-            </div>
-          </div>
-          <div className="details-submit">
-            <Button variant="success" onClick={toggleMode}>
-              Edit
-            </Button>
+          <div className="details-card-read-text" data-testid="details-readform-text">
+            {card.text}
           </div>
         </div>
-      )
+        <div className="details-submit">
+          <Button variant="success" onClick={toggleMode}>
+            Edit
+          </Button>
+        </div>
+      </div>
+    )
+
+    const createForm = (
+      <Fragment>
+        <div className="details-card" data-testid="details-writemode">
+          <div className="details-card-container">
+            <Form className="details-card-write">
+              <Form.Group>
+                <Form.Control
+                  data-testid="details-updateform-header"
+                  onChange={handleHeaderChange}
+                  placeholder="Enter a header..."
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows="15"
+                  autoFocus
+                  data-testid="details-updateform-text"
+                  onChange={handleTextChange}
+                  placeholder="Enter some details..."
+                />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+        <div className="details-cancel">
+          <Button variant="secondary" onClick={toggleCreateMode}>
+            Cancel
+          </Button>
+        </div>
+        <div className="details-submit">
+          <Button variant="success" onClick={handleUpdate}>
+            Create
+          </Button>
+        </div>
+      </Fragment>
+    )
+
+    const writeForm = (
+      <Fragment>
+        <div className="details-card" data-testid="details-writemode">
+          <div className="details-card-container">
+            <Form className="details-card-write">
+              <Form.Group>
+                <Form.Control
+                  data-testid="details-updateform-header"
+                  onChange={handleHeaderChange}
+                  defaultValue={card.header}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows="15"
+                  autoFocus
+                  data-testid="details-updateform-text"
+                  onChange={handleTextChange}
+                  defaultValue={card.text}
+                />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+        <div className="details-delete">
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
+        <div className="details-cancel">
+          <Button variant="secondary" onClick={toggleMode}>
+            Cancel
+          </Button>
+        </div>
+        <div className="details-submit">
+          <Button variant="success" onClick={handleUpdate}>
+            Update
+          </Button>
+        </div>
+      </Fragment>
+    )
+
+    switch (formMode) {
+      case 'read':
+        return readForm
+      case 'write':
+        return writeForm
+      case 'create':
+        return createForm
+      default:
+        return readForm
     }
   }
 
   const listItems = () => {
+    console.log('items', items)
     const list = items.map(item => {
       return (
         <ListGroup.Item
@@ -199,9 +250,9 @@ export default function Details(props) {
         <div className="details-form">
           <div className="details-block">{currentBlock}</div>
           <div className="details-create">
-            <Link to="/item/create" data-testid="createItemButton">
-              <i className="fa fa-plus" /> Create item
-            </Link>
+            <Button className="create-button" variant="dark" onClick={handleCreate}>
+              Add Item
+            </Button>
           </div>
           {form()}
           {listItems()}
