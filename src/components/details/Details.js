@@ -53,6 +53,14 @@ export default function Details(props) {
     setFormMode('read')
   }
 
+  const toggleMode = () => {
+    return formMode === 'read' ? setFormMode('write') : setFormMode('read')
+  }
+
+  const toggleCreateMode = () => {
+    setFormMode('create')
+  }
+
   useEffect(() => {
     if (!props.listResponse) props.getCanvasData()
   }, [])
@@ -99,14 +107,6 @@ export default function Details(props) {
     }
     // Only run this useEffect if any of the below changes
   }, [props.listResponse, items[0].ItemHeader, items[0].ItemText, props.match.params.blockUuid])
-
-  const toggleMode = () => {
-    return formMode === 'read' ? setFormMode('write') : setFormMode('read')
-  }
-
-  const toggleCreateMode = () => {
-    setFormMode('create')
-  }
 
   const form = () => {
     const readForm = (
@@ -221,7 +221,6 @@ export default function Details(props) {
   }
 
   const listItems = () => {
-    console.log('items', items)
     const list = items.map(item => {
       return (
         <ListGroup.Item
