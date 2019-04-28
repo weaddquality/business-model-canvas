@@ -41,8 +41,8 @@ const CanvasBlock = props => {
   return (
     <Link
       id="canvas-block"
-      to={`/details/${props.content.kebabCase}`}
-      className={`${props.content.kebabCase} block`}
+      to={`/details/${props.content.blockInKebabCase}`}
+      className={`${props.content.blockInKebabCase} block`}
     >
       <div className="canvas-blocks-container">
         <div className="canvas-blocks canvas-block-header">{props.blockId}</div>
