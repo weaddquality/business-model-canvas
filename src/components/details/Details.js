@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
 import { BLOCKS } from '../../constants/constants'
 import { Link } from 'react-router-dom'
+import { createItem } from '../../api/createItem'
 import { updateItem } from '../../api/updateItem'
 import { deleteItem } from '../../api/deleteItem'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -18,9 +19,34 @@ export default function Details(props) {
     text: '',
   })
 
-  const handleCreate = () => {
+  const handleAddItem = () => {
+    setCard({ blockUuid: '', header: '', text: '' })
     setItems([...items, { BlockUuid: '', ItemHeader: '', ItemText: '' }])
     toggleCreateMode()
+  }
+
+  const handleCreate = () => {
+    createItem({
+      block: currentBlock,
+      header: card.header,
+      text: card.text,
+    })
+      .then(response => {
+        setCard({ ...card, blockUuid: response.BlockUuid })
+        setItems(
+          items.map(item => {
+            if (item.BlockUuid === '') {
+              item.BlockUuid = response.BlockUuid
+            }
+            return item
+          })
+        )
+        toggleMode()
+        props.getCanvasData()
+      })
+      .catch(e => {
+        alert(e)
+      })
   }
 
   const handleUpdate = () => {
@@ -51,6 +77,19 @@ export default function Details(props) {
     const href = event.target.getAttribute('href')
     props.history.push(href)
     setFormMode('read')
+  }
+
+  const handleEditCancel = () => {
+    const card = items.findIndex(item => {
+      return item.BlockUuid === props.match.params.blockUuid
+    })
+    setCard({
+      ...card,
+      blockUuid: items[card].BlockUuid,
+      header: items[card].ItemHeader,
+      text: items[card].ItemText,
+    })
+    toggleMode()
   }
 
   const toggleMode = () => {
@@ -137,13 +176,13 @@ export default function Details(props) {
                   data-testid="details-updateform-header"
                   onChange={handleHeaderChange}
                   placeholder="Enter a header..."
+                  autoFocus
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Control
                   as="textarea"
                   rows="15"
-                  autoFocus
                   data-testid="details-updateform-text"
                   onChange={handleTextChange}
                   placeholder="Enter some details..."
@@ -158,7 +197,7 @@ export default function Details(props) {
           </Button>
         </div>
         <div className="details-submit">
-          <Button variant="success" onClick={handleUpdate}>
+          <Button variant="success" onClick={handleCreate}>
             Create
           </Button>
         </div>
@@ -196,7 +235,7 @@ export default function Details(props) {
           </Button>
         </div>
         <div className="details-cancel">
-          <Button variant="secondary" onClick={toggleMode}>
+          <Button variant="secondary" onClick={handleEditCancel}>
             Cancel
           </Button>
         </div>
@@ -225,13 +264,14 @@ export default function Details(props) {
       return (
         <ListGroup.Item
           action
+          className={item.BlockUuid === '' ? 'new-item' : null}
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
           href={`${item.BlockUuid}`}
           onClick={handleItemChange}
         >
-          {item.ItemHeader}
+          {card.blockUuid === item.BlockUuid ? card.header : item.ItemHeader}
         </ListGroup.Item>
       )
     })
@@ -249,7 +289,7 @@ export default function Details(props) {
         <div className="details-form">
           <div className="details-block">{currentBlock}</div>
           <div className="details-create">
-            <Button className="create-button" variant="dark" onClick={handleCreate}>
+            <Button className="create-button" variant="dark" onClick={handleAddItem}>
               Add Item
             </Button>
           </div>
