@@ -12,7 +12,9 @@ const Canvas = props => {
   }, [])
 
   const canvasBlocks = Object.entries(props.listResponse).map(block => {
-    return <CanvasBlock key={block.blockInKebabCase} blockId={block[0]} content={block[1]} />
+    const blockName = block[0]
+    const blockData = block[1]
+    return <CanvasBlock key={block.blockInKebabCase} blockName={blockName} blockData={blockData} />
   })
   return (
     <div id="canvas">
