@@ -301,11 +301,13 @@ export default function Details(props) {
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">{currentBlock}</div>
-          <div className="details-create">
-            <Button className="create-button" variant="dark" onClick={handleAddItem}>
-              Add Item
-            </Button>
-          </div>
+          {formMode !== 'create' ? (
+            <div className="details-create">
+              <Button className="create-button" variant="dark" onClick={handleAddItem}>
+                Add Item
+              </Button>
+            </div>
+          ) : null}
           {form()}
           {listItems()}
         </div>

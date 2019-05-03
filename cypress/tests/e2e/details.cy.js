@@ -40,6 +40,8 @@ describe('Testing the details', function() {
     cy.wait('@getUpdatedCanvasData')
 
     cy.getByText('Add Item').click()
+    cy.contains('Add Item').should('not.be.visible')
+
     cy.getByTestId('details-updateform-header')
       .type('New value header')
       .should('have.value', 'New value header')
