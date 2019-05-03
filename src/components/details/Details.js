@@ -27,9 +27,9 @@ export default function Details(props) {
 
   const handleCreate = () => {
     createItem({
-      block: currentBlock,
       header: card.header,
       text: card.text,
+      block: currentBlock,
     })
       .then(response => {
         setCard({ ...card, blockUuid: response.BlockUuid })
@@ -88,6 +88,19 @@ export default function Details(props) {
       blockUuid: items[card].BlockUuid,
       header: items[card].ItemHeader,
       text: items[card].ItemText,
+    })
+    toggleMode()
+  }
+
+  const handleCreateCancel = () => {
+    setItems(items => {
+      return items.filter(item => item.BlockUuid !== '')
+    })
+    setCard({
+      ...card,
+      blockUuid: items[0].BlockUuid,
+      header: items[0].ItemHeader,
+      text: items[0].ItemText,
     })
     toggleMode()
   }
@@ -192,7 +205,7 @@ export default function Details(props) {
           </div>
         </div>
         <div className="details-cancel">
-          <Button variant="secondary" onClick={toggleCreateMode}>
+          <Button variant="secondary" onClick={handleCreateCancel}>
             Cancel
           </Button>
         </div>
