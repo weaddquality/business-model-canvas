@@ -133,6 +133,7 @@ export default function Details(props) {
         const card = items.findIndex(item => {
           return item.BlockUuid === props.match.params.blockUuid
         })
+        // This only happens on the first render.. can get rid of this somehow?
         if (items[0].BlockUuid !== '') {
           setCard({
             ...card,
@@ -141,7 +142,6 @@ export default function Details(props) {
             text: items[card].ItemText,
           })
         }
-        // }
       } else {
         props.history.push(
           props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
