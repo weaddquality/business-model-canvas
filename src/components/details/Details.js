@@ -46,7 +46,6 @@ export default function Details(props) {
           })
         )
         toggleMode()
-        props.getCanvasData()
         props.history.push(
           props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
         )
