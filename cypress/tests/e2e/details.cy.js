@@ -90,7 +90,6 @@ describe('Testing the details', function() {
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
-    cy.wait('@getUpdatedCanvasData')
 
     cy.getByTestId('details-readform-header').should('have.text', 'New value header')
     cy.getByTestId('details-readform-text').should('have.text', 'New value text')
@@ -111,7 +110,6 @@ describe('Testing the details', function() {
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
-    cy.wait('@getUpdatedCanvasData')
 
     cy.getByTestId('details-readform-header').should('have.text', 'Old value header')
     cy.getByTestId('details-readform-text').should('have.text', 'Old value text')
