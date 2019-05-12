@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form'
 export default function Details(props) {
   const [formMode, setFormMode] = useState('read')
   const [currentBlock, setCurrentBlock] = useState('')
-  const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
+  const [items, setItems] = useState([])
   const [card, setCard] = useState({
     blockUuid: '',
     header: '',
@@ -70,16 +70,28 @@ export default function Details(props) {
 
   const handleDelete = () => {
     deleteItem(card.blockUuid).then(() => {
+      const deletedIndex = items.findIndex(item => {
+        return item.BlockUuid === card.blockUuid
+      })
+      const deletedItemHadNextItem = items[deletedIndex + 1]
+      const deletedItemHadPreviousItem = items[deletedIndex - 1]
       setItems(items.filter(item => item.BlockUuid !== card.blockUuid))
+
+      if (deletedItemHadNextItem) {
+        props.history.push(
+          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') +
+            items[deletedIndex + 1].BlockUuid
+        )
+      } else if (deletedItemHadPreviousItem) {
+        props.history.push(
+          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') +
+            items[deletedIndex - 1].BlockUuid
+        )
+      } else {
+        props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
+        setCard({ blockUuid: '', header: '', text: '' })
+      }
       toggleMode()
-      if (items[0])
-        setCard({
-          ...card,
-          blockUuid: items[0].BlockUuid,
-          header: items[0].ItemHeader,
-          text: items[0].ItemText,
-        })
-      // props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
     })
   }
 
@@ -98,6 +110,22 @@ export default function Details(props) {
     setFormMode('read')
   }
 
+  const handleCreateCancel = () => {
+    setItems(items => {
+      return items.filter(item => item.BlockUuid !== '')
+    })
+    const card = items.findIndex(item => {
+      return item.BlockUuid === props.match.params.blockUuid
+    })
+    setCard({
+      ...card,
+      blockUuid: items[card].BlockUuid,
+      header: items[card].ItemHeader,
+      text: items[card].ItemText,
+    })
+    toggleMode()
+  }
+
   const handleEditCancel = () => {
     const card = items.findIndex(item => {
       return item.BlockUuid === props.match.params.blockUuid
@@ -111,19 +139,6 @@ export default function Details(props) {
     toggleMode()
   }
 
-  const handleCreateCancel = () => {
-    setItems(items => {
-      return items.filter(item => item.BlockUuid !== '')
-    })
-    setCard({
-      ...card,
-      blockUuid: items[0].BlockUuid,
-      header: items[0].ItemHeader,
-      text: items[0].ItemText,
-    })
-    toggleMode()
-  }
-
   const toggleMode = () => {
     return formMode === 'read' ? setFormMode('write') : setFormMode('read')
   }
@@ -133,31 +148,52 @@ export default function Details(props) {
   }
 
   useEffect(() => {
+    // Fetch canvas data if we don't already have it
     if (!props.listResponse) props.getCanvasData()
+    // Only run this useEffect once.
   }, [])
 
   useEffect(() => {
-    // Only run this if we have a ready listResponse
+    // Only do this if we have a ready listResponse
     if (props.listResponse) {
+      // Set the current block and the list of items
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
       setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
+    }
+    // Only run this useEffect if any of the below changes.
+    // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
+  }, [props.listResponse])
+
+  useEffect(() => {
+    // If we have any items, then set the card
+    if (items.length > 0 && currentBlock !== '') {
+      // If the url contains a blockUuid,
+      // then try to find that item in the list of items
       if (props.match.params.blockUuid) {
         const card = items.findIndex(item => {
           return item.BlockUuid === props.match.params.blockUuid
         })
-        // This only happens on the first render.. can get rid of this somehow?
-        if (items[0].BlockUuid !== '') {
+        // If the specified blockUuid is found in the list of items,
+        // then set that card.
+        if (card !== -1) {
           setCard({
             ...card,
             blockUuid: items[card].BlockUuid,
             header: items[card].ItemHeader,
             text: items[card].ItemText,
           })
+          // otherwise redirect to our /404 route
+          // E.g. if someone uses a direct url to a deleted item
+        } else {
+          props.history.push('/404')
         }
-      } else {
+      }
+      // If there's no blockUuid on the url,
+      // then set the card with the first item in the list of items
+      else {
         props.history.push(
-          props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
+          props.match.url + '/' + props.listResponse[currentBlock].items[0].BlockUuid
         )
         setCard({
           ...card,
@@ -168,25 +204,8 @@ export default function Details(props) {
       }
     }
     // Only run this useEffect if any of the below changes.
-    // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
-    // items[0].BlockUuid: is used because it's an empty object on the first render (i.e. via a direct link to an item)
-  }, [props.listResponse, items[0].BlockUuid])
-
-  useEffect(() => {
-    const card = items.findIndex(item => {
-      return item.BlockUuid === props.match.params.blockUuid
-    })
-    if (props.match.params.blockUuid && items[0].BlockUuid !== '' && card !== -1) {
-      setCard({
-        ...card,
-        blockUuid: items[card].BlockUuid,
-        header: items[card].ItemHeader,
-        text: items[card].ItemText,
-      })
-    }
-    // Only run this useEffect if any of the below changes.
     // props.match.params.blockUuid: is used when the user changes the current selected item (the url will be updated with the blockUuid)
-  }, [props.match.params.blockUuid])
+  }, [currentBlock, props.match.params.blockUuid])
 
   const form = () => {
     const readForm = (
@@ -317,11 +336,11 @@ export default function Details(props) {
       )
     })
 
-    return (
+    return list.length > 0 ? (
       <div className="details-list" data-testid="details-list">
         <ListGroup>{list}</ListGroup>
       </div>
-    )
+    ) : null
   }
 
   return (
