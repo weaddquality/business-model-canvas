@@ -45,6 +45,7 @@ export default function Details(props) {
             return item
           })
         )
+        props.getCanvasData()
         toggleMode()
         props.history.push(
           props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
@@ -64,6 +65,7 @@ export default function Details(props) {
             : item
         )
       )
+      props.getCanvasData()
       toggleMode()
     })
   }
@@ -91,6 +93,7 @@ export default function Details(props) {
         props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
         setCard({ blockUuid: '', header: '', text: '' })
       }
+      props.getCanvasData()
       toggleMode()
     })
   }
