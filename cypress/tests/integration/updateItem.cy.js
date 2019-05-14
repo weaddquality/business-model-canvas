@@ -3,7 +3,9 @@ describe('Integrationtest of updating items', function() {
   const inputText = 'Int.test update item - text'
   beforeEach(() => {
     cy.login()
-    cy.createItem({ header: inputHeader, text: inputText }).as('createditem')
+    cy.createItem({ header: inputHeader, block: 'Value Propositions', text: inputText }).as(
+      'createditem'
+    )
   })
 
   afterEach(() => {
