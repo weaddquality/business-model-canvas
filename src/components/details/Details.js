@@ -22,7 +22,7 @@ export default function Details(props) {
   const handleAddItem = () => {
     setCard({ blockUuid: '', header: '', text: '' })
     setItems([...items, { BlockUuid: '', ItemHeader: '', ItemText: '' }])
-    toggleCreateMode()
+    setMode('create')
   }
 
   const handleCreate = () => {
@@ -46,7 +46,7 @@ export default function Details(props) {
           })
         )
         props.getCanvasData()
-        toggleMode()
+        setMode('read')
         props.history.push(
           props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
         )
@@ -66,7 +66,7 @@ export default function Details(props) {
         )
       )
       props.getCanvasData()
-      toggleMode()
+      setMode('read')
     })
   }
 
@@ -94,7 +94,7 @@ export default function Details(props) {
         setCard({ blockUuid: '', header: '', text: '' })
       }
       props.getCanvasData()
-      toggleMode()
+      setMode('read')
     })
   }
 
@@ -110,7 +110,11 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    setFormMode('read')
+    if (formMode === 'create') {
+      handleCreateCancel()
+      return
+    }
+    setMode('read')
   }
 
   const handleCreateCancel = () => {
@@ -126,7 +130,7 @@ export default function Details(props) {
       header: items[card].ItemHeader,
       text: items[card].ItemText,
     })
-    toggleMode()
+    setMode('read')
   }
 
   const handleEditCancel = () => {
@@ -139,15 +143,11 @@ export default function Details(props) {
       header: items[card].ItemHeader,
       text: items[card].ItemText,
     })
-    toggleMode()
+    setMode('read')
   }
 
-  const toggleMode = () => {
-    return formMode === 'read' ? setFormMode('write') : setFormMode('read')
-  }
-
-  const toggleCreateMode = () => {
-    setFormMode('create')
+  const setMode = mode => {
+    return setFormMode(mode)
   }
 
   useEffect(() => {
@@ -222,7 +222,7 @@ export default function Details(props) {
           </div>
         </div>
         <div className="details-submit">
-          <Button variant="success" onClick={toggleMode}>
+          <Button variant="success" onClick={() => setMode('write')}>
             Edit
           </Button>
         </div>
@@ -351,7 +351,7 @@ export default function Details(props) {
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">{currentBlock}</div>
-          {formMode !== 'create' ? (
+          {formMode === 'read' ? (
             <div className="details-create">
               <Button className="create-button" variant="dark" onClick={handleAddItem}>
                 Add Item
