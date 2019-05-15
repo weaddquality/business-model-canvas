@@ -12,17 +12,25 @@ describe('Integrationtest of creating items', function() {
       ItemHeader: inputHeader,
       ItemText: inputText,
     }
+    cy.server()
+    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+    cy.visit('/details/value-propositions')
 
-    cy.visit('/item/create')
+    cy.wait('@getUpdatedCanvasData')
 
-    cy.get('[data-testid="createItemInputHeader"]').type(inputHeader)
+    cy.getByText('Add Item').click()
 
-    cy.get('[data-testid="createItemInputText"]').type(inputText)
+    cy.getByTestId('details-updateform-header')
+      .type(inputHeader)
+      .should('have.value', inputHeader)
+    cy.getByTestId('details-updateform-text')
+      .type(inputText)
+      .should('have.value', inputText)
 
     cy.server()
     cy.route('POST', '**/prod/bmc-items/create').as('createItemRequest')
 
-    cy.get('[data-testid="submitButton"]').click()
+    cy.getByText('Create').click()
 
     cy.wait('@createItemRequest').then(http => {
       // request data
