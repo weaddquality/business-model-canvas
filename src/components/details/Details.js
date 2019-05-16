@@ -186,6 +186,8 @@ export default function Details(props) {
             header: items[card].ItemHeader,
             text: items[card].ItemText,
           })
+          // otherwise redirect to our /404 route
+          // E.g. if someone uses a direct url to a deleted item
         }
       }
       // If there's no blockUuid on the url,
