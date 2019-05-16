@@ -188,6 +188,9 @@ describe('Testing the details', function() {
   })
 
   it('can change selected item back and forth', function() {
+    cy.server()
+    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+
     // prepare testdata
     // item 1
     const firstItemHeader = `first item: ${Math.random() * 999}`
@@ -207,6 +210,8 @@ describe('Testing the details', function() {
 
     // test starts
     cy.visit('/details/value-propositions')
+
+    cy.wait('@getUpdatedCanvasData')
 
     // click first created item
     cy.contains(firstItemHeader).click()
