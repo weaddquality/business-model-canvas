@@ -151,6 +151,9 @@ export default function Details(props) {
   }
 
   useEffect(() => {
+    // TODO: Set selected team if not already set? Use team route param
+    // if(props.selectedTeam.....)
+    //
     // Fetch canvas data if we don't already have it
     if (!props.listResponse) props.getCanvasData(props.match.params.team)
     // Only run this useEffect once.

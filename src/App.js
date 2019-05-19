@@ -42,6 +42,7 @@ function App(props) {
     setIsAuthenticated(authenticated)
   }
 
+  // TODO: What the heck have I done here?
   const getCanvasData = team => {
     if (selectedTeam.text === 'Select team...')
       setSelectedTeam({ text: team, href: `/${team}/canvas` })
