@@ -52,12 +52,10 @@ export default function Details(props) {
         // This solves an issue where block name is lost..
         // if the created item is the first one in the list
         if (props.match.params.blockUuid) {
-          console.log('found blockuuid')
           props.history.push(
             props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
           )
         } else {
-          console.log('didnt find blockuuid')
           props.history.push(props.match.url + '/' + response.BlockUuid)
         }
       })
