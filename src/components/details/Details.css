@@ -31,8 +31,8 @@
 .details-create {
   grid-area: create;
   text-align: right;
-  padding-top: 14px;
-  padding-right: 54px;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 .details-create a:hover {
@@ -96,7 +96,7 @@
 
 .details-list {
   grid-area: list;
-  padding-top: 10px;
+  padding-top: 65px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: left;
@@ -107,4 +107,8 @@
   padding-top: 10px;
   padding-left: 10px;
   text-align: left;
+}
+
+.new-item {
+  height: 50px;
 }

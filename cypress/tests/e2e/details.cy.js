@@ -29,6 +29,42 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readmode')
   })
 
+  it('can create an item', function() {
+    // test starts
+    cy.server()
+    cy.route('POST', '**/prod/bmc-items/create**').as('createdItem')
+    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+
+    cy.visit('/details/channels')
+
+    cy.wait('@getUpdatedCanvasData')
+
+    cy.getByText('Add Item').click()
+    cy.contains('Add Item').should('not.be.visible')
+
+    cy.getByTestId('details-updateform-header')
+      .type('New value header')
+      .should('have.value', 'New value header')
+
+    cy.getByTestId('details-updateform-text')
+      .type('New value text')
+      .should('have.value', 'New value text')
+
+    cy.getByText('Create').click()
+
+    cy.wait('@createdItem')
+    cy.wait('@getUpdatedCanvasData')
+
+    cy.getByTestId('details-list').within(() => {
+      cy.getByText('New value header')
+    })
+
+    // clean up
+    cy.get('@createdItem').then(data => {
+      cy.deleteItem(data.response.body.BlockUuid)
+    })
+  })
+
   it('can update an item', function() {
     cy.server()
     cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
@@ -54,7 +90,6 @@ describe('Testing the details', function() {
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
-    cy.wait('@getUpdatedCanvasData')
 
     cy.getByTestId('details-readform-header').should('have.text', 'New value header')
     cy.getByTestId('details-readform-text').should('have.text', 'New value text')
@@ -75,7 +110,6 @@ describe('Testing the details', function() {
     cy.getByText('Update').click()
 
     cy.wait('@updateCanvasData')
-    cy.wait('@getUpdatedCanvasData')
 
     cy.getByTestId('details-readform-header').should('have.text', 'Old value header')
     cy.getByTestId('details-readform-text').should('have.text', 'Old value text')
@@ -85,7 +119,7 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `delete test: ${Math.random() * 999}`
     const inputText = 'delete test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText })
+    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' })
 
     // test starts
     cy.server()
@@ -114,7 +148,9 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `list item-test: ${Math.random() * 999}`
     const inputText = 'list item-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText }).as('createdItem')
+    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' }).as(
+      'createdItem'
+    )
 
     // tests starts
     cy.visit('/details/value-propositions')
@@ -130,7 +166,9 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `specific-test: ${Math.random() * 999}`
     const inputText = 'specific-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText }).as('createdItem')
+    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' }).as(
+      'createdItem'
+    )
 
     // test starts
     cy.visit('/details/value-propositions')
@@ -150,19 +188,30 @@ describe('Testing the details', function() {
   })
 
   it('can change selected item back and forth', function() {
+    cy.server()
+    cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+
     // prepare testdata
     // item 1
     const firstItemHeader = `first item: ${Math.random() * 999}`
     const firstItemText = 'first item: A new item'
-    cy.createItem({ header: firstItemHeader, text: firstItemText }).as('firstItem')
+    cy.createItem({ header: firstItemHeader, text: firstItemText, block: 'Value Propositions' }).as(
+      'firstItem'
+    )
 
     // item 2
     const secondItemHeader = `second item: ${Math.random() * 999}`
     const secondItemText = 'second item: A new item'
-    cy.createItem({ header: secondItemHeader, text: secondItemText }).as('secondItem')
+    cy.createItem({
+      header: secondItemHeader,
+      text: secondItemText,
+      block: 'Value Propositions',
+    }).as('secondItem')
 
     // test starts
     cy.visit('/details/value-propositions')
+
+    cy.wait('@getUpdatedCanvasData')
 
     // click first created item
     cy.contains(firstItemHeader).click()

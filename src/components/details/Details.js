@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
 import { BLOCKS } from '../../constants/constants'
 import { Link } from 'react-router-dom'
+import { createItem } from '../../api/createItem'
 import { updateItem } from '../../api/updateItem'
 import { deleteItem } from '../../api/deleteItem'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -9,27 +10,91 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
-  const [writeMode, setWriteMode] = useState(false)
+  const [formMode, setFormMode] = useState('read')
   const [currentBlock, setCurrentBlock] = useState('')
-  const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
+  const [items, setItems] = useState([])
   const [card, setCard] = useState({
     blockUuid: '',
     header: '',
     text: '',
   })
 
+  const handleAddItem = () => {
+    setCard({ blockUuid: '', header: '', text: '' })
+    setItems([...items, { BlockUuid: '', ItemHeader: '', ItemText: '' }])
+    setMode('create')
+  }
+
+  const handleCreate = () => {
+    createItem({
+      header: card.header,
+      text: card.text,
+      block: currentBlock,
+    })
+      .then(response => {
+        setCard({ ...card, blockUuid: response.BlockUuid })
+        setItems(
+          items.map(item => {
+            if (item.BlockUuid === '') {
+              return {
+                BlockUuid: response.BlockUuid,
+                ItemHeader: card.header,
+                ItemText: card.text,
+              }
+            }
+            return item
+          })
+        )
+        props.getCanvasData()
+        setMode('read')
+        props.history.push(
+          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
+        )
+      })
+      .catch(e => {
+        alert(e)
+      })
+  }
+
   const handleUpdate = () => {
     updateItem({ blockUuid: card.blockUuid, header: card.header, text: card.text }).then(() => {
+      setItems(
+        items.map(item =>
+          item.BlockUuid === card.blockUuid
+            ? { BlockUuid: card.blockUuid, ItemHeader: card.header, ItemText: card.text }
+            : item
+        )
+      )
       props.getCanvasData()
-      toggleMode()
+      setMode('read')
     })
   }
 
   const handleDelete = () => {
     deleteItem(card.blockUuid).then(() => {
+      const deletedIndex = items.findIndex(item => {
+        return item.BlockUuid === card.blockUuid
+      })
+      const deletedItemHadNextItem = items[deletedIndex + 1]
+      const deletedItemHadPreviousItem = items[deletedIndex - 1]
+      setItems(items.filter(item => item.BlockUuid !== card.blockUuid))
+
+      if (deletedItemHadNextItem) {
+        props.history.push(
+          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') +
+            items[deletedIndex + 1].BlockUuid
+        )
+      } else if (deletedItemHadPreviousItem) {
+        props.history.push(
+          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') +
+            items[deletedIndex - 1].BlockUuid
+        )
+      } else {
+        props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
+        setCard({ blockUuid: '', header: '', text: '' })
+      }
       props.getCanvasData()
-      toggleMode()
-      props.history.push(props.match.url.slice(0, props.match.url.lastIndexOf('/')))
+      setMode('read')
     })
   }
 
@@ -45,45 +110,92 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    setWriteMode(false)
+    if (formMode === 'create') {
+      handleCreateCancel()
+      return
+    }
+    setMode('read')
+  }
+
+  const handleCreateCancel = () => {
+    setItems(items => {
+      return items.filter(item => item.BlockUuid !== '')
+    })
+    const card = items.findIndex(item => {
+      return item.BlockUuid === props.match.params.blockUuid
+    })
+    setCard({
+      ...card,
+      blockUuid: items[card].BlockUuid,
+      header: items[card].ItemHeader,
+      text: items[card].ItemText,
+    })
+    setMode('read')
+  }
+
+  const handleEditCancel = () => {
+    const card = items.findIndex(item => {
+      return item.BlockUuid === props.match.params.blockUuid
+    })
+    setCard({
+      ...card,
+      blockUuid: items[card].BlockUuid,
+      header: items[card].ItemHeader,
+      text: items[card].ItemText,
+    })
+    setMode('read')
+  }
+
+  const setMode = mode => {
+    return setFormMode(mode)
   }
 
   useEffect(() => {
+    // Fetch canvas data if we don't already have it
     if (!props.listResponse) props.getCanvasData(props.match.params.team)
+    // Only run this useEffect once.
   }, [])
 
   useEffect(() => {
-    // Only run this if we have a ready listResponse
+    // Only do this if we have a ready listResponse
     if (props.listResponse) {
+      // Set the current block and the list of items
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
       setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
+    }
+    // Only run this useEffect if any of the below changes.
+    // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
+  }, [props.listResponse])
+
+  useEffect(() => {
+    // If we have any items, then set the card
+    if (items.length > 0 && currentBlock !== '') {
+      // If the url contains a blockUuid,
+      // then try to find that item in the list of items
       if (props.match.params.blockUuid) {
         const card = items.findIndex(item => {
           return item.BlockUuid === props.match.params.blockUuid
         })
-
-        if (card === -1) {
-          setCard({
-            ...card,
-            blockUuid: items[0].BlockUuid,
-            header: items[0].ItemHeader,
-            text: items[0].ItemText,
-          })
-        } else {
+        // If the specified blockUuid is found in the list of items,
+        // then set that card.
+        if (card !== -1) {
           setCard({
             ...card,
             blockUuid: items[card].BlockUuid,
             header: items[card].ItemHeader,
             text: items[card].ItemText,
           })
+          // otherwise redirect to our /404 route
+          // E.g. if someone uses a direct url to a deleted item
         }
-      } else {
-        if (props.listResponse[matchedBlock.name].items[0].BlockUuid !== '') {
-          props.history.push(
-            props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
-          )
-        }
+      }
+      // If there's no blockUuid on the url,
+      // then set the card with the first item in the list of items
+      else {
+        props.history.push(
+          props.match.url + '/' + props.listResponse[currentBlock].items[0].BlockUuid
+        )
         setCard({
           ...card,
           blockUuid: items[0].BlockUuid,
@@ -92,82 +204,119 @@ export default function Details(props) {
         })
       }
     }
-    // Only run this useEffect if any of the below changes
-  }, [
-    props.listResponse,
-    items[0].ItemHeader,
-    items[0].ItemText,
-    items.length,
-    props.match.params.blockUuid,
-    props.selectedTeam,
-  ])
-
-  const toggleMode = () => {
-    setWriteMode(!writeMode)
-  }
+    // Only run this useEffect if any of the below changes.
+    // props.match.params.blockUuid: is used when the user changes the current selected item (the url will be updated with the blockUuid)
+  }, [currentBlock, props.match.params.blockUuid, props.selectedTeam])
 
   const form = () => {
-    if (writeMode) {
-      return (
-        <Fragment>
-          <div className="details-card" data-testid="details-writemode">
-            <div className="details-card-container">
-              <Form className="details-card-write">
-                <Form.Group>
-                  <Form.Control
-                    data-testid="details-updateform-header"
-                    onChange={handleHeaderChange}
-                    defaultValue={card.header}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    as="textarea"
-                    rows="15"
-                    autoFocus
-                    data-testid="details-updateform-text"
-                    onChange={handleTextChange}
-                    defaultValue={card.text}
-                  />
-                </Form.Group>
-              </Form>
-            </div>
+    const readForm = (
+      <div className="details-card" data-testid="details-readmode">
+        <div className="details-card-container">
+          <div className="details-card-read-header" data-testid="details-readform-header">
+            {card.header}
           </div>
-          <div className="details-delete">
-            <Button variant="danger" onClick={handleDelete}>
-              Delete
-            </Button>
-          </div>
-          <div className="details-cancel">
-            <Button variant="secondary" onClick={toggleMode}>
-              Cancel
-            </Button>
-          </div>
-          <div className="details-submit">
-            <Button variant="success" onClick={handleUpdate}>
-              Update
-            </Button>
-          </div>
-        </Fragment>
-      )
-    } else {
-      return (
-        <div className="details-card" data-testid="details-readmode">
-          <div className="details-card-container">
-            <div className="details-card-read-header" data-testid="details-readform-header">
-              {card.header}
-            </div>
-            <div className="details-card-read-text" data-testid="details-readform-text">
-              {card.text}
-            </div>
-          </div>
-          <div className="details-submit">
-            <Button variant="success" onClick={toggleMode}>
-              Edit
-            </Button>
+          <div className="details-card-read-text" data-testid="details-readform-text">
+            {card.text}
           </div>
         </div>
-      )
+        <div className="details-submit">
+          <Button variant="success" onClick={() => setMode('write')}>
+            Edit
+          </Button>
+        </div>
+      </div>
+    )
+
+    const createForm = (
+      <Fragment>
+        <div className="details-card" data-testid="details-writemode">
+          <div className="details-card-container">
+            <Form className="details-card-write">
+              <Form.Group>
+                <Form.Control
+                  data-testid="details-updateform-header"
+                  onChange={handleHeaderChange}
+                  placeholder="Enter a header..."
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows="15"
+                  data-testid="details-updateform-text"
+                  onChange={handleTextChange}
+                  placeholder="Enter some details..."
+                />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+        <div className="details-cancel">
+          <Button variant="secondary" onClick={handleCreateCancel}>
+            Cancel
+          </Button>
+        </div>
+        <div className="details-submit">
+          <Button variant="success" onClick={handleCreate}>
+            Create
+          </Button>
+        </div>
+      </Fragment>
+    )
+
+    const writeForm = (
+      <Fragment>
+        <div className="details-card" data-testid="details-writemode">
+          <div className="details-card-container">
+            <Form className="details-card-write">
+              <Form.Group>
+                <Form.Control
+                  data-testid="details-updateform-header"
+                  onChange={handleHeaderChange}
+                  defaultValue={card.header}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows="15"
+                  autoFocus
+                  data-testid="details-updateform-text"
+                  onChange={handleTextChange}
+                  defaultValue={card.text}
+                />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+        <div className="details-delete">
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
+        <div className="details-cancel">
+          <Button variant="secondary" onClick={handleEditCancel}>
+            Cancel
+          </Button>
+        </div>
+        <div className="details-submit">
+          <Button variant="success" onClick={handleUpdate}>
+            Update
+          </Button>
+        </div>
+      </Fragment>
+    )
+
+    switch (formMode) {
+      case 'read':
+        return readForm
+      case 'write':
+        return writeForm
+      case 'create':
+        return createForm
+      default:
+        return readForm
     }
   }
 
@@ -176,22 +325,23 @@ export default function Details(props) {
       return (
         <ListGroup.Item
           action
+          className={item.BlockUuid === '' ? 'new-item' : null}
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
           href={`${item.BlockUuid}`}
           onClick={handleItemChange}
         >
-          {item.ItemHeader}
+          {card.blockUuid === item.BlockUuid ? card.header : item.ItemHeader}
         </ListGroup.Item>
       )
     })
 
-    return (
+    return list.length > 0 ? (
       <div className="details-list" data-testid="details-list">
         <ListGroup>{list}</ListGroup>
       </div>
-    )
+    ) : null
   }
 
   return (
@@ -199,11 +349,13 @@ export default function Details(props) {
       <div className="details-container">
         <div className="details-form">
           <div className="details-block">{currentBlock}</div>
-          <div className="details-create">
-            <Link to="item/create" data-testid="createItemButton">
-              <i className="fa fa-plus" /> Create item
-            </Link>
-          </div>
+          {formMode === 'read' ? (
+            <div className="details-create">
+              <Button className="create-button" variant="dark" onClick={handleAddItem}>
+                Add Item
+              </Button>
+            </div>
+          ) : null}
           {form()}
           {listItems()}
         </div>
