@@ -8,7 +8,7 @@ export const updateItem = card => {
       ItemText: card.text,
     },
     queryStringParameters: {
-      Team: 'Team Continuous',
+      Team: card.team,
       BlockUuid: card.blockUuid,
     },
   })

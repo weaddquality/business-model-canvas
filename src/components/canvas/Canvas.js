@@ -13,8 +13,17 @@ const Canvas = props => {
       : 'horizontal-view'
 
   useEffect(() => {
-    props.getCanvasData(props.match.params.team)
-  }, [props.match.params.team])
+    // Set team if not already set
+    if (props.selectedTeam.text === 'Select team...') {
+      props.handleTeamChange({
+        text: props.match.params.team.replace(/-/g, ' '),
+        href: `/${props.match.params.team}/canvas`,
+      })
+      return
+    }
+    console.log('fetching data on canvas')
+    props.getCanvasData()
+  }, [props.selectedTeam])
 
   const canvasBlocks = Object.entries(props.listResponse).map(block => {
     const blockName = block[0]

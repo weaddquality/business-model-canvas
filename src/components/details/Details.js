@@ -27,6 +27,7 @@ export default function Details(props) {
 
   const handleCreate = () => {
     createItem({
+      team: props.selectedTeam.text,
       header: card.header,
       text: card.text,
       block: currentBlock,
@@ -57,7 +58,12 @@ export default function Details(props) {
   }
 
   const handleUpdate = () => {
-    updateItem({ blockUuid: card.blockUuid, header: card.header, text: card.text }).then(() => {
+    updateItem({
+      team: props.selectedTeam.text,
+      blockUuid: card.blockUuid,
+      header: card.header,
+      text: card.text,
+    }).then(() => {
       setItems(
         items.map(item =>
           item.BlockUuid === card.blockUuid
@@ -71,7 +77,7 @@ export default function Details(props) {
   }
 
   const handleDelete = () => {
-    deleteItem(card.blockUuid).then(() => {
+    deleteItem({ team: props.selectedTeam.text, blockUuid: card.blockUuid }).then(() => {
       const deletedIndex = items.findIndex(item => {
         return item.BlockUuid === card.blockUuid
       })
@@ -151,13 +157,18 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    // TODO: Set selected team if not already set? Use team route param
-    // if(props.selectedTeam.....)
-    //
+    // Set team if not already set and finish the useEffect
+    if (props.selectedTeam.text === 'Select team...') {
+      props.handleTeamChange({
+        text: props.match.params.team.replace(/-/g, ' '),
+        href: `/${props.match.params.team}/canvas`,
+      })
+      return
+    }
     // Fetch canvas data if we don't already have it
-    if (!props.listResponse) props.getCanvasData(props.match.params.team)
+    if (!props.listResponse) props.getCanvasData()
     // Only run this useEffect once.
-  }, [])
+  }, [props.selectedTeam])
 
   useEffect(() => {
     // Only do this if we have a ready listResponse
