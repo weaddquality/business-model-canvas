@@ -3,7 +3,7 @@ import 'cypress-react-unit-test'
 import { StaticRouter } from 'react-router-dom'
 import CanvasBlock from '../../../src/components/canvas-block/Canvas-block'
 
-const content = {
+const blockData = {
   block: 'Value Propositions',
   items: [
     {
@@ -17,7 +17,7 @@ describe.skip('Component testing of CanvasBlock', () => {
   it('renders', () => {
     cy.mount(
       <StaticRouter>
-        <CanvasBlock content={content} />
+        <CanvasBlock blockData={blockData} />
       </StaticRouter>
     )
     cy.contains('my header')

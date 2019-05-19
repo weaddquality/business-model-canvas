@@ -16,9 +16,10 @@ const Canvas = props => {
     props.getCanvasData(props.match.params.team)
   }, [])
 
-  const canvasBlocks = props.listResponse.map(block => {
-    const className = block.block.toLowerCase().replace(' ', '-')
-    return <CanvasBlock key={className} content={block} />
+  const canvasBlocks = Object.entries(props.listResponse).map(block => {
+    const blockName = block[0]
+    const blockData = block[1]
+    return <CanvasBlock key={block.blockInKebabCase} blockName={blockName} blockData={blockData} />
   })
   return (
     <div id="canvas">

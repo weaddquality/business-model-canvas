@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import './Details.css'
+import { BLOCKS } from '../../constants/constants'
 import { Link } from 'react-router-dom'
 import { updateItem } from '../../api/updateItem'
 import { deleteItem } from '../../api/deleteItem'
@@ -9,6 +10,8 @@ import Form from 'react-bootstrap/Form'
 
 export default function Details(props) {
   const [writeMode, setWriteMode] = useState(false)
+  const [currentBlock, setCurrentBlock] = useState('')
+  const [items, setItems] = useState([{ BlockUuid: '', ItemHeader: '', ItemText: '' }])
   const [card, setCard] = useState({
     blockUuid: '',
     header: '',
@@ -42,81 +45,60 @@ export default function Details(props) {
     event.preventDefault()
     const href = event.target.getAttribute('href')
     props.history.push(href)
-    const selectedItemBlockUuid = href.slice(href.lastIndexOf('/') + 1)
-    const currentBlock = getCurrentBlock()
-    const card = currentBlock.items.findIndex(item => {
-      return item.BlockUuid === selectedItemBlockUuid
-    })
-    setCard({
-      blockUuid: currentBlock.items[card].BlockUuid,
-      header: currentBlock.items[card].ItemHeader,
-      text: currentBlock.items[card].ItemText,
-    })
     setWriteMode(false)
   }
 
-  const getCurrentBlock = () => {
-    const emptyBlock = {
-      block: '',
-      blockDescription: '',
-      items: [{ BlockUuid: '', ItemHeader: '', ItemText: '' }],
-    }
-
-    const foundBlock = props.listResponse.find(({ block }) => {
-      const blockKebabCased = block.replace(' ', '-').toLowerCase()
-      return blockKebabCased === props.match.params.blockType
-    })
-
-    if (!foundBlock) {
-      return emptyBlock
-    }
-
-    if (foundBlock.items.length === 0) {
-      foundBlock.items = [{ BlockUuid: '', ItemHeader: '', ItemText: '' }]
-    }
-    return foundBlock ? foundBlock : emptyBlock
-  }
-
   useEffect(() => {
-    if (props.listResponse.length === 0) props.getCanvasData(props.match.params.team)
+    if (!props.listResponse) props.getCanvasData(props.match.params.team)
   }, [])
 
   useEffect(() => {
-    const currentBlock = getCurrentBlock()
-    if (props.match.url.includes(currentBlock.block)) {
-      const selectedItemBlockUuid = props.match.url.slice(props.match.url.lastIndexOf('/') + 1)
-      const card = currentBlock.items.findIndex(item => {
-        return item.BlockUuid === selectedItemBlockUuid
-      })
-
-      if (card === -1) {
-        setCard({
-          ...card,
-          blockUuid: currentBlock.items[0].BlockUuid,
-          header: currentBlock.items[0].ItemHeader,
-          text: currentBlock.items[0].ItemText,
+    // Only run this if we have a ready listResponse
+    if (props.listResponse) {
+      const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
+      setCurrentBlock(matchedBlock.name)
+      setItems(props.listResponse[matchedBlock.name].items)
+      if (props.match.params.blockUuid) {
+        const card = items.findIndex(item => {
+          return item.BlockUuid === props.match.params.blockUuid
         })
+
+        if (card === -1) {
+          setCard({
+            ...card,
+            blockUuid: items[0].BlockUuid,
+            header: items[0].ItemHeader,
+            text: items[0].ItemText,
+          })
+        } else {
+          setCard({
+            ...card,
+            blockUuid: items[card].BlockUuid,
+            header: items[card].ItemHeader,
+            text: items[card].ItemText,
+          })
+        }
       } else {
+        if (props.listResponse[matchedBlock.name].items[0].BlockUuid !== '') {
+          props.history.push(
+            props.match.url + '/' + props.listResponse[matchedBlock.name].items[0].BlockUuid
+          )
+        }
         setCard({
           ...card,
-          blockUuid: currentBlock.items[card].BlockUuid,
-          header: currentBlock.items[card].ItemHeader,
-          text: currentBlock.items[card].ItemText,
+          blockUuid: items[0].BlockUuid,
+          header: items[0].ItemHeader,
+          text: items[0].ItemText,
         })
       }
-    } else {
-      props.history.push(props.match.url + '/' + currentBlock.items[0].BlockUuid)
-      setCard({
-        ...card,
-        blockUuid: currentBlock.items[0].BlockUuid,
-        header: currentBlock.items[0].ItemHeader,
-        text: currentBlock.items[0].ItemText,
-      })
     }
+    // Only run this useEffect if any of the below changes
   }, [
-    getCurrentBlock().items[0].ItemHeader,
-    getCurrentBlock().items[0].ItemText,
-    getCurrentBlock().items.length,
+    props.listResponse,
+    items[0].ItemHeader,
+    items[0].ItemText,
+    items.length,
+    props.match.params.blockUuid,
     props.selectedTeam,
   ])
 
@@ -168,7 +150,7 @@ export default function Details(props) {
           </div>
         </Fragment>
       )
-    } else if (getCurrentBlock().items[0] !== undefined) {
+    } else {
       return (
         <div className="details-card" data-testid="details-readmode">
           <div className="details-card-container">
@@ -186,29 +168,18 @@ export default function Details(props) {
           </div>
         </div>
       )
-    } else {
-      return (
-        <div className="details-card" data-testid="details-readmode">
-          <div className="details-card-container">
-            <div className="details-card-read-header" />
-            <div className="details-card-read-text" data-testid="details-readform-text" />
-          </div>
-        </div>
-      )
     }
   }
 
   const listItems = () => {
-    const block = getCurrentBlock()
-    const blockKebabCased = block.block.replace(' ', '-').toLowerCase()
-    const list = block.items.map(item => {
+    const list = items.map(item => {
       return (
         <ListGroup.Item
           action
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
-          href={`/details/${blockKebabCased}/${item.BlockUuid}`}
+          href={`${item.BlockUuid}`}
           onClick={handleItemChange}
         >
           {item.ItemHeader}
@@ -216,20 +187,18 @@ export default function Details(props) {
       )
     })
 
-    if (block.items[0] !== undefined) {
-      return (
-        <div className="details-list" data-testid="details-list">
-          <ListGroup>{list}</ListGroup>
-        </div>
-      )
-    }
+    return (
+      <div className="details-list" data-testid="details-list">
+        <ListGroup>{list}</ListGroup>
+      </div>
+    )
   }
 
   return (
     <div id="details">
       <div className="details-container">
         <div className="details-form">
-          <div className="details-block">{getCurrentBlock().block}</div>
+          <div className="details-block">{currentBlock}</div>
           <div className="details-create">
             <Link to="item/create" data-testid="createItemButton">
               <i className="fa fa-plus" /> Create item
