@@ -31,11 +31,15 @@ const renderLeftDropdown = props => {
           <LinkContainer to="/Team-Continuous/canvas" className="navbar-dropdown-submenu" replace>
             <Dropdown.Item onClick={handleTeamChange}>Team Continuous</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/Team-Frontendauto/canvas" className="navbar-dropdown-submenu" replace>
+          <LinkContainer
+            to="/Team-Frontend-Auto/canvas"
+            className="navbar-dropdown-submenu"
+            replace
+          >
             <Dropdown.Item onClick={handleTeamChange}>Team Frontend Auto</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/Team-Mobileux/canvas" className="navbar-dropdown-submenu" replace>
-            <Dropdown.Item onClick={handleTeamChange}>Team Mobile</Dropdown.Item>
+          <LinkContainer to="/Team-Mobile-UX/canvas" className="navbar-dropdown-submenu" replace>
+            <Dropdown.Item onClick={handleTeamChange}>Team Mobile UX</Dropdown.Item>
           </LinkContainer>
         </Dropdown.Menu>
       </Dropdown>
