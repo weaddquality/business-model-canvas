@@ -14,7 +14,7 @@ const Canvas = props => {
 
   useEffect(() => {
     props.getCanvasData(props.match.params.team)
-  }, [])
+  }, [props.match.params.team])
 
   const canvasBlocks = Object.entries(props.listResponse).map(block => {
     const blockName = block[0]
