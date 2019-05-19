@@ -21,7 +21,6 @@ const Canvas = props => {
       })
       return
     }
-    console.log('fetching data on canvas')
     props.getCanvasData()
   }, [props.selectedTeam])
 
