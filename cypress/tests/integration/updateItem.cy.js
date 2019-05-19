@@ -3,19 +3,22 @@ describe('Integrationtest of updating items', function() {
   const inputText = 'Int.test update item - text'
   beforeEach(() => {
     cy.login()
-    cy.createItem({ header: inputHeader, block: 'Value Propositions', text: inputText }).as(
-      'createditem'
-    )
+    cy.createItem({
+      team: 'Team Continuous',
+      header: inputHeader,
+      block: 'Value Propositions',
+      text: inputText,
+    }).as('createditem')
   })
 
   afterEach(() => {
     cy.get('@createditem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
   it('testing the request data and response data', function() {
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
     cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
     cy.getByTestId('details-updateform-header')

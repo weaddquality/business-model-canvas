@@ -14,7 +14,7 @@ describe('Integrationtest of creating items', function() {
     }
     cy.server()
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.wait('@getUpdatedCanvasData')
 
@@ -47,7 +47,7 @@ describe('Integrationtest of creating items', function() {
     })
 
     // clean up
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()

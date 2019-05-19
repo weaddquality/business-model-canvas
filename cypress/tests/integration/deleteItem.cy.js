@@ -3,13 +3,16 @@ describe('Integrationtest of deleting items', function() {
   const inputText = 'Int.test delete item - text'
   beforeEach(() => {
     cy.login()
-    cy.createItem({ header: inputHeader, block: 'Value Propositions', text: inputText }).as(
-      'createditem'
-    )
+    cy.createItem({
+      team: 'Team Continuous',
+      header: inputHeader,
+      block: 'Value Propositions',
+      text: inputText,
+    }).as('createditem')
   })
 
   it('testing the request data and response data', function() {
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
     cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
 

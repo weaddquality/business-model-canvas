@@ -4,7 +4,7 @@ describe('Testing the details', function() {
   })
 
   it('renders details-page', function() {
-    cy.visit('/details/key-partners')
+    cy.visit('Team-Continuous/details/key-partners')
     cy.contains('Key Partners')
   })
 
@@ -16,7 +16,7 @@ describe('Testing the details', function() {
   })
 
   it('switch between read and write-mode', function() {
-    cy.visit('/canvas', { timeout: 15000 })
+    cy.visit('Team-Continuous/canvas', { timeout: 15000 })
 
     cy.getByText('Channels').click()
 
@@ -35,7 +35,7 @@ describe('Testing the details', function() {
     cy.route('POST', '**/prod/bmc-items/create**').as('createdItem')
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
 
-    cy.visit('/details/channels')
+    cy.visit('Team-Continuous/details/channels')
 
     cy.wait('@getUpdatedCanvasData')
 
@@ -61,7 +61,7 @@ describe('Testing the details', function() {
 
     // clean up
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.response.body.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.response.body.BlockUuid })
     })
   })
 
@@ -70,7 +70,7 @@ describe('Testing the details', function() {
     cy.route('PUT', '**/prod/bmc-items/update**').as('updateCanvasData')
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
 
-    cy.visit('/details/channels')
+    cy.visit('Team-Continuous/details/channels')
 
     cy.wait('@getUpdatedCanvasData')
 
@@ -119,12 +119,17 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `delete test: ${Math.random() * 999}`
     const inputText = 'delete test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' })
+    cy.createItem({
+      team: 'Team Continuous',
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    })
 
     // test starts
     cy.server()
     cy.route('GET', '**prod/bmc-items/list*').as('getUpdatedCanvasData')
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.wait('@getUpdatedCanvasData')
 
@@ -148,17 +153,20 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `list item-test: ${Math.random() * 999}`
     const inputText = 'list item-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' }).as(
-      'createdItem'
-    )
+    cy.createItem({
+      team: 'Team Continuous',
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
 
     // tests starts
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.contains(inputHeader)
 
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
@@ -166,12 +174,15 @@ describe('Testing the details', function() {
     // prepare testdata
     const inputHeader = `specific-test: ${Math.random() * 999}`
     const inputText = 'specific-test: A new item'
-    cy.createItem({ header: inputHeader, text: inputText, block: 'Value Propositions' }).as(
-      'createdItem'
-    )
+    cy.createItem({
+      team: 'Team Continuous',
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
 
     // test starts
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.contains(inputHeader).click()
 
@@ -183,7 +194,7 @@ describe('Testing the details', function() {
 
     // clean up
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
@@ -195,21 +206,25 @@ describe('Testing the details', function() {
     // item 1
     const firstItemHeader = `first item: ${Math.random() * 999}`
     const firstItemText = 'first item: A new item'
-    cy.createItem({ header: firstItemHeader, text: firstItemText, block: 'Value Propositions' }).as(
-      'firstItem'
-    )
+    cy.createItem({
+      team: 'Team Continuous',
+      header: firstItemHeader,
+      text: firstItemText,
+      block: 'Value Propositions',
+    }).as('firstItem')
 
     // item 2
     const secondItemHeader = `second item: ${Math.random() * 999}`
     const secondItemText = 'second item: A new item'
     cy.createItem({
+      team: 'Team Continuous',
       header: secondItemHeader,
       text: secondItemText,
       block: 'Value Propositions',
     }).as('secondItem')
 
     // test starts
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.wait('@getUpdatedCanvasData')
 
@@ -254,10 +269,10 @@ describe('Testing the details', function() {
 
     // clean up
     cy.get('@firstItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
     cy.get('@secondItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 })
