@@ -151,34 +151,24 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    // Fetch canvas data if we don't already have it
     if (!props.listResponse) props.getCanvasData()
-    // Only run this useEffect once.
   }, [])
 
   useEffect(() => {
-    // Only do this if we have a ready listResponse
     if (props.listResponse) {
-      // Set the current block and the list of items
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
       setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
     }
-    // Only run this useEffect if any of the below changes.
     // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
   }, [props.listResponse])
 
   useEffect(() => {
-    // If we have any items, then set the card
     if (items.length > 0 && currentBlock !== '') {
-      // If the url contains a blockUuid,
-      // then try to find that item in the list of items
       if (props.match.params.blockUuid) {
         const card = items.findIndex(item => {
           return item.BlockUuid === props.match.params.blockUuid
         })
-        // If the specified blockUuid is found in the list of items,
-        // then set that card.
         if (card !== -1) {
           setCard({
             ...card,
@@ -186,13 +176,8 @@ export default function Details(props) {
             header: items[card].ItemHeader,
             text: items[card].ItemText,
           })
-          // otherwise redirect to our /404 route
-          // E.g. if someone uses a direct url to a deleted item
         }
-      }
-      // If there's no blockUuid on the url,
-      // then set the card with the first item in the list of items
-      else {
+      } else {
         props.history.push(
           props.match.url + '/' + props.listResponse[currentBlock].items[0].BlockUuid
         )
@@ -204,7 +189,6 @@ export default function Details(props) {
         })
       }
     }
-    // Only run this useEffect if any of the below changes.
     // props.match.params.blockUuid: is used when the user changes the current selected item (the url will be updated with the blockUuid)
   }, [currentBlock, props.match.params.blockUuid])
 
