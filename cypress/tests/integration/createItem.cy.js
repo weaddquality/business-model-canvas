@@ -10,16 +10,8 @@ describe('Integrationtest of creating items', function() {
   })
 
   it('testing the request data and response data', function() {
-    const team = 'Team Continuous'
-    const block = 'Value Propositions'
     const inputHeader = 'CreateItem Header'
     const inputText = 'CreateItem Text'
-    const expectedResultBody = {
-      Team: 'Team Continuous',
-      Block: 'Value Propositions',
-      ItemHeader: inputHeader,
-      ItemText: inputText,
-    }
     cy.server()
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
     cy.visit('/details/value-propositions')
@@ -43,18 +35,18 @@ describe('Integrationtest of creating items', function() {
     cy.wait('@createItemRequest').then(http => {
       // request data
       expect(http.method).to.eq('POST')
-      expect(http.request.body.Item.Team).to.eq(team)
-      expect(http.request.body.Item.Block).to.eq(block)
+      expect(http.request.body.Item.Team).to.eq('Team Continuous')
+      expect(http.request.body.Item.Block).to.eq('Value Propositions')
       expect(http.request.body.Item.ItemHeader).to.eq(inputHeader)
       expect(http.request.body.Item.ItemText).to.eq(inputText)
 
       // response data
       expect(http.status).to.eq(200)
-      expect(http.response.body.Team).to.eq(expectedResultBody.Team)
-      expect(http.response.body.Block).to.eq(expectedResultBody.Block)
+      expect(http.response.body.Team).to.eq('Team Continuous')
+      expect(http.response.body.Block).to.eq('Value Propositions')
       expect(http.response.body.BlockUuid).to.contain('Value Propositions')
-      expect(http.response.body.ItemHeader).to.eq(expectedResultBody.ItemHeader)
-      expect(http.response.body.ItemText).to.eq(expectedResultBody.ItemText)
+      expect(http.response.body.ItemHeader).to.eq(inputHeader)
+      expect(http.response.body.ItemText).to.eq(inputText)
     })
   })
 })
