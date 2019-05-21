@@ -325,7 +325,7 @@ export default function Details(props) {
       return (
         <ListGroup.Item
           action
-          className={item.BlockUuid === '' ? 'new-item' : null}
+          className={item.BlockUuid === '' ? 'details-new-list-item' : null}
           active={card.blockUuid === item.BlockUuid}
           data-testid="details-list-item"
           key={item.BlockUuid}
