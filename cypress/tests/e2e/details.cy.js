@@ -1,3 +1,5 @@
+import { runInThisContext } from 'vm'
+
 describe('Testing the details', function() {
   beforeEach(function() {
     cy.login()
@@ -29,7 +31,7 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readmode')
   })
 
-  it.only('can create an item', function() {
+  it('can create an item', function() {
     // test starts
     cy.server()
     cy.route('POST', '**/prod/bmc-items/create**').as('createdItem')
@@ -262,6 +264,29 @@ describe('Testing the details', function() {
     })
     cy.get('@secondItem').then(data => {
       cy.deleteItem(data.BlockUuid)
+    })
+  })
+
+  it('can visit a direct-link to details-page', function() {
+    // prepare testdata
+    const inputHeader = 'Int.test delete item - header'
+    const inputText = 'Int.test delete item - text'
+    cy.createItem({
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
+
+    // tests starts here
+    cy.get('@createdItem').then(response => {
+      const blockInKebabcase = response.Block.toLowerCase().replace(' ', '-')
+      cy.server()
+      cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
+      cy.visit(`/details/${blockInKebabcase}/${response.BlockUuid}`)
+      cy.wait('@getUpdatedCanvasData')
+
+      cy.contains(inputText)
+      cy.contains(inputHeader)
     })
   })
 })

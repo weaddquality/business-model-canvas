@@ -33,7 +33,6 @@ describe('Testing the canvas', function() {
     cy.contains('What type of relationships do our customer segments expect')
     cy.contains('Who are we creating value for')
     cy.contains('What key resources do our value propositions require')
-    cy.contains('How do we reach our customer segments')
     cy.contains('What are the important costs inherent in our business model')
     cy.contains('What value are our customers willing to pay for')
   })

@@ -1,4 +1,4 @@
-describe('Integrationtest of updating items', function() {
+describe('Integrationtest of getting items', function() {
   const inputHeader = 'Int.test list item - header'
   const inputText = 'Int.test list item - text'
   beforeEach(() => {
