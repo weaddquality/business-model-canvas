@@ -1,9 +1,17 @@
 describe('Integrationtest of creating items', function() {
-  before(() => {
+  beforeEach(() => {
     cy.login()
   })
 
+  afterEach(() => {
+    cy.get('@createItemRequest').then(data => {
+      cy.deleteItem(data.response.body.BlockUuid)
+    })
+  })
+
   it('testing the request data and response data', function() {
+    const team = 'Team Continuous'
+    const block = 'Value Propositions'
     const inputHeader = 'CreateItem Header'
     const inputText = 'CreateItem Text'
     const expectedResultBody = {
@@ -35,6 +43,8 @@ describe('Integrationtest of creating items', function() {
     cy.wait('@createItemRequest').then(http => {
       // request data
       expect(http.method).to.eq('POST')
+      expect(http.request.body.Item.Team).to.eq(team)
+      expect(http.request.body.Item.Block).to.eq(block)
       expect(http.request.body.Item.ItemHeader).to.eq(inputHeader)
       expect(http.request.body.Item.ItemText).to.eq(inputText)
 
@@ -42,21 +52,9 @@ describe('Integrationtest of creating items', function() {
       expect(http.status).to.eq(200)
       expect(http.response.body.Team).to.eq(expectedResultBody.Team)
       expect(http.response.body.Block).to.eq(expectedResultBody.Block)
+      expect(http.response.body.BlockUuid).to.contain('Value Propositions')
       expect(http.response.body.ItemHeader).to.eq(expectedResultBody.ItemHeader)
       expect(http.response.body.ItemText).to.eq(expectedResultBody.ItemText)
-    })
-
-    // clean up
-    cy.visit('/details/value-propositions')
-
-    cy.getByText(inputHeader).click()
-    cy.getByText('Edit').click()
-
-    cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
-    cy.getByText('Delete').click()
-
-    cy.wait('@deleteRequest').then(response => {
-      expect(response.status).to.eq(200)
     })
   })
 })

@@ -3,13 +3,15 @@ describe('Integrationtest of updating items', function() {
   const inputText = 'Int.test update item - text'
   beforeEach(() => {
     cy.login()
-    cy.createItem({ header: inputHeader, block: 'Value Propositions', text: inputText }).as(
-      'createditem'
-    )
+    cy.createItem({
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
   })
 
   afterEach(() => {
-    cy.get('@createditem').then(data => {
+    cy.get('@createdItem').then(data => {
       cy.deleteItem(data.BlockUuid)
     })
   })

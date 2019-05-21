@@ -3,9 +3,11 @@ describe('Integrationtest of deleting items', function() {
   const inputText = 'Int.test delete item - text'
   beforeEach(() => {
     cy.login()
-    cy.createItem({ header: inputHeader, block: 'Value Propositions', text: inputText }).as(
-      'createditem'
-    )
+    cy.createItem({
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
   })
 
   it('testing the request data and response data', function() {
@@ -21,7 +23,7 @@ describe('Integrationtest of deleting items', function() {
       // request data
       expect(http.method).to.eq('DELETE')
       expect(http.request.body.TableName).to.eq('BusinessModelCanvas')
-      cy.get('@createditem').then(item => {
+      cy.get('@createdItem').then(item => {
         expect(http.url).to.contain(`BlockUuid=${item.BlockUuid}`)
       })
       // response data
