@@ -29,7 +29,7 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readmode')
   })
 
-  it('can create an item', function() {
+  it.only('can create an item', function() {
     // test starts
     cy.server()
     cy.route('POST', '**/prod/bmc-items/create**').as('createdItem')
@@ -58,6 +58,10 @@ describe('Testing the details', function() {
     cy.getByTestId('details-list').within(() => {
       cy.getByText('New value header')
     })
+
+    cy.getByTestId('details-readform-header').should('have.text', 'New value header')
+
+    cy.getByTestId('details-readform-text').should('have.text', 'New value text')
 
     // clean up
     cy.get('@createdItem').then(data => {
