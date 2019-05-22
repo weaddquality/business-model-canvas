@@ -1,5 +1,3 @@
-import { runInThisContext } from 'vm'
-
 describe('Testing the details', function() {
   beforeEach(function() {
     cy.login()
