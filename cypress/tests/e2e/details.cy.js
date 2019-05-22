@@ -299,4 +299,28 @@ describe('Testing the details', function() {
       cy.deleteItem(data.BlockUuid)
     })
   })
+
+  it('renders an empty card and no selected item when visiting a non-existing item', function() {
+    // prepare testdata
+    const inputHeader = `E2E non-existing item test - header: ${Math.random() * 999}`
+    const inputText = 'E2E non-existing item test - text'
+    cy.createItem({
+      header: inputHeader,
+      text: inputText,
+      block: 'Value Propositions',
+    }).as('createdItem')
+
+    // tests starts here
+    cy.visit('/details/value-propositions/Value%20Propositions_8b1fc6e0-7c0f-11e9-not-existing')
+
+    cy.getAllByTestId('details-list-item').each($item => {
+      cy.log($item)
+      cy.wrap($item).should('not.have.class', 'active')
+    })
+
+    // clean up
+    cy.get('@createdItem').then(data => {
+      cy.deleteItem(data.BlockUuid)
+    })
+  })
 })
