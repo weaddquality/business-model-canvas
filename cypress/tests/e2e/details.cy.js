@@ -314,7 +314,6 @@ describe('Testing the details', function() {
     cy.visit('/details/value-propositions/Value%20Propositions_8b1fc6e0-7c0f-11e9-not-existing')
 
     cy.getAllByTestId('details-list-item').each($item => {
-      cy.log($item)
       cy.wrap($item).should('not.have.class', 'active')
     })
 
