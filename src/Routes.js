@@ -8,7 +8,6 @@ import NotFound from './components/not-found/Not-found'
 import Login from './components/login/Login'
 import Logout from './components/logout/Logout'
 import Signup from './components/signup/Signup'
-import Create from './components/create/Create'
 
 export default ({ props }) => (
   <Switch>
@@ -18,10 +17,8 @@ export default ({ props }) => (
     <AppliedRoute exact path="/signup" component={Signup} props={props} />
     <AppliedRoute exact path="/canvas" component={Canvas} props={props} />
     <AppliedRoute exact path="/horizontal" component={Canvas} props={props} />
-    <AppliedRoute exact path="/item/create" component={Create} props={props} />
     <AppliedRoute exact path="/details/:blockType" component={Details} props={props} />
     <AppliedRoute exact path="/details/:blockType/:blockUuid" component={Details} props={props} />
-    <AppliedRoute exact path="/create" component={Create} props={props} />
     <Route component={NotFound} />
   </Switch>
 )

@@ -4,7 +4,7 @@ export const createItem = input => {
   const item = {
     TableName: 'BusinessModelCanvas',
     Team: 'Team Continuous',
-    Block: 'Value Propositions',
+    Block: input.block,
     BlockDescription: 'What value do we deliver to the customer',
     ItemHeader: input.header,
     ItemText: input.text,

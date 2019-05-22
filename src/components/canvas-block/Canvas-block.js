@@ -25,13 +25,18 @@ export const formatBlockHeader = headerText => {
 }
 
 const CanvasBlock = props => {
-  const items = props.blockData.items.map((item, index) => {
+  const items = Object.entries(props.blockData.items).map(item => {
+    const blockUuid = item[0]
+    const itemData = item[1]
+
     return (
-      <div className="canvas-card-container" key={`${index}-${item.ItemHeader}`}>
+      <div className="canvas-card-container" key={`${blockUuid}`}>
         <Card border="dark" className="canvas-item-card">
-          <Card.Header className="canvas-item-header">{headerText(item.ItemHeader)}</Card.Header>
+          <Card.Header className="canvas-item-header">
+            {headerText(itemData.ItemHeader)}
+          </Card.Header>
           <Card.Body>
-            <Card.Text>{itemText(item.ItemText)}</Card.Text>
+            <Card.Text>{itemText(itemData.ItemText)}</Card.Text>
           </Card.Body>
         </Card>
       </div>
