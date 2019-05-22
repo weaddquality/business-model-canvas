@@ -313,6 +313,11 @@ describe('Testing the details', function() {
     // tests starts here
     cy.visit('/details/value-propositions/Value%20Propositions_8b1fc6e0-7c0f-11e9-not-existing')
 
+    // check that the card is empty (no header and no text)
+    cy.getByTestId('details-readform-header').should('have.value', '')
+    cy.getByTestId('details-readform-text').should('have.value', '')
+
+    // check that no item is selected in the item list
     cy.getAllByTestId('details-list-item').each($item => {
       cy.wrap($item).should('not.have.class', 'active')
     })
