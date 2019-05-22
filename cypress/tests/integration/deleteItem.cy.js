@@ -12,7 +12,10 @@ describe('Integrationtest of deleting items', function() {
   })
 
   it('testing the request data and response data', function() {
-    cy.visit('Team-Continuous/details/value-propositions')
+    cy.get('@createdItem').then(response => {
+      cy.visit(`/details/value-propositions/${response.BlockUuid}`)
+    })
+
     cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
 
@@ -24,8 +27,8 @@ describe('Integrationtest of deleting items', function() {
       // request data
       expect(http.method).to.eq('DELETE')
       expect(http.request.body.TableName).to.eq('BusinessModelCanvas')
-      cy.get('@createditem').then(item => {
-        expect(http.url).to.contain(`BlockUuid=${item.BlockUuid}`)
+      cy.get('@createdItem').then(response => {
+        expect(http.url).to.contain(response.BlockUuid)
       })
       // response data
       expect(http.status).to.eq(200)
