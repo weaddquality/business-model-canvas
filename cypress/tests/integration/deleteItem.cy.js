@@ -8,12 +8,12 @@ describe('Integrationtest of deleting items', function() {
       header: inputHeader,
       block: 'Value Propositions',
       text: inputText,
-    }).as('createditem')
+    }).as('createdItem')
   })
 
   it('testing the request data and response data', function() {
     cy.get('@createdItem').then(response => {
-      cy.visit(`/details/value-propositions/${response.BlockUuid}`)
+      cy.visit(`Team-Continuous/details/value-propositions/${response.BlockUuid}`)
     })
 
     cy.getByText(inputHeader).click()

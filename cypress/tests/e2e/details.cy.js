@@ -144,6 +144,7 @@ describe('Testing the details', function() {
 
     cy.wait('@getUpdatedCanvasData')
 
+    cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
     cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
     cy.getByText('Delete').click()
