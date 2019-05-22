@@ -126,20 +126,6 @@ describe('Testing the details', function() {
     cy.getByTestId('details-readform-text').should('have.text', inputTextOld)
   })
 
-  // TODO: !UNSTABLE TEST!
-  // This test fails if there are more than 1 items
-  // We need to handle this somehow.
-  // Option 1 (not optimal)
-  // Add a conditional check..
-  // .. to check if the created item is the last one in the list,
-  // .. and to check if there are any items left in the list,
-  // and then we assert the 'active' attribute based on the above,
-  // This is a bad solution though. Conditional testing sucks.
-  //
-  // Option 2 (more stable, but will clear the current block data..
-  // ... including real data).
-  // Clear the whole block before starting the test, and then prepare test data.
-  // This gives us much better control of the state before the test starts.
   it('can delete an item', function() {
     // prepare testdata
     const inputHeader = `E2E delete test: ${Math.random() * 999}`
