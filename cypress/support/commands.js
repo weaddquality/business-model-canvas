@@ -15,6 +15,7 @@ Cypress.Commands.add('createItem', input => {
   return createItem({
     header: input.header,
     text: input.text,
+    block: input.block,
   })
 })
 
