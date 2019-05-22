@@ -144,7 +144,6 @@ describe('Testing the details', function() {
 
     cy.wait('@getUpdatedCanvasData')
 
-    cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
     cy.route('DELETE', '**/prod/bmc-items/delete*').as('deleteRequest')
     cy.getByText('Delete').click()
@@ -155,7 +154,7 @@ describe('Testing the details', function() {
 
     cy.contains(inputHeader).should('not.be.visible')
 
-    cy.getByTestId('details-list-item')
+    cy.getAllByTestId('details-list-item')
       .first()
       .should('have.class', 'active')
   })
@@ -239,8 +238,6 @@ describe('Testing the details', function() {
 
     cy.wait('@getUpdatedCanvasData')
 
-    cy.wait('@getUpdatedCanvasData')
-
     // click first created item
     cy.contains(firstItemHeader).click()
 
@@ -294,6 +291,7 @@ describe('Testing the details', function() {
     const inputHeader = `E2E direct link test - header: ${Math.random() * 999}`
     const inputText = 'E2E direct link test - text'
     cy.createItem({
+      team: 'Team Continuous',
       header: inputHeader,
       text: inputText,
       block: 'Value Propositions',
@@ -304,7 +302,7 @@ describe('Testing the details', function() {
       const blockInKebabcase = response.Block.toLowerCase().replace(' ', '-')
       cy.server()
       cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
-      cy.visit(`/details/${blockInKebabcase}/${response.BlockUuid}`)
+      cy.visit(`Team-Continuous/details/${blockInKebabcase}/${response.BlockUuid}`)
       cy.wait('@getUpdatedCanvasData')
 
       cy.contains(inputText)
@@ -313,7 +311,7 @@ describe('Testing the details', function() {
 
     // clean up
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
@@ -322,13 +320,16 @@ describe('Testing the details', function() {
     const inputHeader = `E2E non-existing item test - header: ${Math.random() * 999}`
     const inputText = 'E2E non-existing item test - text'
     cy.createItem({
+      team: 'Team Continuous',
       header: inputHeader,
       text: inputText,
       block: 'Value Propositions',
     }).as('createdItem')
 
     // tests starts here
-    cy.visit('/details/value-propositions/Value%20Propositions_8b1fc6e0-7c0f-11e9-not-existing')
+    cy.visit(
+      'Team-Continuous/details/value-propositions/Value%20Propositions_8b1fc6e0-7c0f-11e9-not-existing'
+    )
 
     // check that the card is empty (no header and no text)
     cy.getByTestId('details-readform-header').should('have.value', '')
@@ -341,7 +342,7 @@ describe('Testing the details', function() {
 
     // clean up
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 })
