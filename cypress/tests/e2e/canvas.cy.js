@@ -42,4 +42,31 @@ describe('Testing the canvas', function() {
     cy.get('#canvas-block').click()
     cy.get('#details')
   })
+
+  it('can change selected team and load team specific canvas data', function() {
+    cy.server()
+
+    cy.route('GET', '**prod/bmc-items/list?Team=Team Continuous').as('getTeamContinuousCanvasData')
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Continuous').click()
+    cy.getByTestId('navbarDropdownSplitButton').should('have.text', 'Team Continuous')
+    cy.url().should('include', 'Team-Continuous')
+    cy.wait('@getTeamContinuousCanvasData')
+
+    cy.route('GET', '**prod/bmc-items/list?Team=Team Frontend Auto').as(
+      'getTeamFrontendAutoCanvasData'
+    )
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Frontend Auto').click()
+    cy.getByTestId('navbarDropdownSplitButton').should('have.text', 'Team Frontend Auto')
+    cy.url().should('include', 'Team-Frontend-Auto')
+    cy.wait('@getTeamFrontendAutoCanvasData')
+
+    cy.route('GET', '**prod/bmc-items/list?Team=Team Mobile UX').as('getTeamMobileUXCanvasData')
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Mobile UX').click()
+    cy.getByTestId('navbarDropdownSplitButton').should('have.text', 'Team Mobile UX')
+    cy.url().should('include', 'Team-Mobile-UX')
+    cy.wait('@getTeamMobileUXCanvasData')
+  })
 })
