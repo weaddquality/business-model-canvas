@@ -82,6 +82,7 @@ describe('Testing the canvas', function() {
     cy.route('GET', `**prod/bmc-items/list?Team=${teamContinuous}`).as(
       'getTeamContinuousCanvasData'
     )
+    cy.visit('/')
     cy.getByTestId('navbarDropdownSubmenuToggle').click()
     cy.getByText(`${teamContinuous}`).click()
     cy.getByTestId('navbarDropdownSplitButton').should('have.text', `${teamContinuous}`)
