@@ -42,7 +42,6 @@ function App(props) {
     setIsAuthenticated(authenticated)
   }
 
-  // TODO: What the heck have I done here?
   const getCanvasData = () => {
     getItems(selectedTeam.text).then(response => {
       const { blocks } = response
