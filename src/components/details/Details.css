@@ -6,13 +6,13 @@
 .details-form {
   display: grid;
   border: 2px solid;
-  grid-gap: 5px;
+  gap: 5px;
   padding-bottom: 10px;
   padding-left: 0;
   padding-right: 0;
-  width: 70%;
-  grid-template-rows: 30px 35px 400px 35px;
-  grid-template-columns: 1fr 3fr 105px 170px;
+  width: 100%;
+  grid-template-rows: 1fr 1fr 8fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
   grid-template-areas:
     'block create create create'
     'card card card list'
