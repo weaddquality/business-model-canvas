@@ -1,13 +1,13 @@
 import { API } from 'aws-amplify'
 
-export const deleteItem = blockUuid => {
-  return API.del('bmc-items', '/bmc-items/delete?Team=Team Continuous', {
+export const deleteItem = input => {
+  return API.del('bmc-items', '/bmc-items/delete', {
     body: {
       TableName: 'BusinessModelCanvas',
     },
     queryStringParameters: {
-      Team: 'Team Continuous',
-      BlockUuid: blockUuid,
+      Team: input.team,
+      BlockUuid: input.blockUuid,
     },
   })
 }

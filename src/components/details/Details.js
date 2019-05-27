@@ -27,6 +27,7 @@ export default function Details(props) {
 
   const handleCreate = () => {
     createItem({
+      team: props.selectedTeam.text,
       header: card.header,
       text: card.text,
       block: currentBlock,
@@ -47,9 +48,16 @@ export default function Details(props) {
         )
         props.getCanvasData()
         setMode('read')
-        props.history.push(
-          props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
-        )
+        // TODO: Make a better fix for this.
+        // This solves an issue where block name is lost..
+        // if the created item is the first one in the list
+        if (props.match.params.blockUuid) {
+          props.history.push(
+            props.match.url.slice(0, props.match.url.lastIndexOf('/') + '/') + response.BlockUuid
+          )
+        } else {
+          props.history.push(props.match.url + '/' + response.BlockUuid)
+        }
       })
       .catch(e => {
         alert(e)
@@ -57,7 +65,12 @@ export default function Details(props) {
   }
 
   const handleUpdate = () => {
-    updateItem({ blockUuid: card.blockUuid, header: card.header, text: card.text }).then(() => {
+    updateItem({
+      team: props.selectedTeam.text,
+      blockUuid: card.blockUuid,
+      header: card.header,
+      text: card.text,
+    }).then(() => {
       setItems(
         items.map(item =>
           item.BlockUuid === card.blockUuid
@@ -71,7 +84,7 @@ export default function Details(props) {
   }
 
   const handleDelete = () => {
-    deleteItem(card.blockUuid).then(() => {
+    deleteItem({ team: props.selectedTeam.text, blockUuid: card.blockUuid }).then(() => {
       const deletedIndex = items.findIndex(item => {
         return item.BlockUuid === card.blockUuid
       })
@@ -151,8 +164,15 @@ export default function Details(props) {
   }
 
   useEffect(() => {
+    if (props.selectedTeam.text === 'Select team...') {
+      props.handleTeamChange({
+        text: props.match.params.team.replace('-', ' '),
+        href: `/${props.match.params.team}/canvas`,
+      })
+      return
+    }
     if (!props.listResponse) props.getCanvasData()
-  }, [])
+  }, [props.selectedTeam])
 
   useEffect(() => {
     if (props.listResponse) {
@@ -160,7 +180,6 @@ export default function Details(props) {
       setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
     }
-    // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
   }, [props.listResponse])
 
   useEffect(() => {
@@ -189,8 +208,7 @@ export default function Details(props) {
         })
       }
     }
-    // props.match.params.blockUuid: is used when the user changes the current selected item (the url will be updated with the blockUuid)
-  }, [currentBlock, props.match.params.blockUuid])
+  }, [currentBlock, props.match.params.blockUuid, props.selectedTeam])
 
   const form = () => {
     const readForm = (

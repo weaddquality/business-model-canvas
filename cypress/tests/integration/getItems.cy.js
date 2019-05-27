@@ -4,6 +4,7 @@ describe('Integrationtest of getting items', function() {
   beforeEach(() => {
     cy.login()
     cy.createItem({
+      team: 'Team Continuous',
       header: inputHeader,
       block: 'Channels',
       text: inputText,
@@ -12,7 +13,7 @@ describe('Integrationtest of getting items', function() {
 
   afterEach(() => {
     cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
@@ -20,7 +21,7 @@ describe('Integrationtest of getting items', function() {
     cy.server()
     cy.route('GET', '**/prod/bmc-items/list**').as('listRequest')
 
-    cy.visit('/canvas')
+    cy.visit('Team-Continuous/canvas')
     cy.wait('@listRequest').then(http => {
       // request data
       expect(http.method).to.eq('GET')

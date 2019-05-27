@@ -11,6 +11,7 @@ function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthenticating, setIsAuthenticating] = useState(true)
   const [listResponse, setListResponse] = useState(false)
+  const [selectedTeam, setSelectedTeam] = useState({ text: 'Select team...', href: '/' })
 
   useEffect(() => {
     userHasSession()
@@ -29,6 +30,10 @@ function App(props) {
     handleIsAuthenticating(false)
   }
 
+  const handleTeamChange = team => {
+    setSelectedTeam({ text: team.text, href: team.href })
+  }
+
   const handleIsAuthenticating = authenticating => {
     setIsAuthenticating(authenticating)
   }
@@ -38,7 +43,7 @@ function App(props) {
   }
 
   const getCanvasData = () => {
-    getItems().then(response => {
+    getItems(selectedTeam.text).then(response => {
       const { blocks } = response
       setListResponse(blocks)
     })
@@ -61,6 +66,8 @@ function App(props) {
     redirectToLogin: redirectToLogin,
     getCanvasData: getCanvasData,
     listResponse: listResponse,
+    selectedTeam: selectedTeam,
+    handleTeamChange: handleTeamChange,
   }
 
   return (

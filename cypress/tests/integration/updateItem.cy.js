@@ -4,20 +4,21 @@ describe('Integrationtest of updating items', function() {
   beforeEach(() => {
     cy.login()
     cy.createItem({
+      team: 'Team Continuous',
       header: inputHeader,
-      text: inputText,
       block: 'Value Propositions',
-    }).as('createdItem')
+      text: inputText,
+    }).as('createditem')
   })
 
   afterEach(() => {
-    cy.get('@createdItem').then(data => {
-      cy.deleteItem(data.BlockUuid)
+    cy.get('@createditem').then(data => {
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.BlockUuid })
     })
   })
 
   it('testing the request data and response data', function() {
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
     cy.getByText(inputHeader).click()
     cy.getByText('Edit').click()
     cy.getByTestId('details-updateform-header')

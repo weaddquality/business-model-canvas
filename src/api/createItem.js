@@ -3,7 +3,7 @@ import { API } from 'aws-amplify'
 export const createItem = input => {
   const item = {
     TableName: 'BusinessModelCanvas',
-    Team: 'Team Continuous',
+    Team: input.team,
     Block: input.block,
     BlockDescription: 'What value do we deliver to the customer',
     ItemHeader: input.header,

@@ -15,10 +15,15 @@ export default ({ props }) => (
     <AppliedRoute exact path="/login" component={Login} props={props} />
     <AppliedRoute exact path="/logout" component={Logout} props={props} />
     <AppliedRoute exact path="/signup" component={Signup} props={props} />
-    <AppliedRoute exact path="/canvas" component={Canvas} props={props} />
-    <AppliedRoute exact path="/horizontal" component={Canvas} props={props} />
-    <AppliedRoute exact path="/details/:blockType" component={Details} props={props} />
-    <AppliedRoute exact path="/details/:blockType/:blockUuid" component={Details} props={props} />
+    <AppliedRoute exact path="/:team/canvas" component={Canvas} props={props} />
+    <AppliedRoute exact path="/:team/horizontal" component={Canvas} props={props} />
+    <AppliedRoute exact path="/:team/details/:blockType" component={Details} props={props} />
+    <AppliedRoute
+      exact
+      path="/:team/details/:blockType/:blockUuid"
+      component={Details}
+      props={props}
+    />
     <Route component={NotFound} />
   </Switch>
 )
