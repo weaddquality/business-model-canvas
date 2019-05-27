@@ -164,28 +164,22 @@ export default function Details(props) {
   }
 
   useEffect(() => {
-    // Set team if not already set and finish the useEffect
     if (props.selectedTeam.text === 'Select team...') {
       props.handleTeamChange({
-        text: props.match.params.team.replace(/-/g, ' '),
+        text: props.match.params.team.replace('-', ' '),
         href: `/${props.match.params.team}/canvas`,
       })
       return
     }
-    // Fetch canvas data if we don't already have it
     if (!props.listResponse) props.getCanvasData()
-    // Only run this useEffect once.
   }, [props.selectedTeam])
 
   useEffect(() => {
-    // Only do this if we have a ready listResponse
     if (props.listResponse) {
-      // Set the current block and the list of items
       const matchedBlock = BLOCKS[props.match.params.blockType.replace('-', '_').toUpperCase()]
       setCurrentBlock(matchedBlock.name)
       setItems(props.listResponse[matchedBlock.name].items)
     }
-    // props.listResponse: is used when we don't have any api data on first render (i.e. via direct link to an item)
   }, [props.listResponse])
 
   useEffect(() => {
@@ -201,8 +195,6 @@ export default function Details(props) {
             header: items[card].ItemHeader,
             text: items[card].ItemText,
           })
-          // otherwise redirect to our /404 route
-          // E.g. if someone uses a direct url to a deleted item
         }
       } else {
         props.history.push(
@@ -216,8 +208,6 @@ export default function Details(props) {
         })
       }
     }
-    // props.match.params.blockUuid: is used when the user changes the current selected item (the url will be updated with the blockUuid)
-    // props.selectedTeam: is used when the user changes the selected team
   }, [currentBlock, props.match.params.blockUuid, props.selectedTeam])
 
   const form = () => {
