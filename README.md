@@ -1,4 +1,4 @@
-# Business Model Canvas
+# Business Model Canvas [![CircleCI](https://circleci.com/gh/weaddquality/business-model-canvas.svg?style=svg)](https://circleci.com/gh/weaddquality/business-model-canvas)
 
 ## Description
 
