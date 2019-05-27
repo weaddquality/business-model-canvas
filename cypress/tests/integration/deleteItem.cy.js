@@ -4,15 +4,16 @@ describe('Integrationtest of deleting items', function() {
   beforeEach(() => {
     cy.login()
     cy.createItem({
+      team: 'Team Continuous',
       header: inputHeader,
-      text: inputText,
       block: 'Value Propositions',
+      text: inputText,
     }).as('createdItem')
   })
 
   it('testing the request data and response data', function() {
     cy.get('@createdItem').then(response => {
-      cy.visit(`/details/value-propositions/${response.BlockUuid}`)
+      cy.visit(`Team-Continuous/details/value-propositions/${response.BlockUuid}`)
     })
 
     cy.getByText(inputHeader).click()

@@ -11,49 +11,50 @@ describe('Testing the navbar', function() {
   })
 
   it('the dropdown', function() {
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
     cy.getByText('Team Continuous').click()
     cy.contains('Key Partners')
   })
 
   it('the splitbutton-arrow on dropdown', function() {
-    cy.get('[data-testid="navbarDropdownSplitButton"]').click()
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Continuous').click()
+    cy.getByTestId('navbarDropdownSplitButton').click()
     cy.contains('Key Partners')
   })
 
   it('the splitbutton-arrow on dropdowns submenu OK', function() {
-    cy.get('[data-testid="navbarDropdownSubmenuToggle"]').click()
-    cy.get('[data-testid="navbarDropdownSubmenu"] > a')
-      .first()
-      .click()
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByTestId('navbarDropdownSubmenu').within(() => {
+      cy.get('a')
+        .first()
+        .click()
+    })
     cy.contains('Value Proposition')
   })
 
-  it('the splitbutton-arrow on dropdowns submenu NOK 404', function() {
-    cy.get('[data-testid="navbarDropdownSubmenuToggle"]').click()
-    cy.getByText('Team Frontend Auto').click()
-    cy.contains('404')
-  })
-
   it('the view toggle', function() {
-    cy.get('[data-testid="viewToggleButton"]').click()
+    cy.getByTestId('navbarDropdownSubmenuToggle').click()
+    cy.getByText('Team Continuous').click()
+    cy.getByTestId('viewToggleButton').click()
     cy.url().should('include', '/horizontal')
     cy.contains('Key Partners')
 
-    cy.get('[data-testid="viewToggleButton"]').click()
+    cy.getByTestId('viewToggleButton').click()
     cy.url().should('include', '/canvas')
     cy.contains('Value Propositions')
 
-    cy.get('[data-testid="viewToggleButton"]').click()
+    cy.getByTestId('viewToggleButton').click()
     cy.url().should('include', '/horizontal')
     cy.contains('Cost Structures')
 
-    cy.get('[data-testid="viewToggleButton"]').click()
+    cy.getByTestId('viewToggleButton').click()
     cy.url().should('include', '/canvas')
     cy.contains('Revenue Streams')
   })
 
   it('should have a logout button', function() {
-    cy.get('[data-testid="navbarLogoutButton"]')
+    cy.getByTestId('navbarLogoutButton')
       .should('have.attr', 'href', '/logout')
       .should('have.text', ' Logout')
   })

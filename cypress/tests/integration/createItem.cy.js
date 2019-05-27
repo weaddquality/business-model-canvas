@@ -5,7 +5,7 @@ describe('Integrationtest of creating items', function() {
 
   afterEach(() => {
     cy.get('@createItemRequest').then(data => {
-      cy.deleteItem(data.response.body.BlockUuid)
+      cy.deleteItem({ team: 'Team Continuous', blockUuid: data.response.body.BlockUuid })
     })
   })
 
@@ -14,7 +14,7 @@ describe('Integrationtest of creating items', function() {
     const inputText = 'CreateItem Text'
     cy.server()
     cy.route('GET', '**/prod/bmc-items/list**').as('getUpdatedCanvasData')
-    cy.visit('/details/value-propositions')
+    cy.visit('Team-Continuous/details/value-propositions')
 
     cy.wait('@getUpdatedCanvasData')
 

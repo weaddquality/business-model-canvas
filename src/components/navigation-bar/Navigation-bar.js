@@ -11,11 +11,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ViewToggle from '../view-toggle/View-toggle'
 
 const renderLeftDropdown = props => {
+  const handleTeamChange = event => {
+    props.handleTeamChange({ text: event.target.text, href: event.target.getAttribute('href') })
+  }
+
   if (props.isAuthenticated) {
     return (
       <Dropdown as={ButtonGroup}>
         <Button variant="black" data-testid="navbarDropdownSplitButton">
-          <Link to="/canvas">Team Continuous</Link>
+          <Link to={props.selectedTeam.href}>{props.selectedTeam.text}</Link>
         </Button>
         <Dropdown.Toggle
           split
@@ -24,14 +28,18 @@ const renderLeftDropdown = props => {
           data-testid="navbarDropdownSubmenuToggle"
         />
         <Dropdown.Menu data-testid="navbarDropdownSubmenu">
-          <LinkContainer to="/canvas" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Continuous</Dropdown.Item>
+          <LinkContainer to="/Team-Continuous/canvas" className="navbar-dropdown-submenu" replace>
+            <Dropdown.Item onClick={handleTeamChange}>Team Continuous</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/canvas-frontend" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Frontend Auto</Dropdown.Item>
+          <LinkContainer
+            to="/Team-Frontend-Auto/canvas"
+            className="navbar-dropdown-submenu"
+            replace
+          >
+            <Dropdown.Item onClick={handleTeamChange}>Team Frontend Auto</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/canvas-mobile" className="navbar-dropdown-submenu">
-            <Dropdown.Item>Team Mobile</Dropdown.Item>
+          <LinkContainer to="/Team-Mobile-UX/canvas" className="navbar-dropdown-submenu" replace>
+            <Dropdown.Item onClick={handleTeamChange}>Team Mobile UX</Dropdown.Item>
           </LinkContainer>
         </Dropdown.Menu>
       </Dropdown>
