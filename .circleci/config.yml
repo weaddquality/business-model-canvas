@@ -20,7 +20,7 @@ jobs:
       - run: 
           command: npm start
           background: true
-      - run: npm run cypress:run
+      - run: npm run cypress:ci
 
 workflows:
   version: 2
