@@ -15,6 +15,7 @@
     "test:all": "npm run test:ci && npm run cypress:ci",
     "cypress:open": "cypress open",
     "cypress:ci": "cypress run",
+    "cypress:verify": "cypress verify",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.+(js|json|md|css|css|sass|jsx)\""
   },
