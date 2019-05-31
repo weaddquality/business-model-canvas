@@ -254,12 +254,10 @@ export default function Details(props) {
             </Form>
           </div>
         </div>
-        <div className="details-cancel">
+        <div className="details-create-cancel-buttons">
           <Button variant="secondary" onClick={handleCreateCancel}>
             Cancel
           </Button>
-        </div>
-        <div className="details-submit">
           <Button variant="success" onClick={handleCreate}>
             Create
           </Button>
@@ -297,12 +295,10 @@ export default function Details(props) {
             Delete
           </Button>
         </div>
-        <div className="details-cancel">
+        <div className="details-create-cancel-buttons">
           <Button variant="secondary" onClick={handleEditCancel}>
             Cancel
           </Button>
-        </div>
-        <div className="details-submit">
           <Button variant="success" onClick={handleUpdate}>
             Update
           </Button>

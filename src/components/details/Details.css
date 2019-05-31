@@ -1,3 +1,9 @@
+@media (max-width: 410px) {
+  .details-container .btn {
+    font-size: 0.9rem;
+  }
+}
+
 .details-container {
   height: 10px;
   padding-top: 10px;
@@ -11,11 +17,10 @@
   padding-left: 0;
   padding-right: 0;
   width: 100%;
-  grid-template-rows: 1fr 1fr 8fr 1fr;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-template-rows: min-content min-content min-content min-content;
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
   grid-template-areas:
-    'block create create create'
-    'card card card list'
+    'block empty empty create'
     'card card card list'
     'delete cancel submit list';
 }
@@ -30,7 +35,7 @@
 
 .details-create {
   grid-area: create;
-  text-align: right;
+  margin-left: 12px;
   padding-top: 10px;
   padding-right: 10px;
 }
@@ -53,7 +58,6 @@
 }
 
 .details-card-read-header {
-  grid-area: header;
   border-radius: 4px;
   border: solid 1px;
   margin-top: 10px;
@@ -65,7 +69,6 @@
 }
 
 .details-card-read-text {
-  grid-area: text;
   border-radius: 4px;
   height: 373px;
   border: solid 1px;
@@ -78,19 +81,21 @@
 
 .details-delete {
   grid-area: delete;
-  padding-left: 10px;
+  padding-left: 12px;
   text-align: left;
 }
 
 .details-cancel {
-  grid-area: cancel;
-  padding-right: 10px;
-  text-align: right;
+  text-align: left;
+}
+
+.details-create-cancel-buttons {
+  grid-area: submit;
+  justify-self: end;
 }
 
 .details-submit {
   grid-area: submit;
-  padding-right: 10px;
   text-align: right;
 }
 
@@ -106,7 +111,6 @@
   border: solid 1px;
   padding-top: 10px;
   padding-left: 10px;
-  text-align: left;
 }
 
 .details-new-list-item {
