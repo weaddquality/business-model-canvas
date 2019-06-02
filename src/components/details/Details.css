@@ -8,7 +8,7 @@
       'block . . create'
       'list list list list'
       'card card card card'
-      'delete cancel submit .';
+      'delete cancel submit submit';
   }
 
   .details-create {
