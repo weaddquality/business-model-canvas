@@ -2,42 +2,174 @@
   .details-container .btn {
     font-size: 0.9rem;
   }
+
+  .details-form {
+    display: grid;
+    border: 2px solid;
+    gap: 5px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
+    grid-template-areas:
+      'block . . create'
+      'list list list list'
+      'card card card card'
+      'delete cancel submit .';
+  }
+
+  .details-create {
+    grid-area: create;
+    justify-self: end;
+    margin-right: 12px;
+    margin-top: 2px;
+  }
+
+  .details-list {
+    grid-area: list;
+    max-height: 168px;
+    overflow: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+  }
+
+  .details-card-read-header {
+    border-radius: 4px;
+    border: solid 1px;
+    margin-top: 10px;
+    margin-left: 6px;
+    padding-left: 12px;
+    margin-right: 12px;
+    text-align: left;
+    height: 39px;
+    line-height: 37px;
+  }
+
+  .details-card-read-text {
+    border-radius: 4px;
+    border: solid 1px;
+    min-height: 100px;
+    max-height: 250px;
+    overflow: scroll;
+    margin-left: 6px;
+    margin-top: 16px;
+    padding-top: 5px;
+    padding-left: 12px;
+    margin-right: 12px;
+    text-align: left;
+
+    background: linear-gradient(white 0%, rgba(255, 255, 255, 0)),
+      linear-gradient(rgba(255, 255, 255, 0), white 0%) 0 100%,
+      radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)) 0 100%;
+
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .details-block {
+    grid-area: block;
+    grid-column-end: create;
+    padding-left: 10px;
+    text-align: left;
+    font-size: 17pt;
+  }
+
+  .details-create-cancel-buttons {
+    grid-area: submit;
+    justify-self: end;
+    margin-right: 12px;
+  }
+
+  .details-submit {
+    grid-area: submit;
+    text-align: right;
+    margin-right: 12px;
+  }
 }
 
-.details-container {
-  height: 10px;
-  padding-top: 10px;
-}
+@media (min-width: 411px) {
+  .details-container {
+    height: 10px;
+    padding-top: 10px;
+  }
 
-.details-form {
-  display: grid;
-  border: 2px solid;
-  gap: 5px;
-  padding-bottom: 10px;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  grid-template-rows: min-content min-content min-content min-content;
-  grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
-  grid-template-areas:
-    'block empty empty create'
-    'card card card list'
-    'delete cancel submit list';
-}
+  .details-form {
+    display: grid;
+    border: 2px solid;
+    gap: 5px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
+    grid-template-areas:
+      'block empty empty create'
+      'card card card list'
+      'delete cancel submit list';
+  }
 
-.details-block {
-  grid-area: block;
-  grid-column-end: create;
-  padding-left: 10px;
-  text-align: left;
-  font-size: 17pt;
-}
+  .details-create {
+    grid-area: create;
+    margin-left: 12px;
+    padding-top: 10px;
+    padding-right: 10px;
+  }
 
-.details-create {
-  grid-area: create;
-  margin-left: 12px;
-  padding-top: 10px;
-  padding-right: 10px;
+  .details-list {
+    grid-area: list;
+    padding-top: 65px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+  }
+  .details-card-read-header {
+    border-radius: 4px;
+    border: solid 1px;
+    margin-top: 10px;
+    margin-left: 6px;
+    padding-left: 12px;
+    text-align: left;
+    height: 39px;
+    line-height: 37px;
+  }
+
+  .details-card-read-text {
+    border-radius: 4px;
+    border: solid 1px;
+    min-height: 100px;
+    max-height: 250px;
+    margin-left: 6px;
+    margin-top: 16px;
+    padding-top: 5px;
+    padding-left: 12px;
+    text-align: left;
+  }
+
+  .details-block {
+    grid-area: block;
+    grid-column-end: create;
+    padding-left: 10px;
+    text-align: left;
+    font-size: 17pt;
+  }
+
+  .details-create-cancel-buttons {
+    grid-area: submit;
+    justify-self: end;
+  }
+
+  .details-submit {
+    grid-area: submit;
+    text-align: right;
+  }
 }
 
 .details-create a:hover {
@@ -57,28 +189,6 @@
   padding-left: 6px;
 }
 
-.details-card-read-header {
-  border-radius: 4px;
-  border: solid 1px;
-  margin-top: 10px;
-  margin-left: 6px;
-  padding-left: 12px;
-  text-align: left;
-  height: 39px;
-  line-height: 37px;
-}
-
-.details-card-read-text {
-  border-radius: 4px;
-  height: 373px;
-  border: solid 1px;
-  margin-left: 6px;
-  margin-top: 16px;
-  padding-top: 5px;
-  padding-left: 12px;
-  text-align: left;
-}
-
 .details-delete {
   grid-area: delete;
   padding-left: 12px;
@@ -86,24 +196,6 @@
 }
 
 .details-cancel {
-  text-align: left;
-}
-
-.details-create-cancel-buttons {
-  grid-area: submit;
-  justify-self: end;
-}
-
-.details-submit {
-  grid-area: submit;
-  text-align: right;
-}
-
-.details-list {
-  grid-area: list;
-  padding-top: 65px;
-  padding-left: 10px;
-  padding-right: 10px;
   text-align: left;
 }
 

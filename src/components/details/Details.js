@@ -336,9 +336,9 @@ export default function Details(props) {
     })
 
     return list.length > 0 ? (
-      <div className="details-list" data-testid="details-list">
-        <ListGroup>{list}</ListGroup>
-      </div>
+      <ListGroup className="details-list" data-testid="details-list">
+        {list}
+      </ListGroup>
     ) : null
   }
 
