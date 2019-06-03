@@ -245,7 +245,7 @@ export default function Details(props) {
               <Form.Group>
                 <Form.Control
                   as="textarea"
-                  rows="15"
+                  rows="7"
                   data-testid="details-updateform-text"
                   onChange={handleTextChange}
                   placeholder="Enter some details..."
@@ -277,10 +277,11 @@ export default function Details(props) {
                   defaultValue={card.header}
                 />
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="details-card-write-text">
                 <Form.Control
+                  className="details-card-write-text"
                   as="textarea"
-                  rows="15"
+                  rows="7"
                   autoFocus
                   data-testid="details-updateform-text"
                   onChange={handleTextChange}

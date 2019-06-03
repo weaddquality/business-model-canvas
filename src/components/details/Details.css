@@ -81,7 +81,7 @@
   padding-left: 0;
   padding-right: 0;
   width: 100%;
-  grid-template-rows: min-content min-content min-content min-content;
+  grid-template-rows: minmax(48px, 1fr) min-content min-content min-content;
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
 }
 
@@ -98,14 +98,10 @@
   padding-top: 10px;
 }
 
-.details-card-read-text {
-  min-height: 100px;
-  max-height: 250px;
-}
-
 .details-card-write-text {
   min-height: 100px;
   max-height: 250px;
+  margin-right: 12px;
 }
 
 .details-create a:hover {
@@ -128,6 +124,8 @@
 }
 
 .details-card-read-text {
+  min-height: 100px;
+  max-height: 200px;
   border-radius: 4px;
   border: solid 1px;
   margin-left: 6px;
