@@ -245,7 +245,7 @@ export default function Details(props) {
               <Form.Group>
                 <Form.Control
                   as="textarea"
-                  rows="15"
+                  rows="7"
                   data-testid="details-updateform-text"
                   onChange={handleTextChange}
                   placeholder="Enter some details..."
@@ -254,12 +254,10 @@ export default function Details(props) {
             </Form>
           </div>
         </div>
-        <div className="details-cancel">
+        <div className="details-create-cancel-buttons">
           <Button variant="secondary" onClick={handleCreateCancel}>
             Cancel
           </Button>
-        </div>
-        <div className="details-submit">
           <Button variant="success" onClick={handleCreate}>
             Create
           </Button>
@@ -279,10 +277,11 @@ export default function Details(props) {
                   defaultValue={card.header}
                 />
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="details-card-write-text">
                 <Form.Control
+                  className="details-card-write-text"
                   as="textarea"
-                  rows="15"
+                  rows="7"
                   autoFocus
                   data-testid="details-updateform-text"
                   onChange={handleTextChange}
@@ -297,12 +296,10 @@ export default function Details(props) {
             Delete
           </Button>
         </div>
-        <div className="details-cancel">
+        <div className="details-create-cancel-buttons">
           <Button variant="secondary" onClick={handleEditCancel}>
             Cancel
           </Button>
-        </div>
-        <div className="details-submit">
           <Button variant="success" onClick={handleUpdate}>
             Update
           </Button>
@@ -340,9 +337,9 @@ export default function Details(props) {
     })
 
     return list.length > 0 ? (
-      <div className="details-list" data-testid="details-list">
-        <ListGroup>{list}</ListGroup>
-      </div>
+      <ListGroup className="details-list" data-testid="details-list">
+        {list}
+      </ListGroup>
     ) : null
   }
 

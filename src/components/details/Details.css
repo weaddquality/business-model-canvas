@@ -1,23 +1,88 @@
-.details-container {
-  height: 10px;
-  padding-top: 10px;
+@media (max-width: 410px) {
+  .details-container .btn {
+    font-size: 0.9rem;
+  }
+
+  .details-form {
+    grid-template-areas:
+      'block . . create'
+      'list list list list'
+      'card card card card'
+      'delete cancel submit submit';
+  }
+
+  .details-create {
+    justify-self: end;
+    margin-right: 12px;
+    margin-top: 2px;
+  }
+
+  .details-list {
+    max-height: 168px;
+    overflow: scroll;
+  }
+
+  .details-card-read-header {
+    margin-right: 12px;
+  }
+
+  .details-card-read-text {
+    overflow: scroll;
+    margin-right: 12px;
+
+    /* Add shadows to show scrollable content */
+    background: linear-gradient(white 0%, rgba(255, 255, 255, 0)),
+      linear-gradient(rgba(255, 255, 255, 0), white 0%) 0 100%,
+      radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)) 0 100%;
+
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .details-create-cancel-buttons {
+    margin-right: 12px;
+  }
+
+  .details-submit {
+    margin-right: 12px;
+  }
 }
+
+@media (min-width: 411px) {
+  .details-form {
+    grid-template-areas:
+      'block . . create'
+      'card card card list'
+      'delete cancel submit list';
+  }
+
+  .details-create {
+    margin-left: 12px;
+    padding-top: 10px;
+    padding-right: 10px;
+  }
+
+  .details-list {
+    padding-top: 65px;
+  }
+}
+
+/* Common CSS (applicable to any viewport) */
 
 .details-form {
   display: grid;
   border: 2px solid;
-  grid-gap: 5px;
+  gap: 5px;
   padding-bottom: 10px;
   padding-left: 0;
   padding-right: 0;
-  width: 70%;
-  grid-template-rows: 30px 35px 400px 35px;
-  grid-template-columns: 1fr 3fr 105px 170px;
-  grid-template-areas:
-    'block create create create'
-    'card card card list'
-    'card card card list'
-    'delete cancel submit list';
+  width: 100%;
+  grid-template-rows: minmax(48px, 1fr) min-content min-content min-content;
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr) minmax(150px, 3fr) minmax(100px, 1fr);
 }
 
 .details-block {
@@ -28,11 +93,15 @@
   font-size: 17pt;
 }
 
-.details-create {
-  grid-area: create;
-  text-align: right;
+.details-container {
+  height: 10px;
   padding-top: 10px;
-  padding-right: 10px;
+}
+
+.details-card-write-text {
+  min-height: 100px;
+  max-height: 250px;
+  margin-right: 12px;
 }
 
 .details-create a:hover {
@@ -43,17 +112,7 @@
   grid-area: card;
 }
 
-.details-card-container {
-  margin-left: 6px;
-  padding-bottom: 7px;
-}
-.details-card-write {
-  padding-top: 10px;
-  padding-left: 6px;
-}
-
 .details-card-read-header {
-  grid-area: header;
   border-radius: 4px;
   border: solid 1px;
   margin-top: 10px;
@@ -65,9 +124,9 @@
 }
 
 .details-card-read-text {
-  grid-area: text;
+  min-height: 100px;
+  max-height: 200px;
   border-radius: 4px;
-  height: 373px;
   border: solid 1px;
   margin-left: 6px;
   margin-top: 16px;
@@ -76,37 +135,49 @@
   text-align: left;
 }
 
-.details-delete {
-  grid-area: delete;
-  padding-left: 10px;
-  text-align: left;
+.details-card-container {
+  margin-left: 6px;
+  padding-bottom: 7px;
 }
-
-.details-cancel {
-  grid-area: cancel;
-  padding-right: 10px;
-  text-align: right;
-}
-
-.details-submit {
-  grid-area: submit;
-  padding-right: 10px;
-  text-align: right;
+.details-card-write {
+  padding-top: 10px;
+  padding-left: 6px;
 }
 
 .details-list {
   grid-area: list;
-  padding-top: 65px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: left;
+}
+
+.details-create-cancel-buttons {
+  grid-area: submit;
+  justify-self: end;
+}
+.details-create {
+  grid-area: create;
+}
+
+.details-delete {
+  grid-area: delete;
+  padding-left: 12px;
+  text-align: left;
+}
+
+.details-cancel {
+  text-align: left;
+}
+
+.details-submit {
+  grid-area: submit;
+  text-align: right;
 }
 
 .details-list-item {
   border: solid 1px;
   padding-top: 10px;
   padding-left: 10px;
-  text-align: left;
 }
 
 .details-new-list-item {
